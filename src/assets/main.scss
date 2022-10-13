@@ -1,0 +1,48 @@
+@use "@material/elevation/mdc-elevation";
+
+@import "@/assets/base.scss";
+
+/*#app {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+
+  font-weight: normal;
+}*/
+
+/* ____________________ FUENTES - INICIO ____________________ */
+h1, h2, h3, h4, h5, h6, p {
+  font-family: nimbus-sans, sans-serif;
+}
+h1.gordo {
+  font-family: cubano, sans-serif;
+}
+/* ____________________ FUENTES - FIN ____________________ */
+
+
+
+
+
+#contenedor {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+#cuerpo_contenedor {
+  width: 100%;
+  max-width: 1150px;
+  flex-grow: 1;
+  align-self: center;
+
+  > * {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+
+
+
+.oscuro {
+  background-color: var(--color-background-oscuro);
+}
