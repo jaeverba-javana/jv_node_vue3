@@ -57,12 +57,17 @@
 
       <div class="boton">
         <input
+            v-show="!animationData.active"
             type="button"
             @click="submitForm"
             :value="text[engine.idiomaId].submit"
             :class="{disabled: submit_disabled_bool}"
             :disabled="submit_disabled_bool"
         />
+
+        <div id="loading-formData-container" v-show="animationData.active">
+          <div id="loading-formData"></div>
+        </div>
       </div>
     </form>
   </div>
@@ -71,6 +76,7 @@
 <script>
 import { engine } from "@/engine";
 import "jquery"
+import lottie from "lottie-web";
 
 export default {
   name: "ContactMe",
@@ -104,7 +110,7 @@ export default {
         "campos": {
           "input_nom": {
             "autocomplete": "name",
-            "elemento": "names",
+            "elemento": "name",
             "type": "text",
             empty_error: "Este campo es obligatorio."
           },
@@ -143,6 +149,10 @@ export default {
         activado: false,
         warning: false
       }
+    },
+
+    animationData: {
+      active: false
     }
   }},
 
@@ -207,6 +217,8 @@ export default {
     },
 
     submitForm(e) {
+      let vueContext = this;
+
       let nombre = document.getElementById("input_nom").value
       let email = document.getElementById('input_dir').value
       let mensaje = document.getElementById('input_men').value
@@ -236,8 +248,11 @@ export default {
         error() { }
       })*/
 
+      this.animationData.element.play()
+      this.animationData.active = true
+
       $.ajax({
-        "url": "http://localhost:8082/form/solicitud",
+        "url": window.location.origin+"/form/solicitud",
         "method": "POST",
         "timeout": 0,
         "headers": {
@@ -249,9 +264,21 @@ export default {
           "mensaje": mensaje
         }),
       }).done(function (response) {
-        console.log(response);
+        console.log(response)
+        vueContext.animationData.active = false
+        vueContext.animationData.element.stop()
       });
     }
+  },
+
+  mounted() {
+    this.animationData.element = lottie.loadAnimation({
+      container: document.getElementById("loading-formData"),
+      renderer: "svg",
+      loop: true,
+      autoplay: false,
+      path: "/img/json/lottie/block_loader.json"
+    })
   }
 }
 </script>
@@ -428,6 +455,13 @@ export default {
 
   > input.disabled
     opacity: 0.5
+
+  > div
+    height: 40px
+    display: flex
+    align-items: center
+    > div#loading-formData
+      height: 80px
 
 
 

@@ -1,48 +1,49 @@
 <script>
 import LanguageSelectorItem from "@/components/LanguageSelectorItem.vue";
-import  { engine, cookieManager } from "@/engine";
+import {engine, cookieManager} from "@/engine";
 
 export default {
   name: "LanguageSelector",
 
-  data() {return {
-    classes: {
-      dark: {
-        active: false
-      }
-    },
-    engine,
-    active: false,
-    menuStyles: {height: ""}
-  }},
+  data() {
+    return {
+      classes: {
+        dark: {
+          active: false
+        }
+      },
+      engine,
+      active: false,
+      menuStyles: {height: ""}
+    }
+  },
 
   methods: {
     click() {
-      this.active? (
+      this.active ? (
           this.active = false,
-          this.classes.dark.active = false,
-          this.menuStyles.height = "60px"
+              this.classes.dark.active = false,
+              this.menuStyles.height = "60px"
       ) : (
           this.active = true,
-          this.classes.dark.active = true,
-          this.menuStyles.height = (60 + 20 + (40 * engine.idiomas.length)) + 'px'
+              this.classes.dark.active = true,
+              this.menuStyles.height = (60 + 20 + (40 * engine.idiomas.length)) + 'px'
       )
     },
 
     cambiar(idioma) {
       cookieManager.add({
-        key: 'idioma',
+        key: 'lang',
         value: idioma,
         max_age: 3600 * 24 * 7,
         path: "/"
       })
 
-      this.click()
-
       engine.setIdiomaId(idioma)
 
-
       document.getElementById('html').lang = engine.idiomaId
+
+      this.click()
     }
   },
 
@@ -54,9 +55,10 @@ export default {
 
 <template>
   <div id="LanguageSelectorTemplate">
-    <div class="dark"
-         :class="classes.dark"
-         @click="click"></div>
+    <div
+        class="dark"
+        :class="classes.dark"
+        @click="click"></div>
 
     <div class="language_selector_menu" :style="menuStyles">
       <div class="default" @click="click()">
