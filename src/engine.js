@@ -6,11 +6,19 @@ import {themeFromSourceColor, applyTheme, argbFromHex} from "@material/material-
 export var cookieManager = {
     add: (values) => {
         let key_value;
+        // noinspection ExceptionCaughtLocallyJS
         try {
             if ((values.key && values.value) || values.value === "") key_value = values.key + "=" + values.value;
-            else if (!values.key && !values.value) throw new Error("Propiedades 'key' y 'valor' no detectadas");
-            else if (!values.key) throw new Error("Propiedad 'key' no detectada");
-            else throw new Error("Propiedad 'valor' no detectada");
+            else if (!values.key && !values.value) { // noinspection ExceptionCaughtLocallyJS
+                throw new Error("Propiedades 'key' y 'valor' no detectadas");
+            }
+            else { // noinspection ExceptionCaughtLocallyJS
+                if (!values.key) { // noinspection ExceptionCaughtLocallyJS
+                    throw new Error("Propiedad 'key' no detectada")
+                } else { // noinspection ExceptionCaughtLocallyJS
+                    throw new Error("Propiedad 'valor' no detectada");
+                }
+            }
             let path = values.path ? ";path=" + values.path : "";
             let domain = values.domain ? ";domain=" + values.domain : "";
             let max_age = values.max_age ? ";max-age=" + values.max_age : "";
@@ -52,7 +60,7 @@ export var engine = reactive({
     ],
     idioma() {
         for (let item of engine.idiomas) {
-            if (item.id == cookieManager.get('lang')) {
+            if (item.id === cookieManager.get('lang')) {
                 return item
             }
         }
@@ -76,24 +84,20 @@ export var engine = reactive({
 
             this.apply()
         },
+        colors: themeFromSourceColor(argbFromHex('#007997'), []),
         apply() {
             applyTheme(
-                themeFromSourceColor(argbFromHex('#007997'), [{
-                    name: 'personalizado-1',
-                    value: argbFromHex("#222222"),
-                    blend: true
-                }, {
-                    name: "personalizado-2",
-                    value: argbFromHex("#ff0000"),
-                    blend: false
-                }]), {
+                this.colors, {
                     target: document.body,
-                    dark: localStorage.getItem('theme') === 'dark' ? true : false
+                    dark: localStorage.getItem('theme') === 'dark'
                 }
             )
         }
     }
-
 })
+
+
+console.log(engine.theme.colors)
+
 
 engine.theme.set();

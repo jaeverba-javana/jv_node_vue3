@@ -40,9 +40,5 @@ import SocialMedia from "@/components/SocialMedia.vue";
       font:
         size: 17px
 
-  .template_social_media_contenedor
-    margin-top: 30px
-    margin-bottom: 20px
-
 /* -------------------- Footer - FIN -------------------- */
 </style>
