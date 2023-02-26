@@ -1,0 +1,155 @@
+@import "variables";
+
+@font-face {
+  font-family: '#{$icomoon-font-family}';
+  src:  url('#{$icomoon-font-path}/#{$icomoon-font-family}.eot?q1emqo');
+  src:  url('#{$icomoon-font-path}/#{$icomoon-font-family}.eot?q1emqo#iefix') format('embedded-opentype'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.ttf?q1emqo') format('truetype'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff?q1emqo') format('woff'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.svg?q1emqo##{$icomoon-font-family}') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="jvi-"], [class*=" jvi-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: '#{$icomoon-font-family}' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.jvi-square-xmark-classic-duotone .path1 {
+  &:before {
+    content: $jvi-square-xmark-classic-duotone-path1;  
+  }
+}
+.jvi-square-xmark-classic-duotone .path2 {
+  &:before {
+    content: $jvi-square-xmark-classic-duotone-path2;
+    margin-left: -0.875em;
+    opacity: 0.4;
+  }
+}
+.jvi-circle-xmark-classic-duotone .path1 {
+  &:before {
+    content: $jvi-circle-xmark-classic-duotone-path1;
+  }
+}
+.jvi-circle-xmark-classic-duotone .path2 {
+  &:before {
+    content: $jvi-circle-xmark-classic-duotone-path2;
+    margin-left: -1em;
+    opacity: 0.4;
+  }
+}
+.jvi-ban-classic-duotone .path1 {
+  &:before {
+    content: $jvi-ban-classic-duotone-path1;
+  }
+}
+.jvi-ban-classic-duotone .path2 {
+  &:before {
+    content: $jvi-ban-classic-duotone-path2;
+    margin-left: -1em;
+    opacity: 0.4;
+  }
+}
+.jvi-xmark-classic-duotone {
+  &:before {
+    content: $jvi-xmark-classic-duotone;
+  }
+}
+.jvi-info-classic-duotone .path1 {
+  &:before {
+    content: $jvi-info-classic-duotone-path1;
+  }
+}
+.jvi-info-classic-duotone .path2 {
+  &:before {
+    content: $jvi-info-classic-duotone-path2;
+    margin-left: -0.375em;
+    opacity: 0.4;
+  }
+}
+.jvi-circle-info-classic-duotone .path1 {
+  &:before {
+    content: $jvi-circle-info-classic-duotone-path1;
+  }
+}
+.jvi-circle-info-classic-duotone .path2 {
+  &:before {
+    content: $jvi-circle-info-classic-duotone-path2;
+    margin-left: -1em;
+    opacity: 0.4;
+  }
+}
+.jvi-messages-classic-duotone .path1 {
+  &:before {
+    content: $jvi-messages-classic-duotone-path1;
+  }
+}
+.jvi-messages-classic-duotone .path2 {
+  &:before {
+    content: $jvi-messages-classic-duotone-path2;
+    margin-left: -1.25em;
+    opacity: 0.4;
+  }
+}
+.jvi-envelope_classic_duotone .path1 {
+  &:before {
+    content: $jvi-envelope_classic_duotone-path1;
+  }
+}
+.jvi-envelope_classic_duotone .path2 {
+  &:before {
+    content: $jvi-envelope_classic_duotone-path2;
+    margin-left: -1em;
+    opacity: 0.4;
+  }
+}
+.jvi-user_classic_duotone .path1 {
+  &:before {
+    content: $jvi-user_classic_duotone-path1;
+  }
+}
+.jvi-user_classic_duotone .path2 {
+  &:before {
+    content: $jvi-user_classic_duotone-path2;
+    margin-left: -0.875em;
+    opacity: 0.4;
+  }
+}
+.jvi-paper-plane_classic_duotone .path1 {
+  &:before {
+    content: $jvi-paper-plane_classic_duotone-path1;
+  }
+}
+.jvi-paper-plane_classic_duotone .path2 {
+  &:before {
+    content: $jvi-paper-plane_classic_duotone-path2;
+    margin-left: -1em;
+    opacity: 0.4;
+  }
+}
+.jvi-paper-plane-top_classic_duotone .path1 {
+  &:before {
+    content: $jvi-paper-plane-top_classic_duotone-path1;
+  }
+}
+.jvi-paper-plane-top_classic_duotone .path2 {
+  &:before {
+    content: $jvi-paper-plane-top_classic_duotone-path2;
+    margin-left: -1em;
+    opacity: 0.4;
+  }
+}
+

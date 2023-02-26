@@ -26,7 +26,17 @@
   --md-sys-elevation-12px: 0 7px 8px var(--sombra-1), 0 5px 22px var(--sombra-2), 0 12px 18px var(--sombra-3);
   --md-sys-elevation-16px: 0 8px 10px var(--sombra-1), 0 6px 30px var(--sombra-2), 0 16px 24px var(--sombra-3);
   --md-sys-elevation-24px: 0 11px 15px var(--sombra-1), 0 9px 46px var(--sombra-2), 0 24px 38px var(--sombra-3);
+
+  --ancho-barras: 60px;
+  --v-theme-on-surface: white !important;
 }
+
+
+
+.v-theme--light, .v-theme--dark {
+  --v-theme-on-surface: white !important;
+}
+
 
 
 html {
@@ -45,16 +55,17 @@ html body {
 
 *, *::before, *::after {
   box-sizing: border-box;
+  user-select: none !important;
 }
 
 *, :after, :before, button, button:focus, input, textarea {
   -webkit-tap-highlight-color: transparent;
   box-sizing: inherit;
-  font-family: din-round,sans-serif;
+  //font-family: din-round,sans-serif;
   outline: none;
   -webkit-user-select: none;
   -moz-user-select: none;
-  user-select: none;
+  user-select: text;
 }
 
 
@@ -71,6 +82,14 @@ ol, ul{
 }
 a{
   text-decoration: none;
+  color: inherit;
+}
+a.a--normal{
+  color: var(--md-sys-color-secondary);
+  text-decoration: underline;
+}
+a.a--normal:hover{
+  color: var(--md-sys-color-tertiary);
 }
 
 
@@ -119,9 +138,10 @@ body div[id=contenedor_principal] ~ div {
 *::after {
   box-sizing: border-box;
   margin: 0;
-  position: relative;
   font-weight: normal;
+  position: relative;
 }
+
 
 body {
   min-height: 100vh;

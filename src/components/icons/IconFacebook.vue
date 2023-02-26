@@ -57,10 +57,10 @@ export default {
 <style scoped lang="sass">
 svg
   .bg
-    fill: var(--md-sys-color-inverse-surface)
+    fill: var(--md-sys-color-surface-variant)
 
   .icon
-    fill: var(--md-sys-color-inverse-on-surface)
+    fill: var(--md-sys-color-secondary)
 
   #mascaraFacebookC
     fill: #3c5a99

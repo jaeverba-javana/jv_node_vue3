@@ -7,12 +7,12 @@ export default {
 
   data() {return {
     json: {
-      "es": {
+      es: {
         "about": "acerca de mí",
         "port": "portafolio",
         "blog": "blog"
       },
-      "en": {
+      en: {
         "about": "about me",
         "port": "portfolio",
         "blog": "blog"

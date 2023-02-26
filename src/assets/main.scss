@@ -1,5 +1,10 @@
 @use "@material/elevation/mdc-elevation";
 
+@use 'vuetify' with (
+  $utilities: false,
+  $color-pack: false,
+);
+
 @import "@/assets/base.scss";
 
 /*#app {
@@ -10,8 +15,26 @@
   font-weight: normal;
 }*/
 
+@font-face {
+  font-family: nimbus-sans;
+  src: url("/statics/fonts/NimbusSanL-Reg.otf");
+}
+@font-face {
+  font-family: nimbus-sans;
+  font-weight: bold;
+  src: url("/statics/fonts/NimbusSanL-Bol.otf");
+}
+@font-face {
+  font-family: cubano;
+  src: url("/statics/fonts/Cubano.ttf");
+}
+
 /* ____________________ FUENTES - INICIO ____________________ */
-h1, h2, h3, h4, h5, h6, p {
+h1, h2, h3, h4, h5, h6, label {
+  font-family: nimbus-sans, sans-serif;
+  font-weight: bold;
+}
+p {
   font-family: nimbus-sans, sans-serif;
 }
 .gordo {
@@ -46,3 +69,8 @@ h1, h2, h3, h4, h5, h6, p {
 .oscuro {
   background-color: var(--color-background-oscuro);
 }
+
+
+
+
+

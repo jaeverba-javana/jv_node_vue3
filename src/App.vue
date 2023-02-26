@@ -12,7 +12,9 @@ import HomeView from "@/views/HomeView.vue";
   </div>
 
   <div class="main-container-general">
+    <span></span>
     <main><HomeView></HomeView></main>
+    <span></span>
   </div>
 
   <hr>
@@ -26,15 +28,27 @@ import HomeView from "@/views/HomeView.vue";
 /* --- --- --- --- MAIN - START --- --- --- --- */
 #app
   min-height: 100vh
+  background-color: var(--md-sys-color-background)
 
 #HeaderTemplateContainer
   height: 100vh
+  //min-height: 830px
+  max-height: calc(calc(60vw * 0.9) + 75px)
+
+  @media (max-width: 500px)
+    max-height: calc(calc(60vw * 0.8) + 105px)
 
 .main-container-general
   display: flex
+  flex-direction: column
+  align-items: center
   width: 100%
   justify-content: center
-  background-color: var(--md-sys-color-background)
+  background-color: var(--md-sys-color-surface-variant)
+  //margin: 50px 0
+
+  > span
+    height: 50px
 
   > *
     width: 100%
@@ -43,12 +57,17 @@ import HomeView from "@/views/HomeView.vue";
     display: flex
     flex-direction: column
     row-gap: 50px
-    margin: 50px 0
+    //margin: 50px 0
 
 hr
   background-color: var(--md-sys-color-primary-container)
   border: 0
   height: 5px
+
+#FooterTemplateContainer
+  position: absolute
+  width: 100%
+
 
 /* --- --- --- --- MAIN - END --- --- --- --- */
 </style>

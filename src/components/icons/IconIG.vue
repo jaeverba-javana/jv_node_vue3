@@ -97,12 +97,12 @@ export default {
 <style scoped>
 .bg {
   /*noinspection CssUnresolvedCustomProperty*/
-  fill: var(--md-sys-color-inverse-surface);
+  fill: var(--md-sys-color-surface-variant);
 }
 
 .icon {
   /*noinspection CssUnresolvedCustomProperty*/
-  fill: var(--md-sys-color-inverse-on-surface);
+  fill: var(--md-sys-color-secondary);
 }
 
 #mascaraIg {

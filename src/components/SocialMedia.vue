@@ -1,6 +1,6 @@
 <template>
   <div id="SocialMediaTemplate">
-    <h1 class="gordo">Redes sociales</h1>
+    <h1 class="gordo">{{text[engine.idiomaId].title}}</h1>
 
     <div>
       <div class="icons-container-">
@@ -9,9 +9,9 @@
         </svg>
 
         <div class="icons-container">
-          <IconFacebook :active="medias.facebook.active" id="SocialMediaIconFacebook" />
-          <IconIG :active="medias.instagram.active" id="SocialMediaIconInstagram"  />
-          <IconTwitter :active="medias.twitter.active" id="SocialMediaIconTwitter"  />
+          <IconFacebook :active="medias.facebook.active" id="SocialMediaIconFacebook"/>
+          <IconIG :active="medias.instagram.active" id="SocialMediaIconInstagram"/>
+          <IconTwitter :active="medias.twitter.active" id="SocialMediaIconTwitter"/>
         </div>
       </div>
 
@@ -27,22 +27,35 @@ import IconFacebook from "@/components/icons/IconFacebook.vue";
 import IconIG from "@/components/icons/IconIG.vue";
 import IconTwitter from "@/components/icons/IconTwitter.vue";
 
+import {engine} from "@/engine"
+
 export default {
   name: "SocialMedia",
   components: {IconFacebook, IconIG, IconTwitter},
-  data() {return{
-    medias: {
-      facebook: {
-        active: true
+  data() {
+    return {
+      text: {
+        en: {
+          title: "Social media"
+        },
+        es: {
+          title: "Redes sociales"
+        },
       },
-      instagram: {
-        active: false
-      },
-      twitter: {
-        active: false
+      engine,
+      medias: {
+        facebook: {
+          active: true
+        },
+        instagram: {
+          active: false
+        },
+        twitter: {
+          active: false
+        }
       }
     }
-  }},
+  },
   computed: {
     trans() {
       if (this.medias.facebook.active) return -70
@@ -53,19 +66,19 @@ export default {
   mounted() {
     let Vue = this
 
-    $("#SocialMediaIconFacebook").hover(function() {
+    $("#SocialMediaIconFacebook").hover(function () {
       Vue.medias.facebook.active = true
       Vue.medias.instagram.active = false
       Vue.medias.twitter.active = false
     })
 
-    $("#SocialMediaIconInstagram").hover(function() {
+    $("#SocialMediaIconInstagram").hover(function () {
       Vue.medias.facebook.active = false
       Vue.medias.instagram.active = true
       Vue.medias.twitter.active = false
     })
 
-    $("#SocialMediaIconTwitter").hover(function() {
+    $("#SocialMediaIconTwitter").hover(function () {
       Vue.medias.facebook.active = false
       Vue.medias.instagram.active = false
       Vue.medias.twitter.active = true
@@ -88,6 +101,7 @@ h1
   flex-direction: column
   align-items: center
 
+  //color: var(--md-sys-color-on-background)
   color: var(--md-sys-color-on-background)
 
   > div > div
@@ -112,7 +126,8 @@ h1
     transition-duration: 0.4s
 
     path
-      fill: var(--md-sys-color-inverse-surface)
+      //fill: var(--md-sys-color-inverse-surface)
+      fill: var(--md-sys-color-surface-variant)
 
   .icons-container svg
     width: 50px
@@ -121,6 +136,7 @@ h1
   .users-container
     width: 330px
     height: 50px
-    background-color: var(--md-sys-color-inverse-surface)
+    //background-color: var(--md-sys-color-inverse-surface)
+    background-color: var(--md-sys-color-surface-variant)
     border-radius: 25px
 </style>

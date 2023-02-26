@@ -1,6 +1,8 @@
 <script>
 import lottie from 'lottie-web'
-import { engine } from "@/engine";
+import {engine} from "@/engine";
+import {useTheme} from "vuetify";
+
 
 export default {
   name: "ThemeToggler",
@@ -14,22 +16,30 @@ export default {
       path: '/img/json/lottie/toggle_theme_1.json'
     })
 
+    this.theme = useTheme()
+
     if (localStorage.getItem('theme') === 'dark') {
       this.animation.goToAndStop(15, true)
-    }
+      this.theme.global.name.value = 'darkTheme'
+    } else this.theme.global.name.value = 'lightTheme'
   },
 
   methods: {
     click(e) {
       engine.theme.toggle()
 
-      localStorage.getItem('theme') === 'dark'? (
-          this.animation.setDirection(1),
-          this.animation.play()
-      ) : (
-          this.animation.setDirection(-1),
-          this.animation.play()
-      )
+      //this.theme.global.name.value = this.theme.global.current.value.dark ? "light" : "dark"
+
+      localStorage.getItem('theme') === 'dark'
+          ? (
+              this.animation.setDirection(1),
+                  this.theme.global.name.value = "darkTheme",
+                  this.animation.play()
+          ) : (
+              this.animation.setDirection(-1),
+                  this.theme.global.name.value = "lightTheme",
+                  this.animation.play()
+          )
       this.animation.play()
     }
   }

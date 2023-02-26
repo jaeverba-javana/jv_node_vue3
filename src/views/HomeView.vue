@@ -2,152 +2,203 @@
 import {engine} from "@/engine";
 import IconDesign from "@/components/icons/IconDesign.vue";
 import IconProgramming from "@/components/icons/IconProgramming.vue";
+import SlideDesarrollo from "@/components/SlideDesarrollo.vue";
+import SlideDesign from "@/components/SlideDesign.vue";
 
 
-
-let text = {
-  "es": {
-    "design": {
-      "cosas que disfruto hacer": [
-          "interfaces de usuario",
-          "identidad corporativa",
-          "embalaje",
-          "logos"
-      ],
-      "herramientas": [
-          "Adobe Photoshop",
-          "Adobe Illustrator",
-          "Adobe InDesign",
-          "Adobe XD"
-      ]
+const text = {
+  es: {
+    aboutMe: {
+      title: "Un poco sobre mí",
+      p1: "Soy Javier Vergara, un programador web full-stack y diseñador gráfico freelance con una gran afición por la tecnología. Desde hace tiempo, he trabajado en proyectos como programador web y diseñador gráfico freelance, buscando constantemente desafíos y oportunidades para aprender y mejorar mis habilidades.",
+      p2: "Además de mi experiencia en el desarrollo web y el diseño gráfico, también brindo tutorías en programación, matemáticas preuniversitarias y diseño gráfico. Con dos años de experiencia en la enseñanza, considero que es una excelente forma de continuar creciendo y compartir mi conocimiento con otros. Puedes encontrar más información sobre mi experiencia en mi perfil de SuperProf.",
+      p3: "La mayoría de mi conocimiento y habilidades en programación se han adquirido a través del estudio independiente y la práctica constante en proyectos personales y trabajos freelance.",
     },
-    "programming": {
-      "Frontend": [
-          "HTML - Pug",
-          "CSS - Sass",
-          "JavaScript - Vue3 - JQuery"
-      ],
-      "Backend" : [
-          "Java - Spring Boot",
-          "PHP",
-          "SQL - MySQL, SQLite"
-      ],
-      "Herramientas": [
-          "Jetbrains Space",
-          "GitHub",
-          "Docker",
-          "Azure"
-      ],
-      "IDES": [
-          "Vidsual Studio",
-          "WebStorm",
-          "Netbeans",
-          "DataGrip",
-          "Eclipse",
-          "IntelliJ"
-      ]
+    mySkills: {
+      title: "Mis habilidades",
+      design: {
+        title: "Diseño",
+        content: {
+          "cosas que disfruto hacer": [
+            "interfaces de usuario",
+            "identidad corporativa",
+            "embalaje",
+            "logos"
+          ],
+          "herramientas": [
+            "Adobe Photoshop",
+            "Adobe Illustrator",
+            "Adobe InDesign",
+            "Adobe XD"
+          ],
+        },
+      },
+      programming: {
+        title: "Programación",
+        content: {
+          "Frontend": [
+            "HTML - Pug",
+            "CSS - Sass",
+            "JavaScript - Vue3 - JQuery"
+          ],
+          "Backend": [
+            "Java - Spring Boot",
+            "PHP",
+            "SQL - MySQL, SQLite"
+          ],
+          "Herramientas": [
+            "Jetbrains Space",
+            "GitHub",
+            "Docker",
+            "Azure"
+          ],
+          "IDES": [
+            "Vidsual Studio",
+            "WebStorm",
+            "Netbeans",
+            "DataGrip",
+            "Eclipse",
+            "IntelliJ"
+          ]
+        }
+      }
     }
   },
 
   "en": {
-    "design": {
-      "Things I enjoy doing": [
-          "interfaces de usuario",
-          "identidad corporativa",
-          "embalaje",
-          "logos"
-      ],
-      "herramientas": [
-          "Adobe Photoshop",
-          "Adobe Illustrator",
-          "Adobe InDesign",
-          "Adobe XD"
-      ]
+    aboutMe: {
+      title: "A bit about me",
+      p1: "I am Javier Vergara, a full-stack web developer and freelance graphic designer with a strong passion for technology. For a long time, I have been working on projects as a web developer and freelance graphic designer, always seeking new challenges and opportunities to learn and improve my skills.",
+      p2: "In addition to my experience in web development and graphic design, I also provide tutoring in programming, pre-university mathematics, and graphic design. With two years of teaching experience, I believe it is an excellent way to continue growing and sharing my knowledge with others. You can find more information about my experience on my SuperProf profile.",
+      p3: "Most of my knowledge and skills in programming have been acquired through independent study and constant practice in personal projects and freelance work.",
     },
-    "programming": {
-      "Frontend": [
-          "HTML - Pug",
-          "CSS - Sass",
-          "JavaScript - Vue3 - JQuery"
-      ],
-      "Backend" : [
-          "Java - Spring Boot",
-          "PHP",
-          "SQL - MySQL, SQLite"
-      ],
-      "Herramientas": [
-          "Jetbrains Space",
-          "GitHub",
-          "Docker",
-          "Azure"
-      ],
-      "IDES": [
-          "Vidsual Studio",
-          "WebStorm",
-          "Netbeans",
-          "DataGrip",
-          "Eclipse",
-          "IntelliJ"
-      ]
-    }
-  }
+    mySkills: {
+      title: "My skills",
+      design: {
+        title: "Desing",
+        content: {
+          "Things I enjoy doing": [
+            "User interfaces",
+            "Corporate identity",
+            "Packaging design",
+            "Logos"
+          ],
+          "Tools": [
+            "Adobe Photoshop",
+            "Adobe Illustrator",
+            "Adobe InDesign",
+            "Adobe XD"
+          ]
+        },
+      },
+      programming: {
+        title: "Developing",
+        content: {
+          "Frontend": [
+            "HTML - Pug",
+            "CSS - Sass",
+            "JavaScript - Vue3 - JQuery"
+          ],
+          "Backend": [
+            "Java - Spring Boot",
+            "PHP",
+            "SQL - MySQL, SQLite"
+          ],
+          "Tools": [
+            "Jetbrains Space",
+            "GitHub",
+            "Docker",
+            "Azure"
+          ],
+          "IDES": [
+            "Vidsual Studio",
+            "WebStorm",
+            "Netbeans",
+            "DataGrip",
+            "Eclipse",
+            "IntelliJ"
+          ]
+        }
+      },
+    },
+  },
 }
 </script>
 
 <template>
   <section>
-    <h1 class="gordo">un poco sobre m&iacute;</h1>
-    <p>Soy Javier Vergara, programador web full-stack, freelance y diseñador gráfico colombiano, apasionado por la tecnología y todo lo que tenga que ver con ella.</p>
-    <p>He trabajado como programador web y diseñador gráfico freelance desde 2020. Siempre he sido alguien a quién le ha gustado los retos, experimentar con ellos y generar diferentes resultados, considero que no hay mejor forma de aprender que atreviéndose a hacerlo.</p>
-    <p>La mayor parte del mi conocimiento y habilidades en programación los he adquirido estudiando por mi cuenta y practicando con algunos retos, proyectos personales y trabajos como freelance.</p>
+    <h1 class="gordo">{{ text[engine.idiomaId].aboutMe.title }}</h1>
+    <p>{{ text[engine.idiomaId].aboutMe.p1 }}</p>
+    <p>{{ text[engine.idiomaId].aboutMe.p2 }}</p>
+    <p>{{ text[engine.idiomaId].aboutMe.p3 }}</p>
   </section>
 
   <section class="skills">
-    <h1 class="gordo">mis habilidades</h1>
+    <h1 class="gordo">{{ text[engine.idiomaId].mySkills.title }}</h1>
 
     <div>
       <div>
-        <div class="svg-container"><IconDesign /></div>
-
-        <h2 class="gordo">diseño</h2>
-
-        <div class="cuerpo">
-          <div v-for="(item, index) of this.text[engine.idiomaId].design">
-            <h3>{{index}}</h3>
-            <ul>
-              <li v-for="item2 in item"><p>{{item2}}</p></li>
-            </ul>
-          </div>
+        <div class="svg-container">
+          <IconDesign/>
         </div>
+
+        <h2 class="gordo">{{ text[engine.idiomaId].mySkills.design.title }}</h2>
+
+        <ul class="cuerpo">
+          <li v-for="(item, index) of text[engine.idiomaId].mySkills.design.content">
+            <ul>
+              <h3>{{ index }}</h3>
+
+              <li v-for="item2 in item"><p>{{ item2 }}</p></li>
+            </ul>
+          </li>
+        </ul>
       </div>
 
       <div>
-        <div class="svg-container"><IconProgramming /></div>
-
-        <h2 class="gordo">desarrollo</h2>
-
-        <div class="cuerpo">
-          <div v-for="(item, index) of this.text[engine.idiomaId].programming">
-            <h3>{{index}}</h3>
-            <ul>
-              <li v-for="item2 in item"><p>{{item2}}</p></li>
-            </ul>
-          </div>
+        <div class="svg-container">
+          <IconProgramming/>
         </div>
+
+        <h2 class="gordo">{{ text[engine.idiomaId].mySkills.programming.title }}</h2>
+
+        <ul class="cuerpo">
+          <ul v-for="(item, index) of text[engine.idiomaId].mySkills.programming.content">
+            <li>
+              <h3>{{ index }}</h3>
+
+              <ul>
+                <li v-for="item2 in item"><p>{{ item2 }}</p></li>
+              </ul>
+            </li>
+          </ul>
+        </ul>
       </div>
     </div>
   </section>
 
-  <section>
+  <section id="section-sliders">
+    <div id="SlideDesarrolloContainer">
+      <SlideDesarrollo/>
+    </div>
 
+    <div id="slideDesignContainer">
+      <SlideDesign/>
+    </div>
   </section>
 </template>
 
 <style scoped lang="sass">
+
 section
   color: var(--md-sys-color-on-surface)
   display: flex
   flex-direction: column
+
+  &#section-sliders
+    display: flex
+    flex-direction: column
+    row-gap: 50px
 
   > h1
     font-size: 50px
@@ -160,26 +211,36 @@ section
     margin-top: 9px
     align-self: center
 
+//section de skills o Habilidades
 section.skills
   > div
     display: flex
     justify-content: center
     column-gap: 50px
+    height: min-content
 
     > div
       width: 250px
       height: 500px
-      background-color: var(--md-sys-color-inverse-surface)
+      //background-color: var(--md-sys-color-inverse-surface)
+      background-color: var(--md-sys-color-surface-variant)
       overflow-y: auto
+      padding: 30px 10px
+      position: relative
 
       > .svg-container
         margin-bottom: -50px
-        margin-top: -30px
-        width: 250px
-        height: 250px
+        margin-top: -60px
+        width: 100%
         scrollbar-color: rgba(0, 0, 0, .5) rgba(0, 0, 0, 0)
         scrollbar-width: thin
         scrollbar-gutter: auto
+
+      > ul
+        display: flex
+        flex-direction: column
+        row-gap: 15px
+
 
       &::-webkit-scrollbar
         -webkit-appearance: none
@@ -195,19 +256,20 @@ section.skills
         display: none
 
       &::-webkit-scrollbar-thumb
-        background-color: var(--md-sys-color-inverse-on-surface)
+        background-color: transparent
         border-radius: 20px
-        border: 2px solid #f1f2f3
+        border: 2px solid var(--md-sys-color-on-surface-variant)
 
       &::-webkit-scrollbar-track
         border-radius: 10px
 
       h2, h3, p
-        color: var(--md-sys-color-inverse-on-surface)
+        color: var(--md-sys-color-on-surface-variant)
 
       > h2
-        color: var(--md-sys-color-inverse-on-surface)
+        color: var(--md-sys-color-on-surface-variant)
         text-align: center
+        letter-spacing: 0.05em
 
       h3
         font-weight: bold

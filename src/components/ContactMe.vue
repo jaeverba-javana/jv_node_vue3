@@ -1,160 +1,46 @@
 <template>
   <div id="ContactMeTemplate">
-    <h1 class="titulo gordo">{{text[engine.idiomaId].contactame}}</h1>
+    <h1 class="titulo gordo">{{ text[engine.idiomaId].contactame }}</h1>
 
-    <form>
-      <div v-for="(item, index) in text[engine.idiomaId].campos" :class="index">
-        <!--.contactame_input()-->
-        <!--div id="inputErrorsContainer">
-          <div class="empity-error-container" v-if="!classes[index].activado">
-            <div class="error-text">
-              <p>{{item.empty_error}}</p>
-
-              <svg viewBox="0 0 10 10">
-                <polygon class="principal" points="0 0 10 0 5 10" />
-
-                <path d="M0,0 5,10 10,0" stroke-width="2" fill="transparent"/>
-              </svg>
-            </div>
-
-            <div style="min-height: 10px"></div>
-          </div>
-
-          <div v-else-if="index == 'input_dir'"></div>
-        </div-->
-
-        <h4>{{$filters.capitalize(item.elemento)}}</h4>
-
-        <input
-            v-if="index !== exe"
-            :type="item.type"
-            :id="index"
-            class="mdc-elevation--z4"
-            :class="classes[index]"
-            :autocomplete="item.autocomplete"
-            @input="inputEvent"
-        />
-
-        <textarea
-            v-else :id="index"
-            @keyup="menEvent"
-            class="mdc-elevation--z4"
-            :class="classes[index]"
-        ></textarea>
-
-        <div
-            class="error_text"
-        >
-          <p
-              v-show="classes[index].warning"
-          >{{item.empty_error}}</p>
-
-          <p
-              v-show="classes.input_dir.warning_email && index === 'input_dir'"
-          >{{item.invalid_error}}</p>
-        </div>
-      </div>
-
-      <div class="boton">
-        <input
-            v-show="!animationData.active"
-            type="button"
-            @click="submitForm"
-            :value="text[engine.idiomaId].submit"
-            :class="{disabled: submit_disabled_bool}"
-            :disabled="submit_disabled_bool"
-        />
-
-        <div id="loading-formData-container" v-show="animationData.active">
-          <div id="loading-formData"></div>
-        </div>
-      </div>
-    </form>
+    <ContactMeForm/>
   </div>
 </template>
 
 <script>
-import { engine } from "@/engine";
+import {engine} from "@/engine";
 import "jquery"
-import lottie from "lottie-web";
+import lottie from "lottie-web"
+import ContactMeForm from "@/components/ContactMeForm.vue";
 
 export default {
   name: "ContactMe",
-
-  data() {return {
-    text: {
-      "es": {
-        "campos": {
-          "input_nom": {
-            "autocomplete": "name",
-            "elemento": "nombres",
-            "type": "text",
-            empty_error: "Este campo no puede estar vacío."
-          },
-          "input_dir": {
-            "autocomplete": "email",
-            "elemento": "correo",
-            "type": "email",
-            empty_error: "Este campo no puede estar vacío.",
-            invalid_error: "El Correo es inválido"
-          },
-          "input_men": {
-            "elemento": "mensaje",
-            empty_error: "Debe incluir algún mensaje."
-          }
+  data() {
+    return {
+      engine,
+      exe: 'input_men',
+      classes: {
+        input_nom: {
+          activado: false,
+          warning: false
         },
-        "contactame": "contáctame",
-        "submit": "enviar"
-      },
-      "en": {
-        "campos": {
-          "input_nom": {
-            "autocomplete": "name",
-            "elemento": "name",
-            "type": "text",
-            empty_error: "Este campo es obligatorio."
-          },
-          "input_dir": {
-            "autocomplete": "email",
-            "elemento": "email address",
-            "type": "email",
-            empty_error: "Este campo es obligatorio.",
-            invalid_error: "This email is invalid"
-          },
-          "input_men": {
-            "elemento": "message",
-            empty_error: "Este campo es obligatorio.",
-          }
+        input_dir: {
+          activado: false,
+          warning: false,
+          warning_email: false,
         },
-        "contactame": "contact me",
-        "submit": "submit"
-      }
-    },
-
-    engine,
-
-    exe: 'input_men',
-
-    classes: {
-      input_nom: {
-        activado: false,
-        warning: false
+        input_men: {
+          activado: false,
+          warning: false
+        }
       },
-      input_dir: {
-        activado: false,
-        warning: false,
-        warning_email: false,
-      },
-      input_men: {
-        activado: false,
-        warning: false
+      text: {
+        es: {
+          "contactame": "contáctame",},
+        en: {
+          "contactame": "contact me",},
       }
-    },
-
-    animationData: {
-      active: false
     }
-  }},
+  },
 
   computed: {
     submit_disabled_bool() {
@@ -166,7 +52,6 @@ export default {
     inputId() {
       return 'input_' + id
     },
-
     menEvent(e) {
       if (
           e.target.value
@@ -190,10 +75,13 @@ export default {
 
       //this.classes.submit.disabled = !(!this.classes.input_nom.warning && (!this.classes.input_dir.warning && !this.classes.input_dir.warning_email) && !this.classes.input_men.warning)
     },
-
     nomEvent(e) {
 
     },
+    /*submit: this.handleSubmit(values => {
+      this.$store.commit('toggleEmailSent')
+      alert(JSON.stringify(values, null, 2))
+    }),*/
 
     //TODO(aashni): Esto solamente va a ser llamdo cuando los imputs sean llamados
     inputEvent(e) {
@@ -223,10 +111,10 @@ export default {
       let email = document.getElementById('input_dir').value
       let mensaje = document.getElementById('input_men').value
 
-      console.log(nombre)
-      console.log(email)
-      console.log(mensaje)
-      console.log(e)
+      // console.log(nombre)
+      // console.log(email)
+      // console.log(mensaje)
+      // console.log(e)
 
 
       /*$.ajax({
@@ -252,7 +140,7 @@ export default {
       this.animationData.active = true
 
       $.ajax({
-        "url": window.location.origin+"/form/solicitud",
+        "url": window.location.origin + "/form/solicitud",
         "method": "POST",
         "timeout": 0,
         "headers": {
@@ -271,24 +159,29 @@ export default {
     }
   },
 
-  mounted() {
-    this.animationData.element = lottie.loadAnimation({
-      container: document.getElementById("loading-formData"),
-      renderer: "svg",
-      loop: true,
-      autoplay: false,
-      path: "/img/json/lottie/block_loader.json"
-    })
-  }
+  components: {ContactMeForm}
 }
 </script>
 
 <style lang="sass">
+
+@use './../settings.scss'
+
+//.my-button
+//  height: settings.$button-height
+
+
 /* -------------------- Contactame - INICIO -------------------- */
 
 #ContactMeTemplate
+  display: flex
+  flex-direction: column
+  row-gap: 1em
   width: 100%
   height: 100%
+  padding:
+    left: 50px
+    right: 50px
 
   > h1
     text-align: center
@@ -296,22 +189,29 @@ export default {
     font-size: 60px
     margin:
       top: 40px
-      bottom: 40px
+    @media (max-width: 750px)
+      font-size: 50px
+    @media (max-width: 650px)
+      font-size: 40px
+    @media (max-width: 550px)
+      font-size: 35px
 
   > form
     display: grid
-
     width: 100%
-
-
-    row-gap: 20px
-    column-gap: 20px
-    padding: 0 20px
-
+    row-gap: 30px
+    column-gap: 40px
     grid-template:
       areas: "nom men" "dir men" "input input"
       columns: 1fr 1fr
-      rows: 1fr 1fr
+      rows: min-content 1fr auto
+
+    @media (max-width: 750px)
+      grid-template:
+        areas: "nom" "dir" "men" "input"
+        rows: 1fr 1fr 2fr auto
+        columns: 1fr
+      row-gap: 10px
 
     > .input_nom
       grid-area: nom
@@ -323,10 +223,7 @@ export default {
       grid-area: men
 
     > div
-      width: 100%
-      height: 100%
-      display: flex
-      flex-direction: column
+      height: min-content
 
       > #inputErrorsContainer
 
@@ -352,21 +249,18 @@ export default {
 
       > h4
         color: var(--color-enphasis)
-        font-size: 24px
+        font-size: 20px
         text-shadow: var(--md-sys-elevation-2px)
 
         &::after
           content: "*"
           color: var(--md-sys-color-error)
 
-      > input
-        min-height: 40px
-
       > input,
       > textarea
         flex: 1 1 1px
-        font-size: 20px
-        padding: 10px
+        font-size: 16px
+        padding: 5px
         opacity: 0.5
         border-width: 2px
         transition: all ease-in-out 0.4s
@@ -399,39 +293,27 @@ export default {
         color: var(--md-sys-color-error)
 
 
-
-
-
-
 @media (max-width: 600px)
   #contactame > form > div
     > input,
-    >textarea
+    > textarea
       font-size: 18px
 
 
 @media (max-width: 560px)
   #ContactMeTemplate > form > div
     > input,
-    >textarea
+    > textarea
       font-size: 16px
 
 
-@media (max-width: 490px)
+@media (max-width: 750px)
   #ContactMeTemplate
-    > h1
-      font-size: 50px
     > form
-      grid-template:
-        areas: "nom" "dir" "men" "input"
-        rows: 1fr 1fr 2fr auto
-        columns: 1fr
-
       > div
         > input,
-        >textarea
+        > textarea
           font-size: 18px
-
 
 
 #ContactMeTemplate form > div.boton
@@ -460,9 +342,11 @@ export default {
     height: 40px
     display: flex
     align-items: center
-    > div#loading-formData
-      height: 80px
 
+#loading-formData
+  height: 50px
+  svg
+    transform: scale(2) !important
 
 
 /* -------------------- Contactame - FIN -------------------- */
