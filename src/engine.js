@@ -3,6 +3,8 @@ import {reactive} from 'vue'
 
 import {themeFromSourceColor, applyTheme, argbFromHex} from "@material/material-color-utilities"
 
+
+
 export var cookieManager = {
     add: (values) => {
         let key_value;
@@ -46,6 +48,11 @@ export var cookieManager = {
     samesite: {STRICT: "strict", LAX: "lax"}
 };
 
+
+
+
+
+
 export var engine = reactive({
     idiomas: [
         {
@@ -65,14 +72,23 @@ export var engine = reactive({
             }
         }
     },
-
     idiomaId: cookieManager.get('lang'),
-
     setIdiomaId(id) {
         this.idiomaId = id
     },
 
     templates: {},
+
+    elements: {
+        root: {
+            document: document.getElementById("html"),
+            jquery: $("#html"),
+        },
+        body: {
+            document: document.getElementById("body"),
+            jquery: $("#body"),
+        }
+    },
 
     theme: {
         toggle() {
@@ -83,6 +99,9 @@ export var engine = reactive({
             if (!localStorage.getItem('theme')) localStorage.setItem('theme', window.matchMedia("(prefers-color-scheme: dark)").matches ? 'dark' : 'light')
 
             this.apply()
+        },
+        get() {
+            return localStorage.getItem('theme')
         },
         colors: themeFromSourceColor(argbFromHex('#007997'), []),
         apply() {
@@ -97,7 +116,7 @@ export var engine = reactive({
 })
 
 
-console.log(engine.theme.colors)
+// console.log(engine.theme.colors)
 
 
-engine.theme.set();
+//engine.theme.set();
