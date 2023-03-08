@@ -3,7 +3,12 @@ import {reactive} from 'vue'
 
 import {themeFromSourceColor, applyTheme, argbFromHex} from "@material/material-color-utilities"
 
+import '@/assets/libs/jquery-3.6.1.min'
+// import 'jquery/dist/jquery.slim'
 
+// import {$, JQuery} from 'jquery'
+
+// window.$ = $
 
 export var cookieManager = {
     add: (values) => {

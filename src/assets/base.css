@@ -27,6 +27,11 @@
   --ancho-barras: 60px;
   --v-theme-on-surface: white !important;
 }
+@media (max-width: 449px) {
+  :root {
+    --ancho-barras: 50px;
+  }
+}
 
 .v-theme--light, .v-theme--dark {
   --v-theme-on-surface: white !important;

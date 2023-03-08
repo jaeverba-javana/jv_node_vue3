@@ -1,50 +1,81 @@
 <script>
-import { engine } from "@/engine";
-import "jquery"
+import {engine} from "@/engine";
+import "@/assets/libs/jquery-3.6.1.min"
 
 export default {
   name: "HeaderNav",
 
-  data() {return {
-    json: {
-      es: {
-        "about": "acerca de mí",
-        "port": "portafolio",
-        "blog": "blog"
+  data() {
+    return {
+      json: {
+        es: {
+          "about": "acerca de mí",
+          "port": "portafolio",
+          "blog": "blog"
+        },
+        en: {
+          "about": "about me",
+          "port": "portfolio",
+          "blog": "blog"
+        }
       },
-      en: {
-        "about": "about me",
-        "port": "portfolio",
-        "blog": "blog"
-      }
+
+      engine
+    }
+  },
+
+  methods: {
+    entrando(e) {
+      console.log("entrando")
+      // console.log(e)
     },
 
-    engine
-  }},
+    saliendo(e) {
+      console.log("saliendo")
+      // console.log(e)
+    },
+
+    sobre(e) {
+      console.log("sobre")
+    }
+  },
+
+  mounted() {
+    $(".nav_item").hover(
+        e => e.target.classList.add('hover'),
+        e => e.target.classList.remove('hover')
+    )
+  },
 }
 </script>
 
 <template>
   <div id="HeaderNavTemplate">
-    <div>
-      <div>
-        <div class="nav_items">
-          <h2>{{json[engine.idiomaId].about}}</h2>
-        </div>
-      </div>
+    <ul>
+      <li>
+        <RouterLink to="/blog">
+          <div class="nav_item">
+            <h2>{{ json[engine.idiomaId].about }}</h2>
+          </div>
+        </RouterLink>
+      </li>
 
-      <div>
-        <div class="nav_items">
-          <h2>{{json[engine.idiomaId].port}}</h2>
-        </div>
-      </div>
+      <li>
+        <RouterLink to="/blog">
+          <div class="nav_item">
+            <h2>{{ json[engine.idiomaId].port }}</h2>
+          </div>
+        </RouterLink>
+      </li>
 
-      <div>
-        <div class="nav_items">
-          <h2>{{json[engine.idiomaId].blog}}</h2>
-        </div>
-      </div>
-    </div>
+      <li>
+        <RouterLink to="/blog">
+          <div class="nav_item">
+            <h2>{{ json[engine.idiomaId].blog }}</h2>
+          </div>
+        </RouterLink>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -59,7 +90,7 @@ export default {
   display: flex
   justify-content: center
 
-  > div
+  > ul
     width: 100%
     height: 100%
     max-width: 1150px
@@ -70,7 +101,7 @@ export default {
 
     letter-spacing: 1px
 
-    > div
+    > li
       height: 100%
       padding: 5px
 
@@ -82,20 +113,36 @@ export default {
       justify-content: center
       align-items: center
 
-      > div
-        height: 100%
-        width: 100%
+      > a
 
-        display: flex
+        > div
+          height: 100%
+          width: 100%
 
-        justify-content: center
-        align-items: center
+          display: flex
 
-        > h2
-          width: max-content
-          font-family: cubano, sans-serif
-          text-align: center
-          color: var(--md-sys-color-on-primary-container)
+          justify-content: center
+          align-items: center
+
+          transition:
+            duration: 400ms
+
+          &.hover
+            background-color: rgb(var(--v-theme-primary-container-darken-1))
+            > h2
+              color: rgba(var(--v-theme-on-primary-container-lighten-1))
+
+          > h2
+            width: max-content
+            font-family: cubano, sans-serif
+            text-align: center
+            color: var(--md-sys-color-on-primary-container)
+
+            //&:hover
+            //  color: rgba(var(--v-theme-on-primary-container-lighten-1))
+
+            @media (max-width: 599px)
+              font-size: 20px
 
 /* --------------------------------  header_nav - FIN  --------------------------------  */
 

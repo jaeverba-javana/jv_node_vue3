@@ -64,7 +64,6 @@ const text = {
       }
     }
   },
-
   "en": {
     aboutMe: {
       title: "A bit about me",

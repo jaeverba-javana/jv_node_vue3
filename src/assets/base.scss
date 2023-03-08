@@ -28,6 +28,9 @@
   --md-sys-elevation-24px: 0 11px 15px var(--sombra-1), 0 9px 46px var(--sombra-2), 0 24px 38px var(--sombra-3);
 
   --ancho-barras: 60px;
+  @media (max-width: 449px) {
+    --ancho-barras: 50px;
+  }
   --v-theme-on-surface: white !important;
 }
 

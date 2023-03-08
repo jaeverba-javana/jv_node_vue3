@@ -14,13 +14,13 @@
         <ContactMe/>
       </section>
 
-      <v-divider :thickness="2"></v-divider>
+      <v-divider class="separador" :thickness="2"></v-divider>
 
       <section class="template_social_media_contenedor">
         <SocialMedia/>
       </section>
 
-      <p class="copyright">&copy; Javier Vergara 2022 - {{ text[engine.idiomaId].rights }}</p>
+      <p class="copyright">&copy; Javier Vergara {{ new Date().getFullYear() }} - {{ text[engine.idiomaId].rights }}</p>
     </div>
   </footer>
 </template>
@@ -139,6 +139,7 @@ const particlesLoaded = async container => {
 <style lang="sass">
 /* -------------------- Footer - INICIO -------------------- */
 
+
 .background
   //position: absolute
   height: 90vh
@@ -148,6 +149,9 @@ const particlesLoaded = async container => {
   right: 0
   z-index: auto
   min-width: 100%
+
+.separador
+  margin: 30px 0
 
 @media screen and (min-width: 360px)
   .background

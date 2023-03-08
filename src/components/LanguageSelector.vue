@@ -23,11 +23,12 @@ export default {
       this.active ? (
           this.active = false,
               this.classes.dark.active = false,
-              this.menuStyles.height = "60px"
+              this.menuStyles.height = ""
       ) : (
           this.active = true,
               this.classes.dark.active = true,
-              this.menuStyles.height = (60 + 20 + (40 * engine.idiomas.length)) + 'px'
+              this.menuStyles.height = 'calc(var(--ancho-barras) + 20px + calc(40px * '+engine.idiomas.length+'))'
+              // this.menuStyles.height = (60 + 20 + (40 * engine.idiomas.length)) + 'px'
       )
     },
 
@@ -103,7 +104,7 @@ export default {
     height: 100%
 
   > div.language_selector_menu
-    height: 60px
+    height: var(--ancho-barras)
     overflow: hidden
     position: fixed
     background-color: var(--md-sys-color-primary-container)
@@ -111,7 +112,7 @@ export default {
     z-index: 1
 
     > div.default
-      height: 60px
+      height: var(--ancho-barras)
       cursor: pointer
 
     > div.options

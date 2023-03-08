@@ -3,11 +3,11 @@
 // import 'vuetify/styles'
 
 // import '@/assets/vuetifyVariables.css'
-import '@/assets/jvi/jvi-0.1.21/styles.css'
+import '@/assets/jvi/jvi-0.1.3/styles.css'
 
 // import { aliases, mdi } from 'vuetify/iconsets/mdi'
-// import { aliases, jvi } from '@/fonts/jvi'
-import { aliases, fa } from 'vuetify/iconsets/fa'
+import { aliases, jvi } from '@/fonts/jvi'
+// import { aliases, fa } from 'vuetify/iconsets/fa'
 import {md3} from 'vuetify/blueprints'
 
 // Vuetify
@@ -103,7 +103,7 @@ let lightTheme = {
 
 export default createVuetify({
     icons: {
-        defaultSet: 'fa',
+        defaultSet: 'jvi',
         aliases: {
             ...aliases,
             messages: 'jvi-messages-classic-solid',
@@ -112,14 +112,14 @@ export default createVuetify({
             'paper-plane': 'jvi-paper-plane-classic-solid',
             'envelope': 'jvi-envelope-classic-solid',
         },
-        sets: {fa}
+        sets: {jvi}
     },
     customProperties: true,
     theme: {
         //defaultTheme: 'dark',
         themes: {darkTheme, lightTheme,},
         variations: {
-            colors: ['primary', 'secondary'],
+            colors: ['primary', 'secondary', 'primary-container', 'on-primary-container'],
             lighten: 2,
             darken: 2,
         },

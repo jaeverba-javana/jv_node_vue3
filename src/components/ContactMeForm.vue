@@ -2,6 +2,7 @@
   <form @submit.prevent="submit">
     <div class="input_nom">
       <v-text-field
+          elevation="5"
           v-model="name.value.value"
           :label="$filters.capitalize(text[engine.idiomaId].campos.input_nom.elemento)"
           :autocomplete="text[engine.idiomaId].campos.input_nom.autocomplete"

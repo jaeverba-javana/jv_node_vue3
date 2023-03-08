@@ -3,3 +3,9 @@
   $utilities: false,
   $button-height: 40px,
 );*/
+
+@forward 'vuetify/settings' with (
+  $list-indent-size: 20px,
+  $list-item-prepend-size: 20px,
+  $list-item-icon-margin-end: 16px,
+);

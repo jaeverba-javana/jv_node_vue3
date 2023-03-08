@@ -20,8 +20,7 @@ export default {
 
     if (localStorage.getItem('theme') === 'dark') {
       this.animation.goToAndStop(15, true)
-      this.theme.global.name.value = 'darkTheme'
-    } else this.theme.global.name.value = 'lightTheme'
+    }
   },
 
   methods: {

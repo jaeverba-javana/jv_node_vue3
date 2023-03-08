@@ -43,7 +43,7 @@ import ThemeToggler from "@/components/ThemeToggler.vue";
 
   > div
     width: 100%
-    height: 60px
+    height: var(--ancho-barras)
     max-width: var(--desktop-maxwidth)
     position: fixed
     display: flex
@@ -56,7 +56,7 @@ import ThemeToggler from "@/components/ThemeToggler.vue";
         basis: 1px
 
     > div.lateral-l > div
-      height: 60px
+      height: var(--ancho-barras)
     //width: 300px
 
     > div.centro
