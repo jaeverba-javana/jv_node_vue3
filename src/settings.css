@@ -1,0 +1,21 @@
+/* Error: Can't find stylesheet to import.
+ *    ,
+ * 7  | / @forward 'vuetify/settings' with (
+ * 8  | |   $list-indent-size: 20px,
+ * 9  | |   $list-item-prepend-size: 20px,
+ * 10 | |   $list-item-icon-margin-end: 16px,
+ * 11 | | );
+ *    | '-^
+ *    '
+ *   settings.scss 7:1  root stylesheet */
+
+body::before {
+  font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
+      "Droid Sans Mono", monospace, monospace;
+  white-space: pre;
+  display: block;
+  padding: 1em;
+  margin-bottom: 1em;
+  border-bottom: 2px solid black;
+  content: "Error: Can't find stylesheet to import.\a    \2577 \a 7  \2502  \250c  @forward 'vuetify/settings' with (\a 8  \2502  \2502    $list-indent-size: 20px,\a 9  \2502  \2502    $list-item-prepend-size: 20px,\a 10 \2502  \2502    $list-item-icon-margin-end: 16px,\a 11 \2502  \2502  );\a    \2502  \2514 \2500 ^\a    \2575 \a   settings.scss 7:1  root stylesheet";
+}
