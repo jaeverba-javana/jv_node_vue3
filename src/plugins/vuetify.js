@@ -3,7 +3,7 @@
 // import 'vuetify/styles'
 
 // import '@/assets/vuetifyVariables.css'
-import '@/assets/jvi/jvi-0.1.3/styles.css'
+import '@/assets/jvi/jvi-v1.0/style.css'
 
 // import { aliases, mdi } from 'vuetify/iconsets/mdi'
 import { aliases, jvi } from '@/fonts/jvi'

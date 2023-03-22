@@ -1,91 +1,75 @@
 <template>
-  <div id="HeaderTemplateContainer">
-    <Header/>
-  </div>
+  <v-app-bar color="primary-container">
 
-  <v-layout>
-    <v-navigation-drawer
-        color="grey-darken-1"
-        permanent
-        width="250"
-    >
-      <v-list class="myList">
-        <v-list-subheader>Índice</v-list-subheader>
+  </v-app-bar>
 
-        <v-list-group value="valor">
+  <v-navigation-drawer
+      width="250">
+    <v-list class="myList">
+      <v-list-subheader>Índice</v-list-subheader>
+
+      <v-list-group value="valor">
+        <template v-slot:activator="{ props }">
+          <v-list-item
+              v-bind="props"
+              title="Users"
+              rounded="xl"
+          ></v-list-item>
+        </template>
+
+        <v-list-group value="Admin" active-color="red">
           <template v-slot:activator="{ props }">
             <v-list-item
                 v-bind="props"
-                title="Users"
+                title="Admin"
                 rounded="xl"
             ></v-list-item>
           </template>
 
-          <v-list-group value="Admin" active-color="red">
-            <template v-slot:activator="{ props }">
-              <v-list-item
-                  v-bind="props"
-                  title="Admin"
-                  rounded="xl"
-              ></v-list-item>
-            </template>
-
-            <v-list-item
-                v-for="([title, icon], i) in admins"
-                :key="i"
-                :title="title"
-                :value="title"
-                rounded="xl"
-                subtitle="subtítulo"
-            ></v-list-item>
-          </v-list-group>
-
-          <v-list-group value="Actions">
-            <template v-slot:activator="{ props }">
-              <v-list-item
-                  v-bind="props"
-                  title="Actions"
-              ></v-list-item>
-            </template>
-
-            <v-list-item
-                v-for="([title, icon], i) in cruds"
-                :key="i"
-                :value="title"
-                :title="title"
-                rounded="xl"
-            ></v-list-item>
-          </v-list-group>
+          <v-list-item
+              v-for="([title, icon], i) in admins"
+              :key="i"
+              :title="title"
+              :value="title"
+              rounded="xl"
+              subtitle="subtítulo"
+          ></v-list-item>
         </v-list-group>
-      </v-list>
-    </v-navigation-drawer>
 
-    <v-navigation-drawer
-        color="grey-lighten-1"
-        location="right"
-        permanent
-        width="150"
-    ></v-navigation-drawer>
+        <v-list-group value="Actions">
+          <template v-slot:activator="{ props }">
+            <v-list-item
+                v-bind="props"
+                title="Actions"
+            ></v-list-item>
+          </template>
 
-    <v-main>
-      <v-container
-          class="d-flex justify-center align-center text-h5"
-          style="min-height: 300px;"
-      >
-        Content
-      </v-container>
-    </v-main>
-  </v-layout>
+          <v-list-item
+              v-for="([title, icon], i) in cruds"
+              :key="i"
+              :value="title"
+              :title="title"
+              rounded="xl"
+          ></v-list-item>
+        </v-list-group>
+      </v-list-group>
+    </v-list>
+  </v-navigation-drawer>
 
-  <!--  <div class="main-container-general">
+  <v-navigation-drawer
+      color="grey-lighten-1"
+      location="right"
+      width="150"
+  ></v-navigation-drawer>
 
-    </div>-->
-
-  <hr>
-
-  <div id="FooterTemplateContainer">
-    <Footer/>
-  </div>
+  <v-main>
+    <v-container
+        class="d-flex justify-center align-center text-h5"
+        style="min-height: 300px;"
+    >
+      <div style="min-width: 100%; height: 200vh; background-color: white"></div>
+    </v-container>
+  </v-main>
 </template>
 
 <script setup>

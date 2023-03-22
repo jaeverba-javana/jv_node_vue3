@@ -15,6 +15,7 @@
     "jquery": "^3.6.3",
     "lottie": "^0.0.1",
     "lottie-web": "^5.10.2",
+    "prismjs": "^1.29.0",
     "pug": "^3.0.2",
     "swiper": "^8.4.7",
     "tsparticles": "^2.9.3",

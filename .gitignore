@@ -27,4 +27,4 @@ coverage
 *.sln
 *.sw?
 
-src/assets/svg/icons/fa/nuevos
+#src/assets/svg/icons/fa/nuevos
