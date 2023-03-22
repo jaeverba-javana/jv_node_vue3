@@ -21,7 +21,7 @@ const aliases: { cancel: string; next: string; checkboxOn: string; minus: string
     delimiter: '...',
     sort: 'chevrons-down-classic-solid',
     expand: 'jvi-chevron-down-classic-solid',
-    menu: 'fontawesome-webfont1',
+    menu: 'jvi-bars-classic-solid',
     subgroup: '...',
     dropdown: '...',
     radioOn: '...',

@@ -1,6 +1,8 @@
 <template>
   <v-app-bar color="primary-container">
-
+    <template v-slot:prepend v-if="mobile">
+      <v-app-bar-nav-icon></v-app-bar-nav-icon>
+    </template>
   </v-app-bar>
 
   <v-navigation-drawer
@@ -64,8 +66,9 @@
 
   <v-main>
     <v-container
-        class="d-flex justify-center align-center text-h5"
+        class="v-main__content d-flex justify-center align-center text-h5"
         style="min-height: 300px;"
+        :class="{'v-media-movile': mobile}"
     >
       <div style="min-width: 100%; height: 200vh; background-color: white"></div>
     </v-container>
@@ -76,6 +79,7 @@
 import {RouterView} from "vue-router";
 import Header from "@/components/blog/Header.vue";
 import Footer from "@/components/Footer.vue";
+import { useDisplay } from "vuetify";
 
 
 let open= ['Users'];
@@ -89,6 +93,8 @@ let cruds = [
   ['Update', 'jvi-xmark-classic-solid'],
   ['Delete', 'jvi-xmark-classic-solid'],
 ]
+
+const { mobile } = useDisplay()
 
 /*export default {
   name: "BlogView"
@@ -110,6 +116,12 @@ let cruds = [
 //
 //@media (max-width: 500px)
 //  max-height: calc(calc(60vw * 0.8) + 105px)
+
+.v-main
+  &__content.v-media-movile
+    padding:
+      left: 1em
+      right: 1em
 
 .main-container-general
   display: flex
