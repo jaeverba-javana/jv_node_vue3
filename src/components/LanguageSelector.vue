@@ -1,6 +1,7 @@
 <script>
 import LanguageSelectorItem from "@/components/LanguageSelectorItem.vue";
 import {engine, cookieManager} from "@/engine";
+import {mapMutations, mapState} from "vuex";
 
 export default {
   name: "LanguageSelector",
@@ -9,7 +10,6 @@ export default {
     return {
       classes: {
         dark: {
-          active: false
         }
       },
       engine,
@@ -18,7 +18,13 @@ export default {
     }
   },
 
+  computed: {
+    ...mapState({langugeSelectorState: state => state.components.LangSelector}),
+    // containerHeight: () => this.langugeSelectorState.active? 'calc(var(--ancho-barras) + 20px + calc(40px * '+engine.idiomas.length+'))' : ""
+  },
+
   methods: {
+    ...mapMutations(['toggleActivationOfLangSelectorComponent']),
     click() {
       this.active ? (
           this.active = false,
@@ -44,7 +50,7 @@ export default {
 
       document.getElementById('html').lang = engine.idiomaId
 
-      this.click()
+      this.toggleActivationOfLangSelectorComponent(false)
     }
   },
 
@@ -55,14 +61,14 @@ export default {
 </script>
 
 <template>
-  <div id="LanguageSelectorTemplate">
+  <div id="LanguageSelectorTemplate" :class="{active: langugeSelectorState.active}">
     <div
         class="dark"
-        :class="classes.dark"
-        @click="click"></div>
+        :class="{active: langugeSelectorState.active}"
+        @click="toggleActivationOfLangSelectorComponent(false)"></div>
 
-    <div class="language_selector_menu" :style="menuStyles">
-      <div class="default" @click="click()">
+    <div class="language_selector_menu" :style="{height: langugeSelectorState.active? 'calc(var(--ancho-barras) + 20px + calc(40px * '+engine.idiomas.length+'))' : ''}">
+      <div class="default" @click="toggleActivationOfLangSelectorComponent()">
         <LanguageSelectorItem
             :elemento="engine.idioma()"
             :header="true"
@@ -91,7 +97,6 @@ export default {
     position: fixed
     top: 0
     left: 0
-    backdrop-filter: blur(10px)
 
     transition:
       duration: 400ms
@@ -99,9 +104,10 @@ export default {
 
     z-index: 1
 
-  > div.dark.active
-    width: 100%
-    height: 100%
+    &.active
+      width: 100vw
+      height: 100vh
+      backdrop-filter: blur(4px)
 
   > div.language_selector_menu
     height: var(--ancho-barras)
@@ -120,4 +126,7 @@ export default {
 
       > div
         cursor: pointer
+
+  &.active > div.language_selector_menu
+    box-shadow: var(--md-sys-elevation-6)
 </style>

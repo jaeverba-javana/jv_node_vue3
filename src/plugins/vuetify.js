@@ -6,20 +6,30 @@
 import '@/assets/jvi/jvi-v1.0/style.css'
 
 // import { aliases, mdi } from 'vuetify/iconsets/mdi'
-import { aliases, jvi } from '@/fonts/jvi'
 // import { aliases, fa } from 'vuetify/iconsets/fa'
+import { aliases, jvi } from '@/fonts/jvi-svg.mjs'
 import {md3} from 'vuetify/blueprints'
+import {engine} from "@/engine";
+import {hexFromArgb} from "@material/material-color-utilities";
 
 // Vuetify
 import {createVuetify} from 'vuetify'
 
-import {engine} from "@/engine";
-import {hexFromArgb} from "@material/material-color-utilities";
+import { Hct } from "@material/material-color-utilities";
+
+// Simple demonstration of HCT.
+const color = Hct.fromInt(0xff4285f4);
+console.log(`Hue: ${color.hue}`);
+console.log(`Chrome: ${color.chroma}`);
+console.log(`Tone: ${color.tone}`);
+
+// const color =
+
 
 engine.theme.set()
 const colors = engine.theme.colors
-console.log(colors.schemes.dark.error)
-console.log(colors.schemes.light)
+// console.log(colors.schemes.dark.error)
+// console.log(colors.schemes.light)
 
 
 let darkTheme = {
@@ -60,7 +70,7 @@ let darkTheme = {
     }
 }
 
-console.log(darkTheme.colors.secondary)
+// console.log(darkTheme.colors.secondary)
 
 let lightTheme = {
     dark: false,
@@ -119,7 +129,7 @@ export default createVuetify({
         //defaultTheme: 'dark',
         themes: {darkTheme, lightTheme,},
         variations: {
-            colors: ['primary', 'secondary', 'primary-container', 'on-primary-container'],
+            colors: ['primary', 'secondary', 'primary-container', 'on-primary-container', 'surface-variant'],
             lighten: 2,
             darken: 2,
         },
@@ -138,6 +148,13 @@ export default createVuetify({
         },
         VTextField: {
             variant: 'outlined',
+        },
+        VCard: {
+            elevation: '2',
+            VCard: {
+                elevation: '0',
+                color: 'inherit',
+            }
         }
     }
 })

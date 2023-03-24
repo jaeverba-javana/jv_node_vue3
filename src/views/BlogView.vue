@@ -1,12 +1,44 @@
 <template>
   <v-app-bar color="primary-container">
-    <template v-slot:prepend v-if="mobile">
-      <v-app-bar-nav-icon></v-app-bar-nav-icon>
+<!--     density="prominent"-->
+    <template v-slot:prepend>
+      <v-app-bar-nav-icon v-if="mobile" @click="toggleActivationOfLeftVNavigationDrawerComponent()"></v-app-bar-nav-icon>
+      <div  v-else style="height: 60px; width: 56px">
+        <LanguageSelector/>
+      </div>
     </template>
+
+<!--    <a href="/">-->
+      <img style="height: 100%" alt="logo" src="/img/svg/logo/transparentbackground_colorfull.svg"/>
+<!--    </a>-->
+
+    <template v-slot:append>
+      <v-btn icon size="large">
+        <template v-slot:default>
+          <div style="height: calc(var(--v-btn-height))">
+            <ThemeToggler />
+          </div>
+        </template>
+      </v-btn>
+    </template>
+
+<!--    La perte de abajo - La barra de navegación -->
+
+<!--    <template v-slot:extension v-if="!mobile" >
+      <nav class="fill">
+        <header-nav></header-nav>
+      </nav>
+
+      <div>
+        <h1> hola esto es algo más </h1>
+      </div>
+    </template>-->
   </v-app-bar>
 
   <v-navigation-drawer
-      width="250">
+      width="250"
+      v-model="blogView.components.vNavigationDrawer.leftDrawer.active">
+
     <v-list class="myList">
       <v-list-subheader>Índice</v-list-subheader>
 
@@ -64,25 +96,37 @@
       width="150"
   ></v-navigation-drawer>
 
-  <v-main>
+  <v-navigation-drawer
+
+      width="0"
+  >
+
+    <div class="v-navigation-drawer__flotant_icons" style="max-height: 0px;">
+      <div style="background-color: #00b755; min-width: 60px; min-height: 60px; position: absolute; left: 100%"></div>
+    </div>
+  </v-navigation-drawer>
+
+  <v-main class="d-flex fd-column align-center">
     <v-container
-        class="v-main__content d-flex justify-center align-center text-h5"
+        class="v-main__content fill-width text-h5"
         style="min-height: 300px;"
-        :class="{'v-media-movile': mobile}"
+        :class="{'v-media-movile': !mobile}"
     >
-      <div style="min-width: 100%; height: 200vh; background-color: white"></div>
+      <router-view />
     </v-container>
   </v-main>
 </template>
 
-<script setup>
-import {RouterView} from "vue-router";
-import Header from "@/components/blog/Header.vue";
-import Footer from "@/components/Footer.vue";
-import { useDisplay } from "vuetify";
+<script>
+import {useDisplay} from "vuetify";
+import {mapMutations, mapState} from "vuex";
+import {engine} from "@/engine"
+import ThemeToggler from "@/components/ThemeToggler.vue";
+import LanguageSelector from "@/components/LanguageSelector.vue";
+import HeaderNav from "@/components/HeaderNav.vue";
 
 
-let open= ['Users'];
+let open = ['Users'];
 let admins = [
   ['Management', 'jvi-xmark-classic-solid'],
   ['Settings', 'jvi-xmark-classic-solid'],
@@ -94,16 +138,37 @@ let cruds = [
   ['Delete', 'jvi-xmark-classic-solid'],
 ]
 
-const { mobile } = useDisplay()
+export default {
+  name: "blog view",
+  components: {ThemeToggler, LanguageSelector, HeaderNav},
+  data: () => ({
+    admins, cruds
+  }),
+  setup() {
+    let {mobile, } = useDisplay()
+
+    return {mobile}
+  },
+  computed: {
+    ...mapState({
+      blogView: state => state.views.blogView
+    }),
+  },
+  methods: {
+    ...mapMutations(["toggleActivationOfLeftVNavigationDrawerComponent"])
+  },
+  beforeCreate() {
+    window.removeEventListener("scroll", engine.elements.window.eventListeners.scrollEventListener)
+  }
+}
 
 /*export default {
   name: "BlogView"
 }*/
 </script>
 
-<style scoped lang="sass">
+<style lang="sass">
 @use "@/settings.scss"
-
 
 
 //#HeaderTemplateContainer
@@ -117,11 +182,15 @@ const { mobile } = useDisplay()
 //@media (max-width: 500px)
 //  max-height: calc(calc(60vw * 0.8) + 105px)
 
+.v-toolbar
+  &.v-app-bar
+    overflow: visible
+
 .v-main
   &__content.v-media-movile
     padding:
-      left: 1em
-      right: 1em
+      left: 4em
+      right: 4em
 
 .main-container-general
   display: flex

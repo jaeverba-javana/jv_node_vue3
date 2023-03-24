@@ -122,6 +122,10 @@ const text = {
     },
   },
 }
+
+
+window.addEventListener("scroll", engine.elements.window.eventListeners.scrollEventListener)
+
 </script>
 
 <template>

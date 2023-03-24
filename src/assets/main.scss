@@ -17,25 +17,35 @@
 
 @font-face {
   font-family: nimbus-sans;
-  src: url("/statics/fonts/NimbusSanL-Reg.otf");
+  src: url("public/statics/fonts/NimbusSanL-Reg.otf");
 }
 @font-face {
   font-family: nimbus-sans;
   font-weight: bold;
-  src: url("/statics/fonts/NimbusSanL-Bol.otf");
+  src: url("public/statics/fonts/NimbusSanL-Bol.otf");
 }
 @font-face {
   font-family: cubano;
-  src: url("/statics/fonts/Cubano.ttf");
+  src: url("public/statics/fonts/Cubano.ttf");
+}
+@font-face {
+  font-family: nunito;
+  src: url("public/statics/fonts/Nunito-Regular.ttf");
+}
+@font-face {
+  font-family: nunito;
+  font-weight: bold;
+  src: url("public/statics/fonts/Nunito-Bold.ttf");
 }
 
 /* ____________________ FUENTES - INICIO ____________________ */
 h1, h2, h3, h4, h5, h6, label {
-  font-family: nimbus-sans, sans-serif;
+  font-family: nunito, nimbus-sans, sans-serif;
   font-weight: bold;
 }
 p {
   font-family: nimbus-sans, sans-serif;
+  font-size: 16px;
 }
 .gordo {
   font-family: cubano, sans-serif;
@@ -73,4 +83,7 @@ p {
 
 
 
-
+.fill {
+  min-height: 100%;
+  min-width: 100%;
+}

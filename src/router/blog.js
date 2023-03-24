@@ -4,7 +4,7 @@ export default {
         {
             path: '',
             name: 'Blog - inicio',
-            component: () => import('@/components/ContactMe.vue')
+            component: () => import('@/views/blog/MainBlogView.vue')
         }, {
             path: 'pala',
             component: () => import('@/components/HeaderNav.vue')

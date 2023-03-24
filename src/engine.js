@@ -92,6 +92,39 @@ export var engine = reactive({
         body: {
             document: document.getElementById("body"),
             jquery: $("#body"),
+        },
+        window: {
+            eventListeners: {
+                vars: {
+                    ls: 0,
+                    abajo: false,
+                },
+                scrollEventListener(e) {
+                    let as = window.scrollY;
+
+                    // console.log(engine.elements.window.eventListeners)
+
+                    if (engine.elements.window.eventListeners.vars.abajo) {
+                        if (as < document.getElementById("HeaderTemplateContainer").offsetHeight/* - 120*/) {
+                            $('#HeaderNavTemplateContainer').removeClass('paso')
+                            $('#HeaderPerfilTemplateContainer').removeClass('mdc-elevation--z4')
+                            $('#HeaderPerfilTemplateContainer').addClass('mdc-elevation--z6')
+
+                            engine.elements.window.eventListeners.vars.abajo = false
+                        }
+                    } else {
+                        if (as >= document.getElementById("HeaderTemplateContainer").offsetHeight/* - 120*/) {
+                            $('#HeaderNavTemplateContainer').addClass('paso')
+                            $('#HeaderPerfilTemplateContainer').removeClass('mdc-elevation--z6')
+                            $('#HeaderPerfilTemplateContainer').addClass('mdc-elevation--z4')
+
+                            engine.elements.window.eventListeners.vars.abajo = true
+                        }
+                    }
+
+                    engine.elements.window.eventListeners.vars.ls = as
+                }
+            }
         }
     },
 

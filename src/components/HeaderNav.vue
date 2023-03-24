@@ -54,25 +54,52 @@ export default {
     <ul>
       <li>
         <RouterLink to="/blog">
-          <div class="nav_item">
-            <h2>{{ json[engine.idiomaId].about }}</h2>
-          </div>
+          <v-hover>
+            <template v-slot:default="{ isHovering, props }">
+              <v-card
+                  v-bind="props"
+                  :color="isHovering ? 'primary-container-darken-1' : 'primary-container'"
+              >
+                <div class="nav_item">
+                  <h2>{{ json[engine.idiomaId].about }}</h2>
+                </div>
+              </v-card>
+            </template>
+          </v-hover>
         </RouterLink>
       </li>
 
       <li>
         <RouterLink to="/blog">
-          <div class="nav_item">
-            <h2>{{ json[engine.idiomaId].port }}</h2>
-          </div>
+          <v-hover>
+            <template v-slot:default="{ isHovering, props }">
+              <v-card
+                  v-bind="props"
+                  :color="isHovering ? 'primary-container-darken-1' : 'primary-container'"
+              >
+                <div class="nav_item">
+                  <h2>{{ json[engine.idiomaId].port }}</h2>
+                </div>
+              </v-card>
+            </template>
+          </v-hover>
         </RouterLink>
       </li>
 
       <li>
         <RouterLink to="/blog">
-          <div class="nav_item">
-            <h2>{{ json[engine.idiomaId].blog }}</h2>
-          </div>
+          <v-hover>
+            <template v-slot:default="{ isHovering, props }">
+              <v-card
+                  v-bind="props"
+                  :color="isHovering ? 'primary-container-darken-1' : 'primary-container'"
+              >
+                <div class="nav_item">
+                  <h2>{{ json[engine.idiomaId].blog }}</h2>
+                </div>
+              </v-card>
+            </template>
+          </v-hover>
         </RouterLink>
       </li>
     </ul>
@@ -113,7 +140,7 @@ export default {
       justify-content: center
       align-items: center
 
-      > a
+      a
 
         > div
           height: 100%
@@ -129,14 +156,15 @@ export default {
 
           &.hover
             background-color: rgb(var(--v-theme-primary-container-darken-1))
+
             > h2
               color: rgba(var(--v-theme-on-primary-container-lighten-1))
 
-          > h2
+          h2
             width: max-content
             font-family: cubano, sans-serif
             text-align: center
-            color: var(--md-sys-color-on-primary-container)
+            //color: var(--md-sys-color-on-primary-container)
 
             //&:hover
             //  color: rgba(var(--v-theme-on-primary-container-lighten-1))

@@ -12,7 +12,7 @@
             :error-messages="name.errorMessage.value"
             hide-details="auto"
             color="var(--md-sys-color-on-surface-variant)"
-            prepend-inner-icon="$user"
+            :prepend-inner-icon="icons.classic.solid.user"
         ></v-text-field>
         <!--            :rules="text.es.campos.input_nom.rules"-->
       </div>
@@ -26,7 +26,7 @@
             hide-details="auto"
             color="var(--md-sys-color-on-surface-variant)"
             placeholder="example@website.com"
-            prepend-inner-icon="$envelope"
+            :prepend-inner-icon="icons.classic.solid.envelope"
         ></v-text-field>
         <!--            :rules="text.es.campos.input_dir.rules"-->
       </div>
@@ -40,7 +40,7 @@
             :error-messages="mensaje.errorMessage.value"
             counter="200"
             color="var(--md-sys-color-on-surface-variant)"
-            prepend-inner-icon="$messages"
+            :prepend-inner-icon="icons.classic.solid.messages"
             clearable>
         </v-textarea>
         <!--            :rules="text[engine.idiomaId].campos.input_men.rules"-->
@@ -51,7 +51,7 @@
             class="me-4 gordo"
             type="submit"
             variant="tonal"
-            :prepend-icon="animationData.active? '' : '$paper-plane'"
+            :prepend-icon="animationData.active? '' : icons.classic.solid.paperPlane"
             rounded="0"
             elevation="2"
             size="x-large"
@@ -97,16 +97,19 @@
 
 <script>
 import {engine} from "@/engine";
+import { jvi_00__classic_light } from "@/fonts/paths/full/classicLight.mjs";
 import "jquery"
 import lottie from "lottie-web"
 import ContactMeForm from "@/components/ContactMeForm.vue";
 import {useField, useForm} from "vee-validate";
 import axios from "axios";
+import {mapState} from "vuex";
 
 export default {
   name: "ContactMe",
   data() {
     return {
+      jvi_00__classic_light,
       engine,
       exe: 'input_men',
       classes: {
@@ -246,6 +249,9 @@ export default {
   },
 
   computed: {
+    ...mapState({
+      icons: state => state.icons,
+    }),
     submit_disabled_bool() {
       return !((!this.classes.input_nom.warning && this.classes.input_nom.activado) && ((!this.classes.input_dir.warning && !this.classes.input_dir.warning_email) && this.classes.input_dir.activado) && (!this.classes.input_men.warning && this.classes.input_men.activado))
     }
