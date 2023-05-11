@@ -59,28 +59,7 @@ export var cookieManager = {
 
 
 export var engine = reactive({
-    idiomas: [
-        {
-            id: "es",
-            idioma: "español",
-            img: "/img/svg/banderas/SVG/Espana_cuadrado.svg"
-        }, {
-            id: "en",
-            idioma: "english",
-            img: "/img/svg/banderas/SVG/Inglaterra_cuadrado.svg"
-        }
-    ],
-    idioma() {
-        for (let item of engine.idiomas) {
-            if (item.id === cookieManager.get('lang')) {
-                return item
-            }
-        }
-    },
     idiomaId: cookieManager.get('lang'),
-    setIdiomaId(id) {
-        this.idiomaId = id
-    },
 
     templates: {},
 
@@ -141,7 +120,15 @@ export var engine = reactive({
         get() {
             return localStorage.getItem('theme')
         },
-        colors: themeFromSourceColor(argbFromHex('#007997'), []),
+        colors: themeFromSourceColor(argbFromHex('#59B3B3'), [{
+            name: "secondary",
+            value: argbFromHex("#E88A35"),
+            blend: true
+        },{
+            name: "tertiary",
+            value: argbFromHex("#59B359"),
+            blend: true
+        }]),
         apply() {
             applyTheme(
                 this.colors, {

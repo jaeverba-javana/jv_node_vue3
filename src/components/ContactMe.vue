@@ -96,14 +96,16 @@
 </template>
 
 <script>
+import IconStore from "@/stores/IconStore";
 import {engine} from "@/engine";
+import {mapState} from "pinia";
 import { jvi_00__classic_light } from "@/fonts/paths/full/classicLight.mjs";
 import "jquery"
 import lottie from "lottie-web"
 import ContactMeForm from "@/components/ContactMeForm.vue";
 import {useField, useForm} from "vee-validate";
 import axios from "axios";
-import {mapState} from "vuex";
+// import {mapState} from "vuex";
 
 export default {
   name: "ContactMe",
@@ -249,9 +251,9 @@ export default {
   },
 
   computed: {
-    ...mapState({
-      icons: state => state.icons,
-    }),
+      ...mapState(IconStore, {
+          icons: store => store.icons
+      }),
     submit_disabled_bool() {
       return !((!this.classes.input_nom.warning && this.classes.input_nom.activado) && ((!this.classes.input_dir.warning && !this.classes.input_dir.warning_email) && this.classes.input_dir.activado) && (!this.classes.input_men.warning && this.classes.input_men.activado))
     }

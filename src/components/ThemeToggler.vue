@@ -33,10 +33,18 @@ export default {
           ? (
               this.animation.setDirection(1),
                   this.theme.global.name.value = "darkTheme",
+
+                  $("#html").removeClass("light"),
+                  $("#html").addClass("dark"),
+
                   this.animation.play()
           ) : (
               this.animation.setDirection(-1),
                   this.theme.global.name.value = "lightTheme",
+
+                  $("#html").removeClass("dark"),
+                  $("#html").addClass("light"),
+
                   this.animation.play()
           )
       this.animation.play()

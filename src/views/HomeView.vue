@@ -1,9 +1,13 @@
 <script setup>
-import {engine} from "@/engine";
+import {cookieManager, engine} from "@/engine";
 import IconDesign from "@/components/icons/IconDesign.vue";
 import IconProgramming from "@/components/icons/IconProgramming.vue";
 import SlideDesarrollo from "@/components/SlideDesarrollo.vue";
 import SlideDesign from "@/components/SlideDesign.vue";
+import LanguageStore from "@/stores/engine/LanguageStore";
+import {mapActions, mapState} from "pinia";
+
+let Lang = LanguageStore()
 
 
 const text = {
@@ -130,14 +134,14 @@ window.addEventListener("scroll", engine.elements.window.eventListeners.scrollEv
 
 <template>
   <section>
-    <h1 class="gordo">{{ text[engine.idiomaId].aboutMe.title }}</h1>
-    <p>{{ text[engine.idiomaId].aboutMe.p1 }}</p>
-    <p>{{ text[engine.idiomaId].aboutMe.p2 }}</p>
-    <p>{{ text[engine.idiomaId].aboutMe.p3 }}</p>
+    <h1 class="gordo">{{ text[Lang.id].aboutMe.title }}</h1>
+    <p>{{ text[Lang.id].aboutMe.p1 }}</p>
+    <p>{{ text[Lang.id].aboutMe.p2 }}</p>
+    <p>{{ text[Lang.id].aboutMe.p3 }}</p>
   </section>
 
   <section class="skills">
-    <h1 class="gordo">{{ text[engine.idiomaId].mySkills.title }}</h1>
+    <h1 class="gordo">{{ text[Lang.id].mySkills.title }}</h1>
 
     <div>
       <div>
@@ -145,10 +149,10 @@ window.addEventListener("scroll", engine.elements.window.eventListeners.scrollEv
           <IconDesign/>
         </div>
 
-        <h2 class="gordo">{{ text[engine.idiomaId].mySkills.design.title }}</h2>
+        <h2 class="gordo">{{ text[Lang.id].mySkills.design.title }}</h2>
 
         <ul class="cuerpo">
-          <li v-for="(item, index) of text[engine.idiomaId].mySkills.design.content">
+          <li v-for="(item, index) of text[Lang.id].mySkills.design.content">
             <ul>
               <h3>{{ index }}</h3>
 
@@ -163,10 +167,10 @@ window.addEventListener("scroll", engine.elements.window.eventListeners.scrollEv
           <IconProgramming/>
         </div>
 
-        <h2 class="gordo">{{ text[engine.idiomaId].mySkills.programming.title }}</h2>
+        <h2 class="gordo">{{ text[Lang.id].mySkills.programming.title }}</h2>
 
         <ul class="cuerpo">
-          <ul v-for="(item, index) of text[engine.idiomaId].mySkills.programming.content">
+          <ul v-for="(item, index) of text[Lang.id].mySkills.programming.content">
             <li>
               <h3>{{ index }}</h3>
 

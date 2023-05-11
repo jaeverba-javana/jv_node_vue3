@@ -7,18 +7,11 @@ const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes: [
         {
-            path: '/',
+            path: '/:lang([a-z]{2})?',
             name: 'home',
             component: HomeView
         },
-        { path: '/blog',  ...blog },
-        {
-            path: '/cama',
-            component: null
-        }, {
-            path: '/camaq',
-            component: () => import('@/components/Header.vue')
-        }
+        { path: '/:lang([a-z]{2})?/blog',  ...blog },
     ]
 })
 

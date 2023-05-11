@@ -9,13 +9,12 @@ export default {
 }
 </script>
 
-<template>
-  <div id="LanguageSelectorItemTemplate" :class="{header: header}">
-    <div>
-      <img :src="elemento.img" />
-      <h3>{{elemento.idioma.toUpperCase()}}</h3>
-    </div>
-  </div>
+<template lang="pug">
+div#LanguageSelectorItemTemplate(:class="{header: header}")
+  div
+    img(:src="elemento.img")
+
+    h3 {{elemento.lang}}
 </template>
 
 <style lang="sass">

@@ -1,9 +1,11 @@
 import {createStore} from 'vuex'
 import blogViewStoreComponent from "./views/blogViewStoreComponent";
 
-import {
+/*import {
 
     jvi_angle_down__classic_solid,
+    jvi_angle_left__classic_solid,
+    jvi_angle_right__classic_solid,
     jvi_angle_up__classic_solid,
     jvi_chevron_up__classic_solid,
     jvi_envelope__classic_solid,
@@ -12,7 +14,7 @@ import {
     jvi_person_running__classic_solid,
     jvi_star__classic_solid,
     jvi_user__classic_solid,
-} from './../fonts/paths/full/classicSolid'
+} from './../fonts/paths/full/classicSolid.mjs'
 import {
     jvi_angle_up__classic_light,
     jvi_envelope__classic_light,
@@ -21,23 +23,25 @@ import {
     jvi_person_running__classic_light,
     jvi_star__classic_light,
     jvi_user__classic_light,
-} from './../fonts/paths/full/classicLight'
+} from './../fonts/paths/full/classicLight.mjs'
 import {
     jvi_envelope__classic_regular,
     jvi_messages__classic_regular,
     jvi_paper_plane__classic_regular,
     jvi_user__classic_regular,
-} from './../fonts/paths/full/classicRegular'
+} from './../fonts/paths/full/classicRegular.mjs'*/
 
-let sharpIcons = {
+/*const sharpIcons = {
     solid: {},
     regular: {},
 
-}
+}*/
 
-let classicIcons = {
+/*const classicIcons = {
     solid: {
         angleDown: jvi_angle_down__classic_solid,
+        angleLeft: jvi_angle_left__classic_solid,
+        angleRight: jvi_angle_right__classic_solid,
         angleUp: jvi_angle_up__classic_solid,
         chevronUp: jvi_chevron_up__classic_solid,
         envelope: jvi_envelope__classic_solid,
@@ -65,7 +69,7 @@ let classicIcons = {
 
     },
     thin: {},
-}
+}*/
 
 export default createStore({
     state: {
@@ -74,10 +78,10 @@ export default createStore({
             Ok: false,
             status: 0,
         },
-        icons: {
+        /*icons: {
             classic: classicIcons,
             sharp: sharpIcons,
-        },
+        },*/
         components: {
             LangSelector: {
                 active: null,

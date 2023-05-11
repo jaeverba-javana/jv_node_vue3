@@ -1,12 +1,15 @@
 import { createApp } from 'vue'
 import App from './App.vue'
+import { createPinia } from "pinia";
 import router from './router'
-import store from './store'
+import store from './stores'
 import vuetify from './plugins/vuetify'
-import Particles from 'vue3-particles'
+// import {VSkeletonLoader} from "vuetify/lib/labs/VSkeletonLoader";
+// import Particles from 'vue3-particles'
+
 import { loadFonts } from './plugins/webfontloader'
 
-import './assets/main.scss'
+import './assets/main.sass'
 import "swiper/scss"
 import "swiper/scss/navigation"
 import 'swiper/scss/pagination';
@@ -15,10 +18,11 @@ import 'swiper/scss/scrollbar';
 loadFonts()
 
 const app = createApp(App)
+    .use(createPinia())
     .use(router)
     .use(store)
     .use(vuetify)
-    .use(Particles)
+    // .use(Particles)
 
 app.config.globalProperties.$filters = {
     capitalize (texto) {
@@ -30,9 +34,9 @@ app.mount('#app')
 
 let ls = 0, abajo = false
 
-$("#hola").scroll(function() {
-
-})
+// $("#hola").scroll(function() {
+//
+// })
 
 // para dehabilitar el click izquierdo sobre la página
 window.onload = function() {

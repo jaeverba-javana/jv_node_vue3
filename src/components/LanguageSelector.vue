@@ -1,89 +1,134 @@
 <script>
 import LanguageSelectorItem from "@/components/LanguageSelectorItem.vue";
 import {engine, cookieManager} from "@/engine";
+import {ref, reactive} from 'vue'
 import {mapMutations, mapState} from "vuex";
+import {mapState as mapStatePinia, mapActions as mapActionsPinia} from "pinia"
+import LanguageStore from '@/stores/engine/LanguageStore';
 
-export default {
-  name: "LanguageSelector",
+// let Language = LanguageStore();
+// console.log(Language)
 
-  data() {
-    return {
-      classes: {
-        dark: {
-        }
-      },
-      engine,
-      active: false,
-      menuStyles: {height: ""}
-    }
-  },
+//data:
+// let active = reactive(false)
+// let classes = {dark: {}}
+// let menuStyles = {height: ''}
 
-  computed: {
-    ...mapState({langugeSelectorState: state => state.components.LangSelector}),
-    // containerHeight: () => this.langugeSelectorState.active? 'calc(var(--ancho-barras) + 20px + calc(40px * '+engine.idiomas.length+'))' : ""
-  },
 
-  methods: {
-    ...mapMutations(['toggleActivationOfLangSelectorComponent']),
-    click() {
-      this.active ? (
-          this.active = false,
-              this.classes.dark.active = false,
-              this.menuStyles.height = ""
-      ) : (
-          this.active = true,
-              this.classes.dark.active = true,
-              this.menuStyles.height = 'calc(var(--ancho-barras) + 20px + calc(40px * '+engine.idiomas.length+'))'
-              // this.menuStyles.height = (60 + 20 + (40 * engine.idiomas.length)) + 'px'
-      )
-    },
+//methods:
+/*function click(doActive = null) {
+    active = doActive === null ? !active : doActive
+    /!*this.active ? (
+        this.active = false,
+            this.classes.dark.active = false,
+            this.menuStyles.height = ""
+    ) : (
+        this.active = true,
+            this.classes.dark.active = true,
+            this.menuStyles.height = 'calc(var(--ancho-barras) + 20px + calc(40px * '+engine.idiomas.length+'))'
+        // this.menuStyles.height = (60 + 20 + (40 * engine.idiomas.length)) + 'px'
+    )*!/
+}*/
 
-    cambiar(idioma) {
-      cookieManager.add({
+/*function toggle(language) {
+    cookieManager.add({
         key: 'lang',
         value: idioma,
         max_age: 3600 * 24 * 7,
         path: "/"
-      })
+    })
 
-      engine.setIdiomaId(idioma)
+}*/
 
-      document.getElementById('html').lang = engine.idiomaId
 
-      this.toggleActivationOfLangSelectorComponent(false)
+export default {
+    name: "LanguageSelector",
+
+    data() {
+        return {
+            classes: {
+                dark: {}
+            },
+            engine,
+            active: false,
+            menuStyles: {height: ""},
+            cookieManager
+        }
+    },
+
+    computed: {
+        ...mapStatePinia(LanguageStore, {
+            Language: store => store
+        })
+        // containerHeight: () => this.langugeSelectorState.active? 'calc(var(--ancho-barras) + 20px + calc(40px * '+engine.idiomas.length+'))' : ""
+    },
+
+    methods: {
+        ...mapMutations(['toggleActivationOfLangSelectorComponent']),
+        ...mapActionsPinia(LanguageStore, ['getLanguageById', "setLanguage"]),
+        click() {
+            this.active ? (
+                this.active = false,
+                    this.classes.dark.active = false,
+                    this.menuStyles.height = ""
+            ) : (
+                this.active = true,
+                    this.classes.dark.active = true,
+                    this.menuStyles.height = 'calc(var(--ancho-barras) + 20px + calc(40px * ' + engine.idiomas.length + '))'
+                // this.menuStyles.height = (60 + 20 + (40 * engine.idiomas.length)) + 'px'
+            )
+        },
+
+        cambiar(idioma) {
+
+            /*cookieManager.add({
+                key: 'lang',
+                value: idioma,
+                max_age: 3600 * 24 * 7,
+                path: "/"
+            })
+
+            this.setLanguageId(idioma)
+
+            document.getElementById('html').lang = this.Language.languageId*/
+
+            this.setLanguage(idioma)
+            this.click()
+        }
+    },
+
+    components: {
+        LanguageSelectorItem
     }
-  },
-
-  components: {
-    LanguageSelectorItem
-  }
 }
 </script>
 
 <template>
-  <div id="LanguageSelectorTemplate" :class="{active: langugeSelectorState.active}">
-    <div
-        class="dark"
-        :class="{active: langugeSelectorState.active}"
-        @click="toggleActivationOfLangSelectorComponent(false)"></div>
+    <div id="LanguageSelectorTemplate" :class="{active: active}">
+        <div
+                class="dark"
+                :class="{active: active}"
+                @click="click(false)"></div>
 
-    <div class="language_selector_menu" :style="{height: langugeSelectorState.active? 'calc(var(--ancho-barras) + 20px + calc(40px * '+engine.idiomas.length+'))' : ''}">
-      <div class="default" @click="toggleActivationOfLangSelectorComponent()">
-        <LanguageSelectorItem
-            :elemento="engine.idioma()"
-            :header="true"
-        />
-      </div>
+        <div
+                class="language_selector_menu"
+                :style="{height: active? 'calc(var(--ancho-barras) + 20px + calc(40px * '+Language.languages.length+'))' : ''}">
+            <div class="default" @click="click()">
+                <LanguageSelectorItem
+                        :elemento="getLanguageById(cookieManager.get('lang'))"
+                        :header="true"
+                />
+            </div>
 
-      <div class="options">
-        <LanguageSelectorItem
-            v-for="item in engine.idiomas"
-            :elemento="item"
-            @click="cambiar(item.id)"
-        />
-      </div>
+            <div class="options">
+                <LanguageSelectorItem
+                        v-for="item in Language.languages"
+                        :elemento="item"
+                        @click="cambiar(item.id)"
+                />
+            </div>
+        </div>
     </div>
-  </div>
 </template>
 
 <style lang="sass">

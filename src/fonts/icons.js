@@ -47,7 +47,7 @@ export const VSvgIcon = defineComponent({
 
         let icon = {}
 
-        if (valor.charAt(0) === 'M') {
+        if (valor.charAt(0) === 'M' || valor.charAt(0) === 'm') {
             icon.path = valor
             icon.vb = '0 0 24 24'
         } else {

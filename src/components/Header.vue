@@ -130,7 +130,8 @@ export default {
           font-weight: bold
           /*font-size: 75px*/
           font-size: 6.22vw
-          color: var(--md-sys-color-primary)
+          color: rgb(var(--v-theme-primary))
+          //color: var(--md-sys-color-primary)
           margin-bottom: -4.7vw
 
           @media (min-width: 1300px)
@@ -148,7 +149,7 @@ export default {
           font-family: cubano, sans-serif
           /*font-size: 109px*/
           font-size: 9.03vw
-          color: var(--md-sys-color-on-background)
+          color: rgb(var(--v-theme-on-background))
 
 
           @media (min-width: 1300px)
@@ -183,7 +184,7 @@ export default {
           font-weight: bold
           /*font-size: 43px*/
           font-size: 3.445vw
-          color: var(--md-sys-color-primary)
+          color: rgb(var(--v-theme-primary))
 
           @media (min-width: 1150px)
             font-size: 44.789px

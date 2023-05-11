@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 // Components
-import { VSvgIcon } from "./icons.mjs"; // Types
+import { VSvgIcon } from "./icons.js"; // Types
 import { jvi_circle_xmark__sharp_solid, jvi_exclamation__sharp_solid } from "@/fonts/paths/full/SharpSolid.mjs";
 
 const aliases = {
