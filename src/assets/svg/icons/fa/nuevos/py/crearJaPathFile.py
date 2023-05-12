@@ -3666,13 +3666,13 @@ brands = [
 # alien-8bit classic solid.svg
 
 raices = [
-    ["https://site-assets.fontawesome.com/releases/v6.3.0/svgs/solid/", './../classic/solid/', 'classicSolid.js', ' classic solid', '__classic_solid'],
-    ["https://site-assets.fontawesome.com/releases/v6.3.0/svgs/regular/", './../classic/regular/', 'classicRegular.js', ' classic regular', '__classic_regular'],
-    ["https://site-assets.fontawesome.com/releases/v6.3.0/svgs/light/", './../classic/light/', 'classicLight.js', ' classic light', '__classic_light'],
-    ["https://site-assets.fontawesome.com/releases/v6.3.0/svgs/thin/", './../classic/thin/', 'classicThin.js', ' classic thin', '__classic_thin'],
-    # ["https://site-assets.fontawesome.com/releases/v6.3.0/svgs/duotone/", './../classic/duotone/', ' classic duotone', ],
-    ["https://site-assets.fontawesome.com/releases/v6.3.0/svgs/sharp-solid/", './../sharp/solid/', 'SharpSolid.js', ' sharp solid', '__sharp_solid'],
-    ["https://site-assets.fontawesome.com/releases/v6.3.0/svgs/sharp-regular/", './../sharp/regular/', 'sharpRegular.js', ' sharp regular', '__sharp_regular'],
+    ["https://site-assets.fontawesome.com/releases/v6.3.0/svgs/solid/", './../classic/solid/', 'classicSolid.mjs', ' classic solid', '__classic_solid', "normal"],
+    ["https://site-assets.fontawesome.com/releases/v6.3.0/svgs/regular/", './../classic/regular/', 'classicRegular.mjs', ' classic regular', '__classic_regular', "normal"],
+    ["https://site-assets.fontawesome.com/releases/v6.3.0/svgs/light/", './../classic/light/', 'classicLight.mjs', ' classic light', '__classic_light', "normal"],
+    ["https://site-assets.fontawesome.com/releases/v6.3.0/svgs/thin/", './../classic/thin/', 'classicThin.mjs', ' classic thin', '__classic_thin', "normal"],
+    ["https://site-assets.fontawesome.com/releases/v6.3.0/svgs/duotone/", './../classic/duotone/', 'classicDuotone.mjs', ' classic duotone', '__classic_duotone', "duotone"],
+    ["https://site-assets.fontawesome.com/releases/v6.3.0/svgs/sharp-solid/", './../sharp/solid/', 'sharpSolid.mjs', ' sharp solid', '__sharp_solid', "normal"],
+    ["https://site-assets.fontawesome.com/releases/v6.3.0/svgs/sharp-regular/", './../sharp/regular/', 'sharpRegular.mjs', ' sharp regular', '__sharp_regular', "normal"],
 ]
 
 # export var mdiArrangeBringForward = "M2,2H16V16H2V2M22,8V22H8V18H10V20H20V10H18V8H22Z";
@@ -3699,7 +3699,7 @@ def descargar(array, limite):
 
             nombre = nombre.replace('-', '_')
 
-            jsFile.write(f"export const jvi_{nombre}{array[4]} = 'data:image/svg+xml;charset=utf-8,{texto}';\n")
+            jsFile.write(f"export const jvi_{nombre}{array[4]} = '{texto}';\n")
 
     jsFile.close()
     print('terminado: '+array[2])
@@ -3732,10 +3732,10 @@ def descargar(array, limite):
 
 
 if __name__ == '__main__':
-    descargar(["https://site-assets.fontawesome.com/releases/v6.3.0/svgs/brands/", './../brands/', 'brands.mjs', '', '__brands'], ".svg")
+    descargar(["https://site-assets.fontawesome.com/releases/v6.3.0/svgs/brands/", './../brands/', 'brands.mjs', '', '__brands', "normal"], ".svg")
     print("terminado: brands")
 
-    for i in range(6):
+    for i in range(len(raices)):
         descargar(raices[i], " ")
 
 
