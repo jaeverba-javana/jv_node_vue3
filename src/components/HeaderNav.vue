@@ -1,9 +1,12 @@
 <script>
 import {engine} from "@/engine";
 import "@/assets/libs/jquery-3.6.1.min"
+import MText from "@/plugins/mine/components/MText/MText";
+import THEME from "./../plugins/mine/theme/constants"
 
 export default {
   name: "HeaderNav",
+  components: {MText},
 
   data() {
     return {
@@ -20,7 +23,7 @@ export default {
         }
       },
 
-      engine
+      engine, THEME
     }
   },
 
@@ -59,9 +62,10 @@ export default {
               <v-card
                   v-bind="props"
                   :color="isHovering ? 'primary-container-darken-1' : 'primary-container'"
+                  style="box-shadow: var(--md-sys-elevation-0)"
               >
                 <div class="nav_item">
-                  <h2>{{ json[engine.idiomaId].about }}</h2>
+                  <MText :type="THEME.typography.titleMedium" gordo>{{ json[engine.idiomaId].about }}</MText>
                 </div>
               </v-card>
             </template>
@@ -76,9 +80,10 @@ export default {
               <v-card
                   v-bind="props"
                   :color="isHovering ? 'primary-container-darken-1' : 'primary-container'"
+                  style="box-shadow: var(--md-sys-elevation-0)"
               >
                 <div class="nav_item">
-                  <h2>{{ json[engine.idiomaId].port }}</h2>
+                  <MText :type="THEME.typography.titleMedium" gordo>{{ json[engine.idiomaId].port }}</MText>
                 </div>
               </v-card>
             </template>
@@ -93,9 +98,10 @@ export default {
               <v-card
                   v-bind="props"
                   :color="isHovering ? 'primary-container-darken-1' : 'primary-container'"
+                  style="box-shadow: var(--md-sys-elevation-0)"
               >
                 <div class="nav_item">
-                  <h2>{{ json[engine.idiomaId].blog }}</h2>
+                  <MText :type="THEME.typography.titleMedium" gordo>{{ json[engine.idiomaId].blog }}</MText>
                 </div>
               </v-card>
             </template>

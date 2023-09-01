@@ -6,6 +6,9 @@ import SlideDesarrollo from "@/components/SlideDesarrollo.vue";
 import SlideDesign from "@/components/SlideDesign.vue";
 import LanguageStore from "@/stores/engine/LanguageStore";
 import {mapActions, mapState} from "pinia";
+import MText from "@/plugins/mine/components/MText/MText";
+import THEME from "@/plugins/mine/theme/constants";
+import {capitalize} from "@vue/shared";
 
 let Lang = LanguageStore()
 
@@ -134,14 +137,14 @@ window.addEventListener("scroll", engine.elements.window.eventListeners.scrollEv
 
 <template>
   <section>
-    <h1 class="gordo">{{ text[Lang.id].aboutMe.title }}</h1>
-    <p>{{ text[Lang.id].aboutMe.p1 }}</p>
-    <p>{{ text[Lang.id].aboutMe.p2 }}</p>
-    <p>{{ text[Lang.id].aboutMe.p3 }}</p>
+    <MText :type="THEME.typography.displayMedium" gordo>{{ text[Lang.id].aboutMe.title }}</MText>
+    <m-text>{{ text[Lang.id].aboutMe.p1 }}</m-text>
+    <m-text>{{ text[Lang.id].aboutMe.p2 }}</m-text>
+    <m-text>{{ text[Lang.id].aboutMe.p3 }}</m-text>
   </section>
 
   <section class="skills">
-    <h1 class="gordo">{{ text[Lang.id].mySkills.title }}</h1>
+    <MText :type="THEME.typography.displayMedium" gordo style="margin-bottom: 1rem">{{ text[Lang.id].mySkills.title }}</MText>
 
     <div>
       <div>
@@ -149,14 +152,14 @@ window.addEventListener("scroll", engine.elements.window.eventListeners.scrollEv
           <IconDesign/>
         </div>
 
-        <h2 class="gordo">{{ text[Lang.id].mySkills.design.title }}</h2>
+        <MText :type="THEME.typography.titleMedium" gordo style="margin-bottom: 0.5rem">{{ text[Lang.id].mySkills.design.title }}</MText>
 
         <ul class="cuerpo">
           <li v-for="(item, index) of text[Lang.id].mySkills.design.content">
             <ul>
-              <h3>{{ index }}</h3>
+              <MText :type='THEME.typography.titleSmall' style="text-align: center;">{{capitalize(index)}}</MText>
 
-              <li v-for="item2 in item"><p>{{ item2 }}</p></li>
+              <li v-for="item2 in item"><m-text>{{capitalize(item2)}}</m-text></li>
             </ul>
           </li>
         </ul>
@@ -167,15 +170,15 @@ window.addEventListener("scroll", engine.elements.window.eventListeners.scrollEv
           <IconProgramming/>
         </div>
 
-        <h2 class="gordo">{{ text[Lang.id].mySkills.programming.title }}</h2>
+        <MText :type="THEME.typography.titleMedium" gordo style="margin-bottom: 0.5rem">{{ text[Lang.id].mySkills.programming.title }}</MText>
 
         <ul class="cuerpo">
           <ul v-for="(item, index) of text[Lang.id].mySkills.programming.content">
             <li>
-              <h3>{{ index }}</h3>
+              <MText :type='THEME.typography.titleSmall' style="text-align: center;">{{capitalize(index)}}</MText>
 
               <ul>
-                <li v-for="item2 in item"><p>{{ item2 }}</p></li>
+                <li v-for="item2 in item"><MText>{{capitalize(item2)}}</MText></li>
               </ul>
             </li>
           </ul>

@@ -12,18 +12,9 @@
 
   --md-sys-color-elevation-shadow: rgba(0, 0, 0, 0.2);
 
-
-  //&.dark {
-  //  --sombra-1: rgba(180, 180, 180, 0.2);
-  //  --sombra-2: rgba(180, 180, 180, 0.14);
-  //  --sombra-3: rgba(180, 180, 180, 0.12);
-  //}
-
-  //&.light {
-    --sombra-1: rgba(0, 0, 0, 0.2);
-    --sombra-2: rgba(0, 0, 0, 0.14);
-    --sombra-3: rgba(0, 0, 0, 0.12);
-  //}
+  --sombra-1: rgba(0, 0, 0, 0.2);
+  --sombra-2: rgba(0, 0, 0, 0.14);
+  --sombra-3: rgba(0, 0, 0, 0.12);
 
   --md-sys-elevation-0: 0px 0px 0px 0px var(--sombra-1), 0px 0px 0px 0px var(--sombra-2), 0px 0px 0px 0px var(--sombra-3);
   --md-sys-elevation-1: 0px 2px 1px -1px var(--sombra-1), 0px 1px 1px 0px var(--sombra-2), 0px 1px 3px 0px var(--sombra-3);

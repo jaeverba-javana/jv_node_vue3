@@ -1,0 +1,1 @@
+export const MText = {tagName: 'm-text', data: import('./MText')}

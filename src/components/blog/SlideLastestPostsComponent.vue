@@ -75,7 +75,7 @@
 
                                     <v-card-actions>
                                         <div style="flex-grow: 1"></div>
-                                        <v-btn :icon="$store.state.icons.classic.solid.angleDown"
+                                        <v-btn :icon="icons.classic.solid.angleDown"
                                                @click.stop="item.escondido.mostrar = !item.escondido.mostrar"></v-btn>
                                         <!--                            <v-btn :icon="icons.classic.light.angleUp"></v-btn>-->
                                     </v-card-actions>

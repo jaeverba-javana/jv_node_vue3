@@ -59,7 +59,7 @@ export const JviSvgIcon = defineComponent({
     setup(props, _ref2) {
         let valor = props.icon
         let {attrs} = _ref2;
-        console.log(props.icon)
+        // console.log(props.icon)
 
         let svgNode
 
