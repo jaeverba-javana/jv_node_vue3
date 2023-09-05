@@ -1,14 +1,12 @@
 <script>
 import {engine} from "@/engine";
 import "@/assets/libs/jquery-3.6.1.min"
-import MText from "@/plugins/mine/components/MText/MText";
 import {mapState} from "pinia";
 import MainStore from "@/stores/MainStore";
-import THEME from "./../plugins/mine/theme/constants"
+import THEME from "./../plugins/jv/theme/constants"
 
 export default {
   name: "HeaderNav",
-  components: {MText},
 
   data() {
     return {
@@ -63,23 +61,41 @@ export default {
 <template>
   <div id="HeaderNavTemplate">
     <ul>
-      <li>
+<!--      <li>
         <RouterLink to="/blog">
           <v-hover>
             <template v-slot:default="{ isHovering, props }">
               <v-card
                   v-bind="props"
                   :color="isHovering ? 'primary-container-darken-1' : 'primary-container'"
-                  style="box-shadow: var(--md-sys-elevation-0)"
+                  style="box-shadow: var(&#45;&#45;md-sys-elevation-0)"
               >
                 <div class="nav_item">
-                  <MText :type="THEME.typography.titleMedium" gordo>{{ json[lang.id].about }}</MText>
+                  <jv-text typography="titleMedium" flat>{{ json[lang.id].about }}</jv-text>
                 </div>
               </v-card>
             </template>
           </v-hover>
         </RouterLink>
-      </li>
+      </li>-->
+
+<!--      <li>
+        <RouterLink to="/blog">
+          <v-hover>
+            <template v-slot:default="{ isHovering, props }">
+              <v-card
+                  v-bind="props"
+                  :color="isHovering ? 'primary-container-darken-1' : 'primary-container'"
+                  style="box-shadow: var(&#45;&#45;md-sys-elevation-0)"
+              >
+                <div class="nav_item">
+                  <jv-text typography="titleMedium" flat>{{ json[lang.id].port }}</jv-text>
+                </div>
+              </v-card>
+            </template>
+          </v-hover>
+        </RouterLink>
+      </li>-->
 
       <li>
         <RouterLink to="/blog">
@@ -91,25 +107,7 @@ export default {
                   style="box-shadow: var(--md-sys-elevation-0)"
               >
                 <div class="nav_item">
-                  <MText :type="THEME.typography.titleMedium" gordo>{{ json[lang.id].port }}</MText>
-                </div>
-              </v-card>
-            </template>
-          </v-hover>
-        </RouterLink>
-      </li>
-
-      <li>
-        <RouterLink to="/blog">
-          <v-hover>
-            <template v-slot:default="{ isHovering, props }">
-              <v-card
-                  v-bind="props"
-                  :color="isHovering ? 'primary-container-darken-1' : 'primary-container'"
-                  style="box-shadow: var(--md-sys-elevation-0)"
-              >
-                <div class="nav_item">
-                  <MText :type="THEME.typography.titleMedium" gordo>{{ json[lang.id].blog }}</MText>
+                  <jv-text typography="titleMedium" flat>{{ json[lang.id].blog }}</jv-text>
                 </div>
               </v-card>
             </template>
@@ -171,10 +169,10 @@ export default {
           &.hover
             background-color: rgb(var(--v-theme-primary-container-darken-1))
 
-            > h2
+            > h3
               color: rgba(var(--v-theme-on-primary-container-lighten-1))
 
-          h2
+          h3
             width: max-content
             font-family: cubano, sans-serif
             text-align: center

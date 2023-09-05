@@ -33,6 +33,11 @@ import {
     jvi_user__classic_regular,
 } from './../fonts/paths/full/classicRegular.mjs'
 
+import {
+    jvi_cookie__classic_duotone,
+    jvi_cookie_bite__classic_duotone
+} from './../fonts/paths/full/classicDuotone.mjs'
+
 
 // const sharpIcons =
 
@@ -78,6 +83,10 @@ export default defineStore("iconStore", {
 
                 },
                 thin: {},
+                duotone: {
+                    cookie: jvi_cookie__classic_duotone,
+                    cookieBite: jvi_cookie_bite__classic_duotone
+                }
             },
             sharp: {
                 solid: {},
@@ -102,7 +111,8 @@ export declare interface IconStoreInterface {
             solid: IconStoreClassInterface,
             regular: IconStoreClassInterface,
             light: IconStoreClassInterface,
-            thin: IconStoreClassInterface
+            thin: IconStoreClassInterface,
+            duotone: IconStoreClassInterface
         },
         sharp: {
             solid: IconStoreClassInterface,
@@ -117,6 +127,8 @@ declare interface IconStoreClassInterface {
     angleRight?: string,
     angleUp?: string,
     chevronUp?: string,
+    cookie?: string,
+    cookieBite?: string,
     envelope?: string,
     house?: string,
     messages?: string,

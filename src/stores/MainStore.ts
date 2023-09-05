@@ -9,7 +9,7 @@ export default defineStore('mainStore', {
             all: [{
                 id: 'es',
                 lang: 'español',
-                img: '/img/svg/flags/SVG/spain_squared.svg'
+                img: '/img/svg/flags/SVG/Spain_squared.svg'
             },{
                 id: 'en',
                 lang: 'english',

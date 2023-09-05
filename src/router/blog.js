@@ -1,5 +1,3 @@
-let plus = {}
-
 export default {
     name: 'blog',
     component: () => import('@/views/BlogView.vue'),

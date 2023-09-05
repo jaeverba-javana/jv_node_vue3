@@ -1,13 +1,13 @@
 <script lang="ts">
 import {createVNode} from "@vue/runtime-core";
-import useRender from "./../../plugins/mine/util/useRender"
+import useRender from "../../plugins/jv/lib/util/useRender"
 import {VImg} from "vuetify/lib/components/VImg/index.mjs"
 import {VCard} from 'vuetify/lib/components/VCard/index.mjs'
 import {VSkeletonLoader} from "vuetify/lib/labs/VSkeletonLoader/index.mjs";
 import {ref} from "vue";
 import axios from "axios";
-import THEME from './../../plugins/mine/theme/constants'
-import MText from "./../../plugins/mine/components/MText/MText"
+import THEME from './../../plugins/jv/theme/constants'
+import MText from "../../plugins/jv/lib/components/JvText/JvText"
 import {engine as _engine} from "@/engine"
 import useMainStore from "@/stores/MainStore";
 
@@ -97,7 +97,7 @@ export default {
 
     let mainStore = useMainStore()
 
-    axios.get("/post/"+props.postId+".json")
+    axios.get((process.env.NODE_ENV === 'development'? "/post/" : 'https://jaeverba-javana.github.io/posts/')+props.postId+".json")
         .then(value => {
           console.log(value)
           data.value = value.data
@@ -112,7 +112,7 @@ export default {
     const titleImg = () => createVNode(VCard, {}, {
       default: () => [
         createVNode(VImg, {
-          src: data.value["titleImg"],
+          src: (process.env.NODE_ENV === 'development'? '/img/webP/' : 'https://jaeverba-javana.github.io/img/webP/') +props.postId+'.webp',
           cover: true,
           maxHeight: '300px'
         }),
@@ -128,7 +128,6 @@ export default {
 
         if (value.type === 'p') {
           currentNode = createVNode(MText, {
-            type: THEME.typography.bodyLarge,
             style: [{textIndent: '2rem', marginLeft: '1rem', marginTop: '0.5rem', textAlign: 'justify'}]
           }, [value.content])
         }
@@ -151,7 +150,7 @@ export default {
             marginTop: `${actualLevel}rem`,
           }]
         }, [
-            createVNode(MText, {type: THEME.typography.titleLarge, id: value.title[engine.value.idiomaId]}, [value.title[mainStore.lang.id]]),
+            createVNode(MText, {typography: 'titleLarge', id: value.title[engine.value.idiomaId]}, [value.title[mainStore.lang.id]]),
             ...createContent(value.content)
         ]))
       })
@@ -181,12 +180,12 @@ export default {
           style: [{marginLeft: '0.5rem'}]
         }, {
           default: () => [createVNode(MText, {
-            type: THEME.typography.displayLarge,
+            typography: 'displayMedium',
             style: [{
               marginTop: '1rem'
             }],
             id: data.value.title
-          }, [data.value.title[engine.value.idiomaId]])]
+          }, [data.value.title[mainStore.lang.id]])]
         }),
 
         createVNode(VSkeletonLoader, {

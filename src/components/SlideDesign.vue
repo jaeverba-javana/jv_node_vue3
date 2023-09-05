@@ -2,6 +2,8 @@
 import {Swiper, SwiperSlide} from "swiper/vue"
 import {Navigation} from "swiper"
 import { engine } from '@/engine'
+import {mapState} from "pinia";
+import MainStore from "@/stores/MainStore";
 
 export default {
   name: "SlideDesarrollo",
@@ -41,12 +43,17 @@ export default {
       }
     },
     engine,
-  }}
+  }},
+  computed: {
+    ...mapState(MainStore, {
+      lang: store => store.lang
+    })
+  }
 }
 </script>
 
 <template>
-  <h1 class="gordo">{{text[engine.idiomaId].design_title}}</h1>
+  <h1 class="gordo">{{text[lang.id].design_title}}</h1>
 
   <div class="mySwiper-container">
     <div class="sombra izquierda"><div></div></div>

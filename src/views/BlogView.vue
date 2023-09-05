@@ -11,8 +11,9 @@ import HeaderNav from "@/components/HeaderNav.vue";
 import {defineComponent} from "vuetify/lib/util/index.mjs";
 import Panel from "@/views/Panel.vue";
 import MainStore from "@/stores/MainStore";
-import MText from "@/plugins/mine/components/MText/MText";
-import THEME from "@/plugins/mine/theme/constants"
+import MText from "@/plugins/jv/lib/components/JvText/JvText";
+import THEME from "@/plugins/jv/theme/constants"
+import JvText from "@/plugins/jv/lib/components/JvText/JvText";
 
 
 let open = ['Users'];
@@ -29,7 +30,7 @@ let cruds = [
 
 export default {
   name: "blog view",
-  components: {MText, Panel, ThemeToggler, LanguageSelector, HeaderNav},
+  components: {JvText, MText, Panel, ThemeToggler, LanguageSelector, HeaderNav},
   data: () => ({
     windowSize: {},
     admins, cruds, engine,
@@ -190,13 +191,13 @@ v-navigation-drawer(v-if="showRightSideBar" location="right" width="250" class="
   template( v-slot:prepend )
     v-skeleton-loader(type="heading")
       div.ms-4.mb-2.mt-4
-        h4.font-weight-medium {{text[lang.id].drawBar.right.content}}
+        jv-text(typography="titleSmall") {{text[lang.id].drawBar.right.content}}
 
   template( v-slot:default )
     v-skeleton-loader(type="list-item, list-item, list-item, list-item, list-item, list-item" )
       ul.ms-5
         li.ps-3.text-body-2.py-1.font-weight-regular(v-for="item in sections")
-          m-text(:type="THEME.typography.labelMedium")
+          jv-text(typography="labelMedium")
             a.v-toc-link.d-block.transition-swing.text-decoration-none(:href="`${$route.params.lang? '/'+$route.params.lang : ''}/blog/post/${$route.params.postId || ''}#${item.title[lang.id]}`") {{item.title[lang.id]}}
 
         //li.ps-3.text-body-2.py-1.font-weight-regular.text-primary.router-link-active
@@ -213,9 +214,9 @@ v-main.d-flex.fd-column.align-center
     router-view(v-if="$route.params.postId" :postId="$route.params.postId" style="height: 100%" @loaded="dataLoaded")
     router-view(v-else)
 
-  footer
+  footer(style="padding: 0")
     //v-divider( thickness="2" length="100%")
-    p.copyright &copy; Javier Vergara {{ new Date().getFullYear() }} - {{ text[engine.idiomaId].rights }}
+    p.copyright &copy; Javier Vergara {{ new Date().getFullYear() }} - {{ text[lang.id].rights }}
 </template>
 
 <style lang="sass">

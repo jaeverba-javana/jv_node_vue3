@@ -103,7 +103,7 @@ export default {
         :style="{height: active? 'calc(var(--ancho-barras) + 20px + calc(40px * '+lang.all.length+'))' : ''}">
       <div class="default" @click="click()">
         <LanguageSelectorItem
-            :elemento="getLangById(cookieManager.get('lang'))"
+            :elemento="getLangById(lang.id)"
             :header="true"
         />
       </div>

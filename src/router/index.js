@@ -1,5 +1,4 @@
 import {createRouter, createWebHistory} from 'vue-router'
-import HomeView from '../views/MainView.vue'
 
 import blog from './blog';
 
@@ -9,7 +8,7 @@ const router = createRouter({
         {
             path: '/:lang([a-z]{2})?',
             name: 'home',
-            component: HomeView
+            component: () => import("./../views/MainView.vue")
         },
         { path: '/:lang([a-z]{2})?/blog',  ...blog },
     ]

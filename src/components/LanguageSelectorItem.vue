@@ -1,9 +1,9 @@
 <script>
-import MText from "@/plugins/mine/components/MText/MText";
+import JvText from "@/plugins/jv/lib/components/JvText/JvText";
 
 export default {
   name: "LanguageSelectorItem",
-  components: {MText},
+  components: {JvText},
 
   props: {
     elemento: Object,
@@ -17,7 +17,7 @@ div#LanguageSelectorItemTemplate(:class="{header: header}")
   div
     img(:src="elemento.img")
 
-    m-text {{elemento.lang.toUpperCase()}}
+    jv-text {{elemento.lang.toUpperCase()}}
 </template>
 
 <style lang="sass">

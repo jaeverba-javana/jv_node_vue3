@@ -1,6 +1,6 @@
 <template>
   <div id="SocialMediaTemplate">
-    <h1 class="gordo">{{text[engine.idiomaId].title}}</h1>
+    <jv-text typography="displaySmall" flat>{{text[lang.id].title}}</jv-text>
 
     <div>
       <div class="icons-container-">
@@ -26,12 +26,15 @@
 import IconFacebook from "@/components/icons/IconFacebook.vue";
 import IconIG from "@/components/icons/IconIG.vue";
 import IconTwitter from "@/components/icons/IconTwitter.vue";
+import {mapState} from "pinia"
 
 import {engine} from "@/engine"
+import MainStore from "@/stores/MainStore";
+import JvText from "@/plugins/jv/lib/components/JvText/JvText";
 
 export default {
   name: "SocialMedia",
-  components: {IconFacebook, IconIG, IconTwitter},
+  components: {JvText, IconFacebook, IconIG, IconTwitter},
   data() {
     return {
       text: {
@@ -61,7 +64,10 @@ export default {
       if (this.medias.facebook.active) return -70
       else if (this.medias.instagram.active) return 0
       else return 70
-    }
+    },
+    ...mapState(MainStore, {
+      lang: store => store.lang
+    })
   },
   mounted() {
     let Vue = this

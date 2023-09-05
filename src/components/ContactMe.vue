@@ -1,6 +1,6 @@
 <template>
   <div id="ContactMeTemplate">
-    <h1 class="titulo gordo">{{ text[lang.id].contactame }}</h1>
+    <jv-text typography="displaySmall" flat>{{ text[lang.id].contactame }}</jv-text>
 
     <form @submit.prevent="submit">
       <div class="input_nom">
@@ -8,7 +8,7 @@
             elevation="5"
             v-model="name.value.value"
             :label="$filters.capitalize(text[lang.id].campos.input_nom.elemento)"
-            :autocomplete="text[engine.idiomaId].campos.input_nom.autocomplete"
+            :autocomplete="text[lang.id].campos.input_nom.autocomplete"
             :error-messages="name.errorMessage.value"
             hide-details="auto"
             color="var(--md-sys-color-on-surface-variant)"
@@ -21,7 +21,7 @@
         <v-text-field
             v-model="email.value.value"
             :label="$filters.capitalize(text[lang.id].campos.input_dir.elemento)"
-            :autocomplete="text[engine.idiomaId].campos.input_dir.autocomplete"
+            :autocomplete="text[lang.id].campos.input_dir.autocomplete"
             :error-messages="email.errorMessage.value"
             hide-details="auto"
             color="var(--md-sys-color-on-surface-variant)"
@@ -35,7 +35,7 @@
         <v-textarea
             v-model="mensaje.value.value"
             :label="$filters.capitalize(text[lang.id].campos.input_men.elemento)"
-            :autocomplete="text[engine.idiomaId].campos.input_men.autocomplete"
+            :autocomplete="text[lang.id].campos.input_men.autocomplete"
             class=""
             :error-messages="mensaje.errorMessage.value"
             counter="200"
@@ -59,9 +59,9 @@
         >
           <!--        :disabled="animationData.active"-->
           <span v-show="!animationData.active">
-            <m-text style="font-weight: bold">
+            <jvi-text style="font-weight: bold">
               {{ text[lang.id].submit }}
-            </m-text>
+            </jvi-text>
 
           </span>
           <span id="loading-formData" v-show="animationData.active"></span>
@@ -114,7 +114,7 @@ import axios from "axios";
 import icons from "@/common/icons";
 import {markRaw} from "vue";
 import MainStore from "@/stores/MainStore";
-import MText from "@/plugins/mine/components/MText/MText";
+import MText from "@/plugins/jv/lib/components/JvText/JvText";
 // import {mapState} from "vuex";
 
 export default {
@@ -142,7 +142,7 @@ export default {
       active: false
     },
     dialogo: false,
-    icons: markRaw(icons)
+    icons
     // text: {
     //   es: {
     //     "contactame": "contáctame",},
@@ -161,10 +161,7 @@ export default {
             "type": "text",
             empty_error: "Este campo no puede estar vacío.",
             minCharacters: "Debes escribir por lo menos tres caracteres.",
-            rules: [
-              value => !!value || 'Required.',
-              value => (value && value.length >= 3) || 'Min 3 characters',
-            ]
+
           },
           "input_dir": {
             "autocomplete": "email",
@@ -172,28 +169,14 @@ export default {
             "type": "email",
             empty_error: "Este campo no puede estar vacío.",
             invalid_error: "El Correo es inválido",
-            rules: [
-              value => !!value || 'Required.',
-              value => (value || '').length <= 50 || 'Max 50 characters',
-              value => {
-                const pattern = /^\w+([-._+]?\w+)*@\w+([.-]?\w+)*((\.\w{2,10})+$)|(@\w+([.-]?\w+)*((\.\w{2,10})+$))/
-                return pattern.test(value) || 'Invalid e-mail.'
-              },
-            ]
+
           },
           "input_men": {
             "elemento": "mensaje",
             empty_error: "Debe incluir algún mensaje.",
             minCharacters: "Incluye un mensaje con un mínimo de diez caracteres.",
             maxCharacters: "Incluye un mensaje con un máximo de doscientos caracteres.",
-            rules: [
-              value => !!value || 'Required.',
-              value => (value || '').length <= 200 || 'Max 200 characters',
-              value => {
-                const pattern = /(<script>)|(<\/script>)|script/
-                return !pattern.test(value) || 'No incluir scripts.'
-              },
-            ]
+
           }
         },
         "contactame": "contáctame",
@@ -205,19 +188,19 @@ export default {
             "autocomplete": "name",
             "elemento": "name",
             "type": "text",
-            empty_error: "Este campo es obligatorio.",
+            empty_error: "This field can't be empty.",
             minCharacters: "Name needs to be at least 2 characters.",
           },
           "input_dir": {
             "autocomplete": "email",
             "elemento": "email address",
             "type": "email",
-            empty_error: "Este campo es obligatorio.",
+            empty_error: "This field can't be empty.",
             invalid_error: "This email is invalid"
           },
           "input_men": {
             "elemento": "message",
-            empty_error: "Este campo es obligatorio.",
+            empty_error: "You have to include a message.",
             minCharacters: "Message needs to be at least 10 characters.",
             maxCharacters: "The message must have a maximum of 200 characters..",
           }
@@ -227,23 +210,25 @@ export default {
       }
     }
 
+    const mainStore = MainStore()
+
     const {handleSubmit, handleReset} = useForm({
       validationSchema: {
         name(value) {
-          if (!value?.length) return text[engine.idiomaId].campos.input_nom.empty_error
-          if (value?.length < 3) return text[engine.idiomaId].campos.input_nom.minCharacters
+          if (!value?.length) return text[mainStore.lang.id].campos.input_nom.empty_error
+          if (value?.length < 3) return text[mainStore.lang.id].campos.input_nom.minCharacters
 
           return true
         },
         mensaje(value) {
-          if (!value?.length) return text[engine.idiomaId].campos.input_men.empty_error
-          if (value?.length < 10) return text[engine.idiomaId].campos.input_men.minCharacters
-          if (value?.length > 200) return text[engine.idiomaId].campos.input_men.maxCharacters
+          if (!value?.length) return text[mainStore.lang.id].campos.input_men.empty_error
+          if (value?.length < 10) return text[mainStore.lang.id].campos.input_men.minCharacters
+          if (value?.length > 200) return text[mainStore.lang.id].campos.input_men.maxCharacters
 
           return true
         },
         email(value) {
-          if (!value?.length) return text[engine.idiomaId].campos.input_dir.empty_error
+          if (!value?.length) return text[mainStore.lang.id].campos.input_dir.empty_error
           if (!/^\w+([-._+]?\w+)*@\w+([.-]?\w+)*((\.\w{2,10})+$)|(@\w+([.-]?\w+)*((\.\w{2,10})+$))/i.test(value)) return 'Must be a valid e-mail.'
 
           return true
@@ -256,7 +241,7 @@ export default {
     let mensaje = useField('mensaje')
 
 
-    return {text, name, mensaje, email, handleSubmit}
+    return {text, name, mensaje, email, handleSubmit, mainStore}
   },
 
   computed: {

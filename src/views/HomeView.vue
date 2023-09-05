@@ -6,10 +6,10 @@ import SlideDesarrollo from "@/components/SlideDesarrollo.vue";
 import SlideDesign from "@/components/SlideDesign.vue";
 import LanguageStore from "@/stores/engine/LanguageStore";
 import {mapActions, mapState} from "pinia";
-import MText from "@/plugins/mine/components/MText/MText";
-import THEME from "@/plugins/mine/theme/constants";
+import MText from "@/plugins/jv/lib/components/JvText/JvText";
 import MainStore from "@/stores/MainStore";
 import {capitalize} from "@vue/shared";
+import JvText from "@/plugins/jv/lib/components/JvText/JvText";
 
 let Lang = LanguageStore()
 let mainStore = MainStore()
@@ -139,14 +139,14 @@ window.addEventListener("scroll", engine.elements.window.eventListeners.scrollEv
 
 <template>
   <section>
-    <MText :type="THEME.typography.displayMedium" gordo>{{ text[mainStore.lang.id].aboutMe.title }}</MText>
-    <m-text>{{ text[mainStore.lang.id].aboutMe.p1 }}</m-text>
-    <m-text>{{ text[mainStore.lang.id].aboutMe.p2 }}</m-text>
-    <m-text>{{ text[mainStore.lang.id].aboutMe.p3 }}</m-text>
+    <jv-text :typography="'displayMedium'" flat >{{ text[mainStore.lang.id].aboutMe.title }}</jv-text>
+    <jv-text>{{ text[mainStore.lang.id].aboutMe.p1 }}</jv-text>
+    <jv-text>{{ text[mainStore.lang.id].aboutMe.p2 }}</jv-text>
+    <jv-text>{{ text[mainStore.lang.id].aboutMe.p3 }}</jv-text>
   </section>
 
   <section class="skills">
-    <MText :type="THEME.typography.displayMedium" gordo style="margin-bottom: 1rem">{{ text[mainStore.lang.id].mySkills.title }}</MText>
+    <jv-text typography="displayMedium" flat style="margin-bottom: 1rem">{{ text[mainStore.lang.id].mySkills.title }}</jv-text>
 
     <div>
       <div>
@@ -154,14 +154,14 @@ window.addEventListener("scroll", engine.elements.window.eventListeners.scrollEv
           <IconDesign/>
         </div>
 
-        <MText :type="THEME.typography.titleMedium" gordo style="margin-bottom: 0.5rem">{{ text[mainStore.lang.id].mySkills.design.title }}</MText>
+        <jv-text typography="titleMedium" flat style="margin-bottom: 0.5rem">{{ text[mainStore.lang.id].mySkills.design.title }}</jv-text>
 
         <ul class="cuerpo">
           <li v-for="(item, index) of text[mainStore.lang.id].mySkills.design.content">
             <ul>
-              <MText :type='THEME.typography.titleSmall' style="text-align: center;">{{capitalize(index)}}</MText>
+              <jv-text typography='titleSmall' style="text-align: center;">{{capitalize(index)}}</jv-text>
 
-              <li v-for="item2 in item"><m-text>{{capitalize(item2)}}</m-text></li>
+              <li v-for="item2 in item"><jv-text>{{capitalize(item2)}}</jv-text></li>
             </ul>
           </li>
         </ul>
@@ -172,18 +172,16 @@ window.addEventListener("scroll", engine.elements.window.eventListeners.scrollEv
           <IconProgramming/>
         </div>
 
-        <MText :type="THEME.typography.titleMedium" gordo style="margin-bottom: 0.5rem">{{ text[mainStore.lang.id].mySkills.programming.title }}</MText>
+        <jv-text typography="titleMedium" flat style="margin-bottom: 0.5rem">{{ text[mainStore.lang.id].mySkills.programming.title }}</jv-text>
 
         <ul class="cuerpo">
-          <ul v-for="(item, index) of text[mainStore.lang.id].mySkills.programming.content">
-            <li>
-              <MText :type='THEME.typography.titleSmall' style="text-align: center;">{{capitalize(index)}}</MText>
+          <li v-for="(item, index) of text[mainStore.lang.id].mySkills.programming.content">
+              <jv-text typography='titleSmall' style="text-align: center;">{{capitalize(index)}}</jv-text>
 
               <ul>
-                <li v-for="item2 in item"><MText>{{capitalize(item2)}}</MText></li>
+                <li v-for="item2 in item"><jv-text>{{capitalize(item2)}}</jv-text></li>
               </ul>
-            </li>
-          </ul>
+          </li>
         </ul>
       </div>
     </div>
@@ -194,9 +192,9 @@ window.addEventListener("scroll", engine.elements.window.eventListeners.scrollEv
       <SlideDesarrollo/>
     </div>
 
-    <div id="slideDesignContainer">
+<!--    <div id="slideDesignContainer">
       <SlideDesign/>
-    </div>
+    </div>-->
   </section>
 </template>
 
@@ -213,12 +211,12 @@ section
     row-gap: 50px
 
   > h1
-    font-size: 50px
+    //font-size: 50px
     text-align: center
     color: var(--md-sys-color-on-surface-variant)
 
   > p
-    font-size: 18px
+    //font-size: 18px
     max-width: 773px
     margin-top: 9px
     align-self: center
@@ -283,7 +281,7 @@ section.skills
         text-align: center
         letter-spacing: 0.05em
 
-      h3
+      //h3
         font-weight: bold
 
       h3, p

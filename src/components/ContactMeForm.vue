@@ -4,8 +4,8 @@
             <v-text-field
                     elevation="5"
                     v-model="name.value.value"
-                    :label="$filters.capitalize(text[engine.idiomaId].campos.input_nom.elemento)"
-                    :autocomplete="text[engine.idiomaId].campos.input_nom.autocomplete"
+                    :label="$filters.capitalize(text[lang.id].campos.input_nom.elemento)"
+                    :autocomplete="text[lang.id].campos.input_nom.autocomplete"
                     :error-messages="name.errorMessage.value"
                     hide-details="auto"
                     color="var(--md-sys-color-on-surface-variant)"
@@ -17,8 +17,8 @@
         <div class="input_dir">
             <v-text-field
                     v-model="email.value.value"
-                    :label="$filters.capitalize(text[engine.idiomaId].campos.input_dir.elemento)"
-                    :autocomplete="text[engine.idiomaId].campos.input_dir.autocomplete"
+                    :label="$filters.capitalize(text[lang.id].campos.input_dir.elemento)"
+                    :autocomplete="text[lang.id].campos.input_dir.autocomplete"
                     :error-messages="email.errorMessage.value"
                     hide-details="auto"
                     color="var(--md-sys-color-on-surface-variant)"
@@ -31,8 +31,8 @@
         <div class="input_men">
             <v-textarea
                     v-model="mensaje.value.value"
-                    :label="$filters.capitalize(text[engine.idiomaId].campos.input_men.elemento)"
-                    :autocomplete="text[engine.idiomaId].campos.input_men.autocomplete"
+                    :label="$filters.capitalize(text[lang.id].campos.input_men.elemento)"
+                    :autocomplete="text[lang.id].campos.input_men.autocomplete"
                     class=""
                     :error-messages="mensaje.errorMessage.value"
                     counter="200"
@@ -55,7 +55,7 @@
                     bgColor="red"
             >
                 <!--        :disabled="animationData.active"-->
-                <span v-show="!animationData.active">{{ text[engine.idiomaId].submit }}</span>
+                <span v-show="!animationData.active">{{ text[lang.id].submit }}</span>
                 <span id="loading-formData" v-show="animationData.active"></span>
             </v-btn>
 
@@ -112,11 +112,11 @@
 
 <script>
 import IconStore from "@/stores/IconStore";
+import MainStore from "@/stores/MainStore";
 import {mapState} from "pinia";
 import axios from "axios";
 import lottie from "lottie-web";
 import {ref} from 'vue'
-import {engine} from "@/engine";
 import {useField, useForm} from "vee-validate";
 // import * as VAlert from 'vuetify/lib/components/VAlert/index.mjs'
 // import * as VBtn from 'vuetify/lib/components/VBtn/index.mjs'
@@ -130,7 +130,6 @@ export default {
     name: "ContactMeForm",
     data() {
         return {
-            engine,
             animationData: {
                 active: false
             },
@@ -190,19 +189,19 @@ export default {
                         "autocomplete": "name",
                         "elemento": "name",
                         "type": "text",
-                        empty_error: "Este campo es obligatorio.",
+                        empty_error: "This field can't be empty.",
                         minCharacters: "Name needs to be at least 2 characters.",
                     },
                     "input_dir": {
                         "autocomplete": "email",
                         "elemento": "email address",
                         "type": "email",
-                        empty_error: "Este campo es obligatorio.",
+                        empty_error: "This field can't be empty.",
                         invalid_error: "This email is invalid"
                     },
                     "input_men": {
                         "elemento": "message",
-                        empty_error: "Este campo es obligatorio.",
+                        empty_error: "You have to include a message.",
                         minCharacters: "Message needs to be at least 10 characters.",
                         maxCharacters: "The message must have a maximum of 200 characters..",
                     }
@@ -212,23 +211,25 @@ export default {
             }
         }
 
+        const mainStore = MainStore()
+
         const {handleSubmit, handleReset} = useForm({
             validationSchema: {
                 name(value) {
-                    if (!value?.length) return text[engine.idiomaId].campos.input_nom.empty_error
-                    if (value?.length < 3) return text[engine.idiomaId].campos.input_nom.minCharacters
+                    if (!value?.length) return text[mainStore.lang.id].campos.input_nom.empty_error
+                    if (value?.length < 3) return text[mainStore.lang.id].campos.input_nom.minCharacters
 
                     return true
                 },
                 mensaje(value) {
-                    if (!value?.length) return text[engine.idiomaId].campos.input_men.empty_error
-                    if (value?.length < 10) return text[engine.idiomaId].campos.input_men.minCharacters
-                    if (value?.length > 200) return text[engine.idiomaId].campos.input_men.maxCharacters
+                    if (!value?.length) return text[mainStore.lang.id].campos.input_men.empty_error
+                    if (value?.length < 10) return text[mainStore.lang.id].campos.input_men.minCharacters
+                    if (value?.length > 200) return text[mainStore.lang.id].campos.input_men.maxCharacters
 
                     return true
                 },
                 email(value) {
-                    if (!value?.length) return text[engine.idiomaId].campos.input_dir.empty_error
+                    if (!value?.length) return text[mainStore.lang.id].campos.input_dir.empty_error
                     if (!/^\w+([-._+]?\w+)*@\w+([.-]?\w+)*((\.\w{2,10})+$)|(@\w+([.-]?\w+)*((\.\w{2,10})+$))/i.test(value)) return 'Must be a valid e-mail.'
 
                     return true
@@ -241,7 +242,7 @@ export default {
         let mensaje = useField('mensaje')
 
 
-        return {text, name, mensaje, email, handleSubmit}
+        return {text, name, mensaje, email, handleSubmit, ...mainStore}
     },
 
     computed: {

@@ -4,7 +4,7 @@ import { createPinia } from "pinia";
 import router from './router'
 import store from './stores'
 import vuetify from './plugins/vuetify'
-import mine from './plugins/mine/mine'
+import jv from '@/plugins/jv/dist/jv'
 // import {VSkeletonLoader} from "vuetify/lib/labs/VSkeletonLoader";
 // import Particles from 'vue3-particles'
 
@@ -22,7 +22,7 @@ const app = createApp(App)
     .use(createPinia())
     .use(router)
     .use(store)
-    .use(mine)
+    .use(jv)
     .use(vuetify)
     // .use(Particles)
 

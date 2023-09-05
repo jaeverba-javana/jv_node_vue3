@@ -20,7 +20,7 @@
         <SocialMedia/>
       </section>
 
-      <p class="copyright">&copy; Javier Vergara {{ new Date().getFullYear() }} - {{ text[engine.idiomaId].rights }}</p>
+      <p class="copyright">&copy; Javier Vergara {{ new Date().getFullYear() }} - {{ text[mainStore.lang.id].rights }}</p>
     </div>
   </footer>
 </template>
@@ -30,9 +30,12 @@ import ContactMe from "@/components/ContactMe.vue";
 import SocialMedia from "@/components/SocialMedia.vue";
 import {loadFull} from "tsparticles"
 import {VDivider} from 'vuetify/lib/components/VDivider/index.mjs'
+import MainStore from "@/stores/MainStore";
 //import Particles from "vue3-particles"
 
 import { engine } from "@/engine";
+
+const mainStore = MainStore()
 
 //let engine = motor
 
@@ -44,6 +47,8 @@ let text = {
     rights: "All rights reserved"
   },
 }
+
+
 
 let particlesOptions = {
   color: ['#03dac6', '#ff0266', '#000000'],

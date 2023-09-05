@@ -75,5 +75,10 @@ export default createVuetify({
                 color: 'inherit',
             }
         }
+    },
+    display: {
+        thresholds: {
+            sm: 750
+        }
     }
 })

@@ -11,78 +11,74 @@
                 ></v-skeleton-loader>
             </swiper-slide>-->
 
-            <swiper-slide tag="li" v-for="(item, index) in posts" :key="index">
+            <swiper-slide tag="li" v-for="(item, index) in latestPosts" :key="index">
                 <v-skeleton-loader
                     type="card, actions"
                     min-height="100%"
                 >
-                    <v-card elevation="0" width="100%" height="100%" class="mx-auto miniPost" color="surface-variant">
-                        <div class="d-flex align-center justify-center swiper-item" style=" overflow: hidden">
-                            <v-img
-                                width="100%"
-                                :src="item.imgUrl"
-                                cover
-                            >
-                                <template v-slot:placeholder style="background-color: black">
-                                    <div class="d-flex align-center justify-center fill-height"
-                                         :style="{'background-color': item.primaryColor}">
-                                        <v-progress-circular
-                                            color="grey-lighten-4"
-                                            indeterminate
-                                        ></v-progress-circular>
-                                    </div>
-                                </template>
-                            </v-img>
-                        </div>
+                    <v-card @click="click(item)" elevation="0" width="100%" height="100%" class="mx-auto miniPost" color="surface-variant">
+                      <div class="d-flex align-center justify-center swiper-item" style=" overflow: hidden">
+                        <v-img
+                            width="100%"
+                            :src="itemImg(item)"
+                            cover
+                        >
+                          <template v-slot:placeholder style="background-color: black">
+                            <div class="d-flex align-center justify-center fill-height"
+                                 :style="{'background-color': item.primaryColor}">
+                              <v-progress-circular
+                                  color="grey-lighten-4"
+                                  indeterminate
+                              ></v-progress-circular>
+                            </div>
+                          </template>
+                        </v-img>
+                      </div>
 
 
-                        <v-card-title style="padding-bottom: 0">
-                            <h5 style="margin-bottom: -5px">
-                                {{ item.title }}
-                            </h5>
-                        </v-card-title>
+                      <v-card-title style="padding-bottom: 0">
+                        <jv-text typography="titleSmall" style="margin-bottom: -5px">
+                          {{ item.title }}
+                        </jv-text>
+                      </v-card-title>
 
-                        <v-card-subtitle>
-                            <p>algún subtítulo</p>
-                        </v-card-subtitle>
+                      <!--                        <v-card-subtitle>-->
+                      <!--                            <m-text :type="Theme.typography.labelLarge">algún subtítulo</m-text>-->
+                      <!--                        </v-card-subtitle>-->
 
-                        <v-card-actions>
-                            <p><span class="fecha">{{ item.fecha }}</span></p>
+                      <v-card-actions>
+                        <jv-text typography="labelSmall"><span class="fecha">{{ item.date }}</span></jv-text>
+                        <div style="flex-grow: 1"></div>
+                        <v-btn :icon="icons.classic.solid.angleUp"
+                               @click.stop="openId? item.id === openId? openId = '' : openId = item.id : openId = item.id"></v-btn>
+                        <!--                            <v-btn :icon="icons.classic.light.angleUp"></v-btn>-->
+                      </v-card-actions>
+
+                      <v-expand-transition class="v-expand-transition">
+                        <v-card
+                            v-if="openId === item.id"
+                            class="v-card--reveal"
+                            style="height: 100%;"
+                            color="surface-variant-darken-1"
+                        >
+                          <div style="display: flex; flex-direction: column; height: 100%">
+                            <v-card-text class="">
+                              <jv-text>{{item.description}}</jv-text>
+                            </v-card-text>
+
                             <div style="flex-grow: 1"></div>
-                            <v-btn :icon="icons.classic.solid.angleUp"
-                                   @click.stop="item.escondido.mostrar = !item.escondido.mostrar"></v-btn>
-                            <!--                            <v-btn :icon="icons.classic.light.angleUp"></v-btn>-->
-                        </v-card-actions>
-
-                        <v-expand-transition>
-                            <v-card
-                                v-if="item.escondido.mostrar"
-                                class="v-card--reveal"
-                                style="height: 100%;"
-                                color="surface-variant-darken-1"
-                            >
-                                <div style="display: flex; flex-direction: column; height: 100%">
-                                    <v-card-text class="">
-                                        <p class="text-h4 text--primary">
-                                            Origin
-                                        </p>
-                                        <p>late 16th century (as a noun denoting a place where alms were distributed):
-                                            ’ </p>
-                                    </v-card-text>
-
-                                    <div style="flex-grow: 1"></div>
 
 
-                                    <v-card-actions>
-                                        <div style="flex-grow: 1"></div>
-                                        <v-btn :icon="icons.classic.solid.angleDown"
-                                               @click.stop="item.escondido.mostrar = !item.escondido.mostrar"></v-btn>
-                                        <!--                            <v-btn :icon="icons.classic.light.angleUp"></v-btn>-->
-                                    </v-card-actions>
-                                </div>
+                            <v-card-actions style="position: absolute; left: 0; right: 0; bottom: 0">
+                              <div style="flex-grow: 1"></div>
+                              <v-btn :icon="icons.classic.solid.angleDown"
+                                     @click.stop="openId = ''"></v-btn>
+                              <!--                            <v-btn :icon="icons.classic.light.angleUp"></v-btn>-->
+                            </v-card-actions>
+                          </div>
 
-                            </v-card>
-                        </v-expand-transition>
+                        </v-card>
+                      </v-expand-transition>
                     </v-card>
                 </v-skeleton-loader>
 
@@ -107,6 +103,9 @@ import {Swiper, SwiperSlide} from "swiper/vue"
 export default {
     name: "SlideLastestPostsComponent",
     components: {Swiper, SwiperSlide},
+    props: {
+      latestPosts: Object
+    },
     setup() {
         return {
             modules: [Navigation]
@@ -114,63 +113,9 @@ export default {
     },
     data() {
         return {
-            posts: [
-                {
-                    imgUrl: '/img/png/fondos/gato con botas.png',
-                    title: 'Título de la página',
-                    subtitle: 'Algún subtítulo',
-                    escondido: {
-                        mostrar: false,
-                    },
-                    primaryColor: '#E9902F',
-                    fecha: '21/01/2029'
-                }, {
-                    imgUrl: '/img/png/fondos/pequeño gtut.png',
-                    title: 'Título de la página',
-                    subtitle: 'Algún subtítulo',
-                    escondido: {
-                        mostrar: false,
-                    },
-                    primaryColor: '#262C3A',
-                    fecha: '21/01/2029'
-                }, {
-                    imgUrl: '/img/png/fondos/personajes-de-hora-de-aventura.jpg',
-                    title: 'Título de la página',
-                    subtitle: 'Algún subtítulo',
-                    escondido: {
-                        mostrar: false,
-                    },
-                    primaryColor: '#262C3A',
-                    fecha: '21/01/2029'
-                }, {
-                    imgUrl: '/img/png/fondos/rick-sanchez-foto-policial-de-rick-y-morty.jpg',
-                    title: 'Título de la página',
-                    subtitle: 'Algún subtítulo',
-                    escondido: {
-                        mostrar: false,
-                    },
-                    primaryColor: '#262C3A',
-                    fecha: '21/01/2029'
-                }, {
-                    imgUrl: '/img/png/fondos/luigi-the-super-mario-bros.jpg',
-                    title: 'Título de la página',
-                    subtitle: 'Algún subtítulo',
-                    escondido: {
-                        mostrar: false,
-                    },
-                    primaryColor: '#262C3A',
-                    fecha: '21/01/2029'
-                }, {
-                    imgUrl: '/img/png/fondos/principito.png',
-                    title: 'Título de la página',
-                    subtitle: 'Algún subtítulo',
-                    escondido: {
-                        mostrar: false,
-                    },
-                    primaryColor: '#50C8AF',
-                    fecha: '21/01/2029'
-                }
-            ],
+          opened: {},
+          openId: '',
+
             swipper_props: {
                 breakpoints: {
                     960: {
@@ -195,12 +140,26 @@ export default {
             },
         }
     },
+  methods: {
+      click(item) {
+        this.$router.push(`${this.$route.params.lang? '/'+this.$route.params.lang : ''}/blog/post/${item.id}`)
+      },
+    itemImg(item) {
+      return (process.env.NODE_ENV === 'development'? '/img/webP/' : 'https://jaeverba-javana.github.io/img/webP/') +item.id+'.webp'
+
+    }
+  },
     computed: {
         ...mapState(IconStore, {
             icons: store => store.icons
-        })
+        }),
     },
-    // created() {
+  created() {
+    for (let i = 0; i < this.latestPosts.length; i++) {
+      this.opened = false
+    }
+  }
+  // created() {
     //   this.swipper_props.modules = this.modules
     // }
 }
@@ -216,7 +175,6 @@ export default {
     padding: 3px
 
   p .fecha
-    font-size: 14px
     opacity: 0.7
     padding-left: 1em
 
@@ -243,6 +201,12 @@ export default {
   &.swiper-button-next
     right: auto
     left: var(--ub)
+
+.v-card--reveal
+  .v-card-text
+    overflow: auto
+    &::-webkit-scrollbar
+      display: none
 
 
 </style>

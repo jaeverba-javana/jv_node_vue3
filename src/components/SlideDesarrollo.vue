@@ -2,6 +2,8 @@
 import {Swiper, SwiperSlide} from "swiper/vue"
 import {Navigation} from "swiper"
 import { engine } from "@/engine"
+import { mapState} from "pinia";
+import MainStore from "@/stores/MainStore";
 
 export default {
   name: "SlideDesarrollo",
@@ -36,12 +38,17 @@ export default {
       spaceBetween: 20,
       speed: 700
     },
-  }}
+  }},
+  computed: {
+    ...mapState(MainStore, {
+      lang: store => store.lang
+    })
+  }
 }
 </script>
 
 <template>
-  <h1 class="gordo">{{text[engine.idiomaId].develop_title}}</h1>
+  <jv-text typography="displayMedium" flat>{{text[lang.id].develop_title}}</jv-text>
 
   <div class="mySwiper-container">
     <div class="sombra izquierda"><div></div></div>
@@ -49,7 +56,7 @@ export default {
     <swiper v-bind="swipper_props" class="mySwiper">
       <swiper-slide v-for="n in 11">
         <div><img src="/img/png/slides/develop/Imagen_1.png" alt="Vista previa del proyecto"></div>
-        <h2>Nombre del proyecto</h2>
+        <jv-text typography="titleMedium">Nombre del proyecto</jv-text>
       </swiper-slide>
     </swiper>
 
@@ -64,7 +71,7 @@ export default {
 <style scoped lang="sass">
 h1
   padding-left: 85px
-  font-size: 40px
+  //font-size: 40px
 
 .mySwiper-container
   //position: absolute

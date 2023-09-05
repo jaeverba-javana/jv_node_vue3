@@ -37,7 +37,7 @@ import {
     jvi_angle_right__classic_duotone,
     jvi_messages__classic_duotone,
     jvi_user__classic_duotone,
-    jvi_envelope__classic_duotone, jvi_paper_plane__classic_duotone,
+    jvi_envelope__classic_duotone, jvi_paper_plane__classic_duotone, jvi_cookie__classic_duotone,
 } from './../../fonts/paths/full/classicDuotone.mjs'
 
 export declare interface GIcons {
@@ -97,6 +97,7 @@ export const classicDuotone = {
     user: jvi_user__classic_duotone,
     envelope: jvi_envelope__classic_duotone,
     paperPlane: jvi_paper_plane__classic_duotone,
+    cookie: jvi_cookie__classic_duotone
 }
 
 export const sharpSolid = {
