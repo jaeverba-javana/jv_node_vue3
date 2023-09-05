@@ -7,6 +7,7 @@ import {
     jvi_angle_up__classic_solid,
     jvi_chevron_up__classic_solid,
     jvi_envelope__classic_solid,
+    jvi_house__classic_solid,
     jvi_messages__classic_solid,
     jvi_paper_plane__classic_solid,
     jvi_person_running__classic_solid,
@@ -16,7 +17,7 @@ import {
 
 import {
     jvi_angle_up__classic_light,
-    jvi_envelope__classic_light,
+    jvi_envelope__classic_light, jvi_house__classic_light,
     jvi_messages__classic_light,
     jvi_paper_plane__classic_light,
     jvi_person_running__classic_light,
@@ -26,6 +27,7 @@ import {
 
 import {
     jvi_envelope__classic_regular,
+    jvi_house__classic_regular,
     jvi_messages__classic_regular,
     jvi_paper_plane__classic_regular,
     jvi_user__classic_regular,
@@ -39,7 +41,7 @@ import {
 
 
 export default defineStore("iconStore", {
-    state: ():object => ({
+    state: (): IconStoreInterface => ({
         icons: {
             classic: {
                 solid: {
@@ -49,6 +51,7 @@ export default defineStore("iconStore", {
                     angleUp: jvi_angle_up__classic_solid,
                     chevronUp: jvi_chevron_up__classic_solid,
                     envelope: jvi_envelope__classic_solid,
+                    house: jvi_house__classic_solid,
                     messages: jvi_messages__classic_solid,
                     paperPlane: jvi_paper_plane__classic_solid,
                     personRunning: jvi_person_running__classic_solid,
@@ -58,6 +61,7 @@ export default defineStore("iconStore", {
                 },
                 regular: {
                     envelope: jvi_envelope__classic_regular,
+                    house: jvi_house__classic_regular,
                     messages: jvi_messages__classic_regular,
                     paperPlane: jvi_paper_plane__classic_regular,
                     user: jvi_user__classic_regular,
@@ -65,6 +69,7 @@ export default defineStore("iconStore", {
                 light: {
                     angleUp: jvi_angle_up__classic_light,
                     envelope: jvi_envelope__classic_light,
+                    house: jvi_house__classic_light,
                     messages: jvi_messages__classic_light,
                     paperPlane: jvi_paper_plane__classic_light,
                     personRunning: jvi_person_running__classic_light,
@@ -90,3 +95,33 @@ export default defineStore("iconStore", {
 
     }
 })
+
+export declare interface IconStoreInterface {
+    icons: {
+        classic: {
+            solid: IconStoreClassInterface,
+            regular: IconStoreClassInterface,
+            light: IconStoreClassInterface,
+            thin: IconStoreClassInterface
+        },
+        sharp: {
+            solid: IconStoreClassInterface,
+            regular: IconStoreClassInterface
+        }
+    }
+}
+
+declare interface IconStoreClassInterface {
+    angleDown?: string,
+    angleLeft?: string,
+    angleRight?: string,
+    angleUp?: string,
+    chevronUp?: string,
+    envelope?: string,
+    house?: string,
+    messages?: string,
+    paperPlane?: string,
+    personRunning?: string,
+    star?: string,
+    user?: string
+}

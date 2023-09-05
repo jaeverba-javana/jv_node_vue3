@@ -1,5 +1,17 @@
 class THEME {
     typography: TypographyTheme_ = {
+        labelSmall: {
+            fontSize: (1 / 7) * 5,
+            fontFamily: 'Nunito',
+        },
+        labelMedium: {
+            fontSize: (1 / 7) * 6,
+            fontFamily: 'Nunito',
+        },
+        labelLarge: {
+            fontSize: 1,
+            fontFamily: 'Nunito',
+        },
         bodySmall: {
             fontSize: 0.9,
             fontFamily: 'Nunito',
@@ -17,17 +29,20 @@ class THEME {
             fontFamily: 'Nunito'
         },
         titleMedium: {
-            fontSize: 1.6
+            fontSize: 1.6,
+            fontFamily: 'Alegreya',
         },
         titleLarge: {
             fontSize: 2,
             fontFamily: 'Alegreya',
         },
         displaySmall: {
-            fontSize: 2.5
+            fontSize: 2.5,
+            fontFamily: 'Alegreya',
         },
         displayMedium: {
-            fontSize: 3
+            fontSize: 3,
+            fontFamily: 'Alegreya',
         },
         displayLarge: {
             fontSize: 3.5,
@@ -39,6 +54,9 @@ class THEME {
 export default new THEME
 
 export declare interface TypographyTheme_ {
+    labelSmall?: Typography_,
+    labelMedium?: Typography_,
+    labelLarge?: Typography_,
     bodySmall?: Typography_,
     bodyMedium?: Typography_,
     bodyLarge?: Typography_,

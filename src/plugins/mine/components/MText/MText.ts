@@ -1,6 +1,7 @@
 import {ComponentInternalInstance, createVNode, Text} from "vue";
 import THEME from "../../theme/constants";
 import useRender from "./../../util/useRender"
+
 export default {
     name: 'MText',
     props: {
@@ -12,7 +13,7 @@ export default {
         // console.log('attrs', attrs)
         // console.log('slots', slots)
         // console.log('props', props)
-        console.log(props.gordo)
+        // console.log(props.gordo)
 
         let tag = 'p'
 

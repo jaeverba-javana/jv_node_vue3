@@ -5,7 +5,7 @@ const mine: {
     install(app: any, options: any): void
 } = {
     install: (app, options) => {
-        console.log('options', options)
+        // console.log('options', options)
 
         app.component('m-text', MText)
 
@@ -16,6 +16,32 @@ const mine: {
             methods: {
                 capitalize(string: string) {
                     return string.charAt(0).toUpperCase() + string.slice(1)
+                },
+                addCookie(values) {
+                    let key_value;
+                    // noinspection ExceptionCaughtLocallyJS
+                    try {
+                        if ((values.key && values.value) || values.value === "") key_value = values.key + "=" + values.value;
+                        else if (!values.key && !values.value) { // noinspection ExceptionCaughtLocallyJS
+                            throw new Error("Propiedades 'key' y 'valor' no detectadas");
+                        }
+                        else { // noinspection ExceptionCaughtLocallyJS
+                            if (!values.key) { // noinspection ExceptionCaughtLocallyJS
+                                throw new Error("Propiedad 'key' no detectada")
+                            } else { // noinspection ExceptionCaughtLocallyJS
+                                throw new Error("Propiedad 'valor' no detectada");
+                            }
+                        }
+                        let path = values.path ? ";path=" + values.path : "";
+                        let domain = values.domain ? ";domain=" + values.domain : "";
+                        let max_age = values.max_age ? ";max-age=" + values.max_age : "";
+                        let expires = values.expires ? ";expires=" + values.expires : "";
+                        let secure = values.secure ? ";secure" : "";
+                        let samesite = values.samesite === "strict" ? ";samesite=strict" : values.samesite === "lax" ? ";samesite=lax" : "";
+                        document.cookie = key_value + path + domain + max_age + expires + secure + samesite;
+                    } catch (msg) {
+                        console.error("Ha ocurrido un error con la creación de la cookie \nEspecificación del error: " + msg);
+                    }
                 }
             }
         })

@@ -16,7 +16,7 @@ import "swiper/scss/navigation"
 import 'swiper/scss/pagination';
 import 'swiper/scss/scrollbar';
 
-loadFonts()
+// loadFonts()
 
 const app = createApp(App)
     .use(createPinia())

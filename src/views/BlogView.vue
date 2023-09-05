@@ -3,12 +3,16 @@
 import {useDisplay} from "vuetify";
 import {mapMutations, mapState} from "vuex";
 import {mapState as piniaMapState} from "pinia"
+import IconStore from "@/stores/IconStore";
 import {engine} from "@/engine"
 import ThemeToggler from "@/components/ThemeToggler.vue";
 import LanguageSelector from "@/components/LanguageSelector.vue";
 import HeaderNav from "@/components/HeaderNav.vue";
 import {defineComponent} from "vuetify/lib/util/index.mjs";
 import Panel from "@/views/Panel.vue";
+import MainStore from "@/stores/MainStore";
+import MText from "@/plugins/mine/components/MText/MText";
+import THEME from "@/plugins/mine/theme/constants"
 
 
 let open = ['Users'];
@@ -25,14 +29,39 @@ let cruds = [
 
 export default {
   name: "blog view",
-  components: {Panel, ThemeToggler, LanguageSelector, HeaderNav},
+  components: {MText, Panel, ThemeToggler, LanguageSelector, HeaderNav},
   data: () => ({
     windowSize: {},
     admins, cruds, engine,
     text: {
-      es: {rights: "Todos los derechos reservados"},
-      en: {rights: "All rights reserved"}
+      es: {
+        rights: "Todos los derechos reservados",
+        drawBar: {
+          left: {
+            home: 'Inicio',
+            personal: 'Mi portafolio personal'
+          },
+          right: {
+            content: "Contenido"
+          }
+        }
+      },
+      en: {
+        rights: "All rights reserved",
+        drawBar: {
+          left: {
+            home: 'Home',
+            personal: 'My personal portfolio'
+          },
+          right: {
+            content: "Content"
+          }
+        }
+      }
     },
+    showRightSideBar: false,
+    sections: 0,
+    THEME
   }),
   setup() {
     let {mobile, sm, md, name} = useDisplay()
@@ -46,6 +75,12 @@ export default {
     ...mapState({
       blogView: state => state.views.blogView
     }),
+    ...piniaMapState(IconStore, {
+      icons: store => store.icons
+    }),
+    ...piniaMapState(MainStore, {
+      lang: store => store.lang
+    })
   },
   methods: {
     ...mapMutations(["toggleActivationOfLeftVNavigationDrawerComponent"]),
@@ -55,6 +90,16 @@ export default {
       console.log('size: md:', this.md)
       console.log('size: name:', this.name)
     },
+    onHomeClick() {
+      console.log('Home have been clicked')
+      this.$router.push('/blog')
+    },
+    dataLoaded(e) {
+      console.log(e)
+
+      this.sections = e
+      this.showRightSideBar = true
+    }
   },
   mounted() {
     this.onResize()
@@ -103,23 +148,29 @@ v-app-bar(color="primary-container" v-resize="onResize")
           div(style="height: calc(var(--v-btn-height))")
             ThemeToggler
 
-  <!--    La perte de abajo - La barra de navegación -->
-
-  //<template v-slot:extension v-if="!mobile" >
-        <nav class="fill">
-          <header-nav></header-nav>
-        </nav>
-
-        <div>
-          <h1> hola esto es algo más </h1>
-        </div>
-
 v-navigation-drawer(color="surface-lighten-1" width="250" v-model="blogView.components.vNavigationDrawer.leftDrawer.active")
-  v-skeleton-loader(type="list-item, list-item, list-item, list-item, list-item, list-item" style="width: 100%" )
-    v-list.myList(bg-color="surface-lighten-1" color="" width="100%" )
-      v-list-subheader Índice
+  v-list.myList(
+    bg-color="surface-lighten-1"
+    color="" width="100%"
+    :mandatory="true"
+    nav
+    open-strategy="single"
+    :selected="['Home']"
+    style="display: flex; flex-direction: column; height: 100%; justify-content: space-between")
+    //v-list-subheader Índice
 
-      v-list-group(value="valor")
+    div
+      v-list-item(
+        :title="text[lang.id].drawBar.left.home" value="Home" :prepend-icon="icons.classic.light.house" @click="onHomeClick")
+
+    v-list-item(
+      :title="text[lang.id].drawBar.left.personal", value="personalPortfolio",
+      :prepend-icon="icons.classic.light.user")
+
+  //v-skeleton-loader(type="list-item, list-item, list-item, list-item, list-item, list-item" style="width: 100%" )
+
+
+      //v-list-group(value="valor")
         template( v-slot:activator="{ props }")
           v-list-item(v-bind="props" title="Users" rounded="xl")
 
@@ -135,23 +186,23 @@ v-navigation-drawer(color="surface-lighten-1" width="250" v-model="blogView.comp
 
           v-list-item( v-for="([title, icon], i) in cruds" :key="i" :value="title" :title="title" rounded="xl" )
 
-v-navigation-drawer(location="right" width="250" class="" :border="false" floating sticky)
+v-navigation-drawer(v-if="showRightSideBar" location="right" width="250" class="" :border="false" floating sticky)
   template( v-slot:prepend )
     v-skeleton-loader(type="heading")
       div.ms-4.mb-2.mt-4
-        h4.font-weight-medium Contenido
+        h4.font-weight-medium {{text[lang.id].drawBar.right.content}}
 
   template( v-slot:default )
     v-skeleton-loader(type="list-item, list-item, list-item, list-item, list-item, list-item" )
       ul.ms-5
-        li.ps-3.text-body-2.py-1.font-weight-regular.text-primary.router-link-active
+        li.ps-3.text-body-2.py-1.font-weight-regular(v-for="item in sections")
+          m-text(:type="THEME.typography.labelMedium")
+            a.v-toc-link.d-block.transition-swing.text-decoration-none(:href="`${$route.params.lang? '/'+$route.params.lang : ''}/blog/post/${$route.params.postId || ''}#${item.title[lang.id]}`") {{item.title[lang.id]}}
+
+        //li.ps-3.text-body-2.py-1.font-weight-regular.text-primary.router-link-active
           a.v-toc-link.d-block.transition-swing.text-decoration-none(href="/blog/post/post/#whatIs") ¿Qué es canvas?
-        li.ps-3.text-body-2.py-1.font-weight-regular.text-medium-emphasis
+        //li.ps-3.text-body-2.py-1.font-weight-regular.text-medium-emphasis
           a.v-toc-link.d-block.transition-swing.text-decoration-none(href="/blog/post/post/#howWorks") ¿Cómo funciona canvas?
-        li.ps-3.text-body-2.py-1.font-weight-regular.text-medium-emphasis
-          a.v-toc-link.d-block.transition-swing.text-decoration-none(href="/blog/post/post/#utilities") ¿Para qué me sirve un elemento canvas?
-        li.ps-3.text-body-2.py-1.font-weight-regular.text-medium-emphasis
-          a.v-toc-link.d-block.transition-swing.text-decoration-none(href="/blog/post/post/#diferences") ¿En qué se diferencia con svg?
 
 v-navigation-drawer( width="0")
   div.v-navigation-drawer__flotant_icons( style="max-height: 0px;")
@@ -159,12 +210,12 @@ v-navigation-drawer( width="0")
 
 v-main.d-flex.fd-column.align-center
   v-container.v-main__content.fill-width.text-h5( :class="{'v-media-movile': !mobile}" )
-    router-view(v-if="$route.params.postId" :postId="$route.params.postId" nombre="Javier" style="height: 100%")
+    router-view(v-if="$route.params.postId" :postId="$route.params.postId" style="height: 100%" @loaded="dataLoaded")
     router-view(v-else)
 
-footer
-  //v-divider( thickness="2" length="100%")
-  p.copyright &copy; Javier Vergara {{ new Date().getFullYear() }} - {{ text[engine.idiomaId].rights }}
+  footer
+    //v-divider( thickness="2" length="100%")
+    p.copyright &copy; Javier Vergara {{ new Date().getFullYear() }} - {{ text[engine.idiomaId].rights }}
 </template>
 
 <style lang="sass">

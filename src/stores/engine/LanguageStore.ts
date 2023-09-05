@@ -1,7 +1,7 @@
 import {defineStore} from "pinia";
 import {cookieManager} from "./../../engine";
 
-let langId:string = cookieManager.get('lang')? cookieManager.get('lang') : "es"
+let langId:string = cookieManager.get('lang') || "es"
 
 const LanguageStore = defineStore("language", {
     state: (): object => ({

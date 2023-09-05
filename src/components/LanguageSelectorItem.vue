@@ -1,6 +1,9 @@
 <script>
+import MText from "@/plugins/mine/components/MText/MText";
+
 export default {
   name: "LanguageSelectorItem",
+  components: {MText},
 
   props: {
     elemento: Object,
@@ -14,7 +17,7 @@ div#LanguageSelectorItemTemplate(:class="{header: header}")
   div
     img(:src="elemento.img")
 
-    h3 {{elemento.lang}}
+    m-text {{elemento.lang.toUpperCase()}}
 </template>
 
 <style lang="sass">
@@ -37,12 +40,9 @@ div#LanguageSelectorItemTemplate(:class="{header: header}")
       height: 100%
       width: 24px
 
-    h3
-      font-family: nimbus-sans, sans-serif
-      font:
-        weight: bold
-        size: 20px
-        color: var(--md-sys-color-on-primay-container)
+    p
+      font-weight: bold
+      transform: translateY(0.1rem)
 
 #LanguageSelectorItemTemplate.header
   height: 100%

@@ -2,6 +2,8 @@
 import {engine} from "@/engine";
 import "@/assets/libs/jquery-3.6.1.min"
 import MText from "@/plugins/mine/components/MText/MText";
+import {mapState} from "pinia";
+import MainStore from "@/stores/MainStore";
 import THEME from "./../plugins/mine/theme/constants"
 
 export default {
@@ -25,6 +27,12 @@ export default {
 
       engine, THEME
     }
+  },
+
+  computed: {
+    ...mapState(MainStore, {
+      lang: store => store.lang
+    })
   },
 
   methods: {
@@ -65,7 +73,7 @@ export default {
                   style="box-shadow: var(--md-sys-elevation-0)"
               >
                 <div class="nav_item">
-                  <MText :type="THEME.typography.titleMedium" gordo>{{ json[engine.idiomaId].about }}</MText>
+                  <MText :type="THEME.typography.titleMedium" gordo>{{ json[lang.id].about }}</MText>
                 </div>
               </v-card>
             </template>
@@ -83,7 +91,7 @@ export default {
                   style="box-shadow: var(--md-sys-elevation-0)"
               >
                 <div class="nav_item">
-                  <MText :type="THEME.typography.titleMedium" gordo>{{ json[engine.idiomaId].port }}</MText>
+                  <MText :type="THEME.typography.titleMedium" gordo>{{ json[lang.id].port }}</MText>
                 </div>
               </v-card>
             </template>
@@ -101,7 +109,7 @@ export default {
                   style="box-shadow: var(--md-sys-elevation-0)"
               >
                 <div class="nav_item">
-                  <MText :type="THEME.typography.titleMedium" gordo>{{ json[engine.idiomaId].blog }}</MText>
+                  <MText :type="THEME.typography.titleMedium" gordo>{{ json[lang.id].blog }}</MText>
                 </div>
               </v-card>
             </template>

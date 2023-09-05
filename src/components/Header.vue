@@ -1,12 +1,14 @@
 <script>
 import HeaderPerfil from "@/components/HeaderPerfil.vue";
 import HeaderNav from "@/components/HeaderNav.vue";
+import {mapState} from "pinia";
+import MainStore from "@/stores/MainStore";
 import { engine } from "@/engine"
 
 export default {
   name: "headerVue",
   components: {HeaderPerfil, HeaderNav},
-  data() {return{
+  data: () => ({
     engine,
     text: {
       en: {
@@ -24,7 +26,13 @@ export default {
         gd: "y diseñador gráfico"
       }
     }
-  }}
+  }),
+
+  computed: {
+    ...mapState(MainStore, {
+      lang: store => store.lang
+    })
+  }
 }
 
 </script>
@@ -40,9 +48,9 @@ export default {
       <div>
         <div id="headerSoy">
           <div>
-            <p id="headerIm">{{ text[engine.idiomaId].im }}</p>
-            <p id="headerJ" class="headerJv">{{ text[engine.idiomaId].j }}</p>
-            <p id="headerV" class="headerJv">{{ text[engine.idiomaId].v }}</p>
+            <p id="headerIm">{{ text[lang.id].im }}</p>
+            <p id="headerJ" class="headerJv">{{ text[lang.id].j }}</p>
+            <p id="headerV" class="headerJv">{{ text[lang.id].v }}</p>
           </div>
         </div>
 
@@ -51,8 +59,8 @@ export default {
 
         <div id="headerPresentation">
           <div>
-            <p>{{text[engine.idiomaId].wp}}</p>
-            <p>{{text[engine.idiomaId].gd}}</p>
+            <p>{{text[lang.id].wp}}</p>
+            <p>{{text[lang.id].gd}}</p>
           </div>
         </div>
       </div>

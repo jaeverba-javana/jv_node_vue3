@@ -8,9 +8,11 @@ import LanguageStore from "@/stores/engine/LanguageStore";
 import {mapActions, mapState} from "pinia";
 import MText from "@/plugins/mine/components/MText/MText";
 import THEME from "@/plugins/mine/theme/constants";
+import MainStore from "@/stores/MainStore";
 import {capitalize} from "@vue/shared";
 
 let Lang = LanguageStore()
+let mainStore = MainStore()
 
 
 const text = {
@@ -137,14 +139,14 @@ window.addEventListener("scroll", engine.elements.window.eventListeners.scrollEv
 
 <template>
   <section>
-    <MText :type="THEME.typography.displayMedium" gordo>{{ text[Lang.id].aboutMe.title }}</MText>
-    <m-text>{{ text[Lang.id].aboutMe.p1 }}</m-text>
-    <m-text>{{ text[Lang.id].aboutMe.p2 }}</m-text>
-    <m-text>{{ text[Lang.id].aboutMe.p3 }}</m-text>
+    <MText :type="THEME.typography.displayMedium" gordo>{{ text[mainStore.lang.id].aboutMe.title }}</MText>
+    <m-text>{{ text[mainStore.lang.id].aboutMe.p1 }}</m-text>
+    <m-text>{{ text[mainStore.lang.id].aboutMe.p2 }}</m-text>
+    <m-text>{{ text[mainStore.lang.id].aboutMe.p3 }}</m-text>
   </section>
 
   <section class="skills">
-    <MText :type="THEME.typography.displayMedium" gordo style="margin-bottom: 1rem">{{ text[Lang.id].mySkills.title }}</MText>
+    <MText :type="THEME.typography.displayMedium" gordo style="margin-bottom: 1rem">{{ text[mainStore.lang.id].mySkills.title }}</MText>
 
     <div>
       <div>
@@ -152,10 +154,10 @@ window.addEventListener("scroll", engine.elements.window.eventListeners.scrollEv
           <IconDesign/>
         </div>
 
-        <MText :type="THEME.typography.titleMedium" gordo style="margin-bottom: 0.5rem">{{ text[Lang.id].mySkills.design.title }}</MText>
+        <MText :type="THEME.typography.titleMedium" gordo style="margin-bottom: 0.5rem">{{ text[mainStore.lang.id].mySkills.design.title }}</MText>
 
         <ul class="cuerpo">
-          <li v-for="(item, index) of text[Lang.id].mySkills.design.content">
+          <li v-for="(item, index) of text[mainStore.lang.id].mySkills.design.content">
             <ul>
               <MText :type='THEME.typography.titleSmall' style="text-align: center;">{{capitalize(index)}}</MText>
 
@@ -170,10 +172,10 @@ window.addEventListener("scroll", engine.elements.window.eventListeners.scrollEv
           <IconProgramming/>
         </div>
 
-        <MText :type="THEME.typography.titleMedium" gordo style="margin-bottom: 0.5rem">{{ text[Lang.id].mySkills.programming.title }}</MText>
+        <MText :type="THEME.typography.titleMedium" gordo style="margin-bottom: 0.5rem">{{ text[mainStore.lang.id].mySkills.programming.title }}</MText>
 
         <ul class="cuerpo">
-          <ul v-for="(item, index) of text[Lang.id].mySkills.programming.content">
+          <ul v-for="(item, index) of text[mainStore.lang.id].mySkills.programming.content">
             <li>
               <MText :type='THEME.typography.titleSmall' style="text-align: center;">{{capitalize(index)}}</MText>
 

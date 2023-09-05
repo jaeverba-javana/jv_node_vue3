@@ -8,26 +8,24 @@ import {ref} from "vue";
 import axios from "axios";
 import THEME from './../../plugins/mine/theme/constants'
 import MText from "./../../plugins/mine/components/MText/MText"
+import {engine as _engine} from "@/engine"
+import useMainStore from "@/stores/MainStore";
 
 interface att {
   att: string
   value: string
 }
 
-// export interface Component {
-//     tag: string
-//     attrs?: Array<att>
-//     children?: Array<Component>
-// }
-
-export const JviSectionHeading = {
+/*export const JviSectionHeading = {
   name: "JviSectionHeading",
   props: {
     tag: String,
     text: String
   },
-  setup(attrs) {
+  setup(attrs, refs) {
     console.log("JviSectionHeading props: ", attrs)
+
+    let {emit} = refs
 
     return () => {
       return createVNode(attrs.tag, {}, [
@@ -46,12 +44,11 @@ export const JviSectionHeading = {
       ])
     }
   }
-}
+}*/
 
 export default {
   data: () => ({}),
   props: {
-    nombre: String,
     postElements: Object,
     postId: String
   },
@@ -60,6 +57,8 @@ export default {
     loaded: value => true,
   },
   setup(props, _ref) {
+    let {emit} = _ref
+
     /*let __PostBlogView = createVNode("section", {}, [
         createVNode(VImg, {
             "src": postElements.img.url,
@@ -94,15 +93,21 @@ export default {
     let loading = ref(true)
     let data = ref({})
     let respondido = ref(false)
+    let engine = ref(_engine)
 
-    axios.get("/post/prueba.json").then(value => {
-      console.log(value)
-      data.value = value.data
-      loading.value = false
-      respondido.value = true
-    }).catch(reason => {
-      console.error(reason)
-    })
+    let mainStore = useMainStore()
+
+    axios.get("/post/"+props.postId+".json")
+        .then(value => {
+          console.log(value)
+          data.value = value.data
+          loading.value = false
+          respondido.value = true
+          emit('loaded', value.data.sections)
+        })
+        .catch(reason => {
+          console.error(reason)
+        })
 
     const titleImg = () => createVNode(VCard, {}, {
       default: () => [
@@ -114,8 +119,8 @@ export default {
       ]
     })
 
-    function createContent(data: Array<{type: string, content: string}> = []) {
-      console.log('crear content data', data)
+    function createContent(data: Array<TagInterface> = []) {
+      // console.log('crear content data', data)
       let virtualNodes = []
 
       data.forEach(value => {
@@ -134,7 +139,7 @@ export default {
       return virtualNodes
     }
 
-    function crear(data: Array<{title: string, content: Array<{type: string}>}>, oldLevel = 0) {
+    function crear(data: Array<SectionInterface>, oldLevel = 0) {
       let virtualNodes = []
 
       let actualLevel = oldLevel+1
@@ -146,7 +151,7 @@ export default {
             marginTop: `${actualLevel}rem`,
           }]
         }, [
-            createVNode(MText, {type: THEME.typography.titleLarge, id: value.title}, [value.title]),
+            createVNode(MText, {type: THEME.typography.titleLarge, id: value.title[engine.value.idiomaId]}, [value.title[mainStore.lang.id]]),
             ...createContent(value.content)
         ]))
       })
@@ -181,7 +186,7 @@ export default {
               marginTop: '1rem'
             }],
             id: data.value.title
-          }, [data.value.title])]
+          }, [data.value.title[engine.value.idiomaId]])]
         }),
 
         createVNode(VSkeletonLoader, {
@@ -194,6 +199,14 @@ export default {
       ]
     }))
   },
+}
+
+declare interface SectionInterface {
+  title: string, content: Array<TagInterface>
+}
+
+declare interface TagInterface {
+  type: string, content: string
 }
 </script>
 
