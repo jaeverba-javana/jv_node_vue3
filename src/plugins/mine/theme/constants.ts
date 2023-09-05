@@ -26,7 +26,8 @@ class THEME {
         },
         titleSmall: {
             fontSize: 1.2,
-            fontFamily: 'Nunito'
+            fontFamily: 'Nunito',
+            fontWeight: 'bold'
         },
         titleMedium: {
             fontSize: 1.6,
@@ -71,4 +72,5 @@ export declare interface TypographyTheme_ {
 export declare interface Typography_ {
     fontSize?: number,
     fontFamily?: string,
+    fontWeight?: string | number,
 }

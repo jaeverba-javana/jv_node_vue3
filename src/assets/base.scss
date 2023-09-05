@@ -46,6 +46,7 @@
   --ancho-barras: 60px;
   @media (max-width: 449px) {
     --ancho-barras: 50px;
+    font-size: 14px;
   }
   --v-theme-on-surface: white !important;
 }

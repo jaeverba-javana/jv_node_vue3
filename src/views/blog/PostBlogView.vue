@@ -128,7 +128,7 @@ export default {
 
         if (value.type === 'p') {
           currentNode = createVNode(MText, {
-            type: THEME.typography.bodyLarge,
+            type: THEME.typography.bodyMedium,
             style: [{textIndent: '2rem', marginLeft: '1rem', marginTop: '0.5rem', textAlign: 'justify'}]
           }, [value.content])
         }
@@ -181,7 +181,7 @@ export default {
           style: [{marginLeft: '0.5rem'}]
         }, {
           default: () => [createVNode(MText, {
-            type: THEME.typography.displayLarge,
+            type: THEME.typography.displayMedium,
             style: [{
               marginTop: '1rem'
             }],

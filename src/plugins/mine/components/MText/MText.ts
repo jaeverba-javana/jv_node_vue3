@@ -37,7 +37,8 @@ export default {
         return () => createVNode(tag, {
             'style': [{
                 'font-size': props.type.fontSize + 'em',
-                'fontFamily': props.gordo? "cubano" : props.type.fontFamily || 'inherit'
+                'fontFamily': props.gordo? "cubano" : props.type.fontFamily || 'inherit',
+                'font-weight': props.type.fontWeight
             }]
         }, {
             default: () => [slots.default?.()],
