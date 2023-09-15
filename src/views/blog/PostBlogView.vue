@@ -150,7 +150,7 @@ export default {
             marginTop: `${actualLevel}rem`,
           }]
         }, [
-            createVNode(MText, {typography: 'titleLarge', id: value.title[engine.value.idiomaId]}, [value.title[mainStore.lang.id]]),
+            createVNode(MText, {typography: 'titleLarge', id: value.title[mainStore.lang.id]}, [value.title[mainStore.lang.id]]),
             ...createContent(value.content)
         ]))
       })
