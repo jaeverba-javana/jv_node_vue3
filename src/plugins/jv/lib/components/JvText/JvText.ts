@@ -11,7 +11,7 @@ const makeJvTextProps = propsFactory({
     ...makeTypographyProps(),
 }, 'JvText')
 
-if (process.env.NODE_ENV === 'development') console.log(makeJvTextProps)
+// if (process.env.NODE_ENV === 'development') console.log(makeJvTextProps)
 
 export default {
     name: 'JvText',

@@ -1,0 +1,59 @@
+{
+  "title": {
+    "es": "Jetpack Compose",
+    "en": "Jetpack Compose"
+  },
+  "lastDate": "12/09/2023",
+  "titleImg": "/img/webP/Mesa de trabajo 1.webp",
+  "description": "",
+  "content": [
+    {
+      "type": "p",
+      "content": {
+        "es": "Jetpack Compose es un moderno kit de herramientas de IU (Interfaz de Usuario) para la creación de aplicaciones de Android de manera más rápida y sencilla. Diseñado por Google, Jetpack Compose utiliza un enfoque declarativo para la construcción de interfaces, lo que permite a los desarrolladores describir cómo debería lucir la IU en lugar de escribir código imperativo detallado.",
+        "en": ""
+      }
+    },{
+      "type": "p",
+      "content": {
+        "es": "Con Jetpack Compose, puedes crear interfaces de usuario de alta calidad utilizando componentes reutilizables y personalizables. Su enfoque basado en funciones y la utilización del lenguaje de programación Kotlin te permiten crear rápidamente pantallas interactivas y visualmente atractivas. Además, Jetpack Compose se integra de manera fluida con el ecosistema de Jetpack de Android, lo que significa que puedes aprovechar las ventajas de las bibliotecas y componentes existentes.",
+        "en": ""
+      }
+    },{
+      "type": "p",
+      "content": {
+        "es": "Si eres un desarrollador de Android que busca una forma más moderna y eficiente de construir interfaces de usuario, Jetpack Compose es una herramienta que debes considerar. Con su enfoque simplificado y su capacidad para acelerar el proceso de desarrollo de IU, Jetpack Compose ofrece una nueva forma emocionante de crear aplicaciones atractivas y funcionales para dispositivos Android.",
+        "en": ""
+      }
+    },{
+      "type": "section",
+      "title": {
+        "es": "Ventajas",
+        "en": "What is it?"
+      },
+      "content": [
+        {
+          "type": "p",
+          "content": {
+            "es": "Y bueno, no se hablaría tan bien de android si no tubiera unas ventajas tan buenas como las que se van a mencionar a continuación",
+            "en": "Hello"
+          }
+        },{
+          "type": "section",
+          "title": {
+            "es": "Rapido"
+          },
+          "content": [
+            {
+              "type": "p",
+              "content": {
+                "es": "esto es de lo rapido",
+                "en": "esto es de lo rapido en ingles"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

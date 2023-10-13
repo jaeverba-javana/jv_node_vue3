@@ -4,12 +4,14 @@ import useRender from "../../plugins/jv/lib/util/useRender"
 import {VImg} from "vuetify/lib/components/VImg/index.mjs"
 import {VCard} from 'vuetify/lib/components/VCard/index.mjs'
 import {VSkeletonLoader} from "vuetify/lib/labs/VSkeletonLoader/index.mjs";
+import {VIcon} from "vuetify/lib/components/VIcon/index.mjs";
 import {ref} from "vue";
 import axios from "axios";
 import THEME from './../../plugins/jv/theme/constants'
 import MText from "../../plugins/jv/lib/components/JvText/JvText"
 import {engine as _engine} from "@/engine"
 import useMainStore from "@/stores/MainStore";
+import {classicRegular, classicSolid} from "@/common/icons";
 
 interface att {
   att: string
@@ -55,6 +57,7 @@ export default {
   emits: {
     loadingStarted: value => true,
     loaded: value => true,
+    appendSection: value => true
   },
   setup(props, _ref) {
     let {emit} = _ref
@@ -97,14 +100,29 @@ export default {
 
     let mainStore = useMainStore()
 
-    axios.get((process.env.NODE_ENV === 'development'? "/post/" : 'https://jaeverba-javana.github.io/posts/')+props.postId+".json")
+    function getIndice(data: Array<PortionInterface>, indice = [], actualLevel = 0) {
+
+      data.forEach(value => {
+        if (value.type === "section") {
+          indice.push({title: value.title.es, actualLevel})
+          indice.concat(getIndice(value.content, indice, actualLevel + 1))
+        }
+      })
+
+      return indice
+    }
+
+    axios.get((process.env.NODE_ENV === 'development' ? "/post/" : 'https://jaeverba-javana.github.io/posts/') + props.postId + ".json")
         .then(value => {
           console.log(value)
           data.value = value.data
           loading.value = false
           respondido.value = true
-          emit('loaded', value.data.sections)
+          console.log("de lo del indice:", getIndice(value.data.content))
+          emit('loaded', {title: data.value.title[mainStore.lang.id], content: getIndice(value.data.content)})
+
         })
+
         .catch(reason => {
           console.error(reason)
         })
@@ -112,12 +130,16 @@ export default {
     const titleImg = () => createVNode(VCard, {}, {
       default: () => [
         createVNode(VImg, {
-          src: (process.env.NODE_ENV === 'development'? '/img/webP/' : 'https://jaeverba-javana.github.io/img/webP/') +props.postId+'.webp',
+          src: (process.env.NODE_ENV === 'development' ? '/img/webP/' : 'https://jaeverba-javana.github.io/img/webP/') + props.postId + '.webp',
           cover: true,
           maxHeight: '300px'
         }),
       ]
     })
+
+    function crearSub(data: SectionInterface) {
+      return createVNode("div", {}, [])
+    }
 
     function createContent(data: Array<TagInterface> = []) {
       // console.log('crear content data', data)
@@ -129,7 +151,14 @@ export default {
         if (value.type === 'p') {
           currentNode = createVNode(MText, {
             style: [{textIndent: '2rem', marginLeft: '1rem', marginTop: '0.5rem', textAlign: 'justify'}]
-          }, [value.content])
+          }, {
+            default: () => value.content[mainStore.lang.id]
+          })
+        } else if (value.type === 'sub') {
+          currentNode = createVNode('div', {
+            class: "sub",
+            style: [{textIndent: '2rem', marginLeft: '1rem', marginTop: '0.5rem', textAlign: 'justify'}]
+          }, [createVNode('div', {}, [])])
         }
 
         virtualNodes.push(currentNode)
@@ -138,74 +167,163 @@ export default {
       return virtualNodes
     }
 
-    function crear(data: Array<SectionInterface>, oldLevel = 0) {
+    function crear(data: Array<PortionInterface>, oldLevel = 0) {
       let virtualNodes = []
 
-      let actualLevel = oldLevel+1
+      let actualLevel = oldLevel + 1
 
-      data.forEach(value => {
-        virtualNodes.push(createVNode('div', {
-          style: [{
-            marginLeft: `${actualLevel}rem`,
-            marginTop: `${actualLevel}rem`,
-          }]
-        }, [
-            createVNode(MText, {typography: 'titleLarge', id: value.title[mainStore.lang.id]}, [value.title[mainStore.lang.id]]),
-            ...createContent(value.content)
-        ]))
+      data.forEach((value, index) => {
+        // console.log("Type of container:", value.type)
+
+        switch (value.type) {
+          case "p":
+            virtualNodes.push(createVNode(MText, {
+              style: [{
+                textIndent: '2rem',
+                marginLeft: (oldLevel) + 'rem',
+                marginTop: index ? '0.5rem' : '0',
+                textAlign: 'justify'
+              }]
+            }, {
+              default: () => value.content[mainStore.lang.id]
+            }))
+            break
+
+          case "section":
+            // emit('appendSection', {title: value.title[mainStore.lang.id], actualLevel})
+
+            virtualNodes.push(createVNode('div', {
+              style: [{
+                marginTop: index ? '0.5rem' : '0',
+                marginLeft: (oldLevel) + 'rem'
+              }],
+              class: 'section'
+            }, [
+              createVNode(MText, {
+                typography: oldLevel ? oldLevel === 1 ? 'titleMedium' : 'titleSmall' : 'titleLarge',
+                id: value.title[mainStore.lang.id],
+                class: 'section-title'
+              }, {
+                default: () => [
+                  value.title[mainStore.lang.id],
+                  createVNode('a', {
+                    href: '#' + value.title[mainStore.lang.id]
+                  }, [createVNode(VIcon, {
+                    icon: classicRegular.link,
+                    // color: 'primary',
+                    size: '.9em'
+                  })]),
+                ]
+              }),
+
+              ...crear(value.content, actualLevel)
+            ]))
+        }
+
+        //   virtualNodes.push(createVNode('div', {
+        //     style: [{
+        //       marginLeft: `${actualLevel}rem`,
+        //       marginTop: `${actualLevel}rem`,
+        //     }],
+        //     class: "body-section"
+        //   }, [
+        //     createVNode(MText, {
+        //       typography: 'titleLarge',
+        //       id: value.title[mainStore.lang.id]
+        //     }, {
+        //       default: () => value.title[mainStore.lang.id]
+        //     }),
+        //
+        //     ...createContent(value.content)
+        //   ]))
       })
 
       return virtualNodes
     }
 
-    useRender(() => createVNode('div', {}, {
+    useRender(() => createVNode('div', {
+      class: "post-blog-view"
+    }, {
       default: () => [
         createVNode(VSkeletonLoader, {
           height: '300px',
           type: 'image',
           loading: loading.value
         }, {
-          default: () => [
-            createVNode('div', {
-              style: [{
-                width: '100%'
-              }]
-            }, [titleImg()])
-          ]
+          default: () => createVNode('div', {
+            style: [{
+              width: '100%'
+            }]
+          }, [titleImg()])
+
         }),
 
         createVNode(VSkeletonLoader, {
           type: 'heading',
           loading: loading.value,
-          style: [{marginLeft: '0.5rem'}]
+          style: [{/*marginLeft: '0.5rem'*/}]
         }, {
-          default: () => [createVNode(MText, {
-            typography: 'displayMedium',
-            style: [{
-              marginTop: '1rem'
-            }],
-            id: data.value.title
-          }, [data.value.title[mainStore.lang.id]])]
+          default: () => [
+            createVNode(MText, {
+              typography: 'displayMedium',
+              style: [{
+                marginTop: '1rem'
+              }],
+              id: data.value.title[mainStore.lang.id],
+              class: 'main-title'
+            }, {
+              default: () => [
+                data.value.title[mainStore.lang.id],
+                createVNode('a', {
+                  href: '#' + data.value.title[mainStore.lang.id]
+                }, [createVNode(VIcon, {
+                  icon: classicRegular.link,
+                  // color: 'primary',
+                  size: '.9em'
+                })]),
+              ]
+            })
+          ]
         }),
 
         createVNode(VSkeletonLoader, {
           type: 'heading, text@4, heading, text@3, heading, text@5',
           loading: loading.value
         }, {
-          default: () => createVNode('div', {
-          }, crear(data.value['sections']))
+          default: () => createVNode('div', {class: 'sections'}, crear(data.value['content']))
         }),
       ]
     }))
   },
 }
 
+declare interface PostInterface {
+  title: LangContentInterface,
+  lastDate: string,
+  titleImg: string,
+  description: LangContentInterface,
+  content: Array<PostInterface> | LangContentInterface
+}
+
+declare interface PortionInterface {
+  type: string,
+  title?: LangContentInterface,
+  content: Array<PortionInterface> | LangContentInterface
+}
+
 declare interface SectionInterface {
-  title: string, content: Array<TagInterface>
+  title: string,
+  content: Array<TagInterface>
 }
 
 declare interface TagInterface {
-  type: string, content: string
+  type: string,
+  content: LangContentInterface
+}
+
+declare interface LangContentInterface {
+  es: string,
+  en: string
 }
 </script>
 
@@ -261,6 +379,29 @@ section
 </template-->
 
 <style lang="sass">
+.sections .section .section-title, .main-title
+  &:hover a
+    opacity: 1
+
+  a
+    transition: opacity ease 400ms
+    opacity: 0
+    margin-left: .5em
+
+    &, &:before
+    //float: left
+
+    &:before
+  //content: '#'
+  //margin-right: -1em
+  //color: rgb(var(--v-theme-primary))
+
+  i
+    color: rgb(var(--v-theme-primary))
+
+//.post-blog-view .body-section
+  scroll-snap-align: start
+
 //main
 //  h1, h2, h3, h4, h5, h6
 //    a

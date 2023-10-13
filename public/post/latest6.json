@@ -1,0 +1,10 @@
+[
+  {
+    "title": "Jetpack Compose",
+    "tags": "android",
+    "id": "jetpack_compose",
+    "img": "/img/webP/Mesa de trabajo 1.webp",
+    "date": "2023/03/09",
+    "description": "Jetpack Compose es un moderno kit de herramientas de IU (Interfaz de Usuario) para la creación de aplicaciones de Android de manera más rápida y sencilla. Diseñado por Google, Jetpack Compose utiliza un enfoque declarativo para la construcción de interfaces, lo que permite a los desarrolladores describir cómo debería lucir la IU en lugar de escribir código imperativo detallado."
+  }
+]

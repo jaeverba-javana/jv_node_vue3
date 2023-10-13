@@ -61,7 +61,7 @@ export default {
       }
     },
     showRightSideBar: false,
-    sections: 0,
+    sections: {},
     THEME
   }),
   setup() {
@@ -85,25 +85,31 @@ export default {
   },
   methods: {
     ...mapMutations(["toggleActivationOfLeftVNavigationDrawerComponent"]),
-    onResize() {
+    /*onResize() {
       console.log('size: mobile:', this.mobile)
       console.log('size: sm:', this.sm)
       console.log('size: md:', this.md)
       console.log('size: name:', this.name)
-    },
+    },*/
     onHomeClick() {
       console.log('Home have been clicked')
       this.$router.push('/blog')
     },
     dataLoaded(e) {
-      console.log(e)
+      console.log('sections:', e)
 
       this.sections = e
       this.showRightSideBar = true
+    },
+    appendSection(e) {
+      console.log("section receibed:", e)
+
+      this.sections.push(e)
+      if (!this.showRightSideBar) this.showRightSideBar = true
     }
   },
   mounted() {
-    this.onResize()
+    // this.onResize()
   },
   beforeCreate() {
 
@@ -116,7 +122,7 @@ export default {
 </script>
 
 <template lang="pug">
-v-app-bar(color="primary-container" v-resize="onResize")
+v-app-bar(color="primary-container" )
   //   density = "prominent"
 
   template(v-slot:prepend)
@@ -196,9 +202,13 @@ v-navigation-drawer(v-if="showRightSideBar" location="right" width="250" class="
   template( v-slot:default )
     v-skeleton-loader(type="list-item, list-item, list-item, list-item, list-item, list-item" )
       ul.ms-5
-        li.ps-3.text-body-2.py-1.font-weight-regular(v-for="item in sections")
+        li.text-body-2.font-weight-regular
+          jv-text(typography="labelLarge" style="font-weight: bold")
+            a.v-toc-link.d-block.transition-swing.text-decoration-none(:href="`#${sections.title}`") {{sections.title}}
+
+        li.text-body-2.py-1.font-weight-regular.item(v-for="item in sections.content" :class="'ps-'+(2+(item.actualLevel*2))")
           jv-text(typography="labelMedium")
-            a.v-toc-link.d-block.transition-swing.text-decoration-none(:href="`${$route.params.lang? '/'+$route.params.lang : ''}/blog/post/${$route.params.postId || ''}#${item.title[lang.id]}`") {{item.title[lang.id]}}
+            a.v-toc-link.d-block.transition-swing.text-decoration-none(:href="`#${item.title}`") {{item.title}}
 
         //li.ps-3.text-body-2.py-1.font-weight-regular.text-primary.router-link-active
           a.v-toc-link.d-block.transition-swing.text-decoration-none(href="/blog/post/post/#whatIs") ¿Qué es canvas?
@@ -211,7 +221,7 @@ v-navigation-drawer( width="0")
 
 v-main.d-flex.fd-column.align-center
   v-container.v-main__content.fill-width.text-h5( :class="{'v-media-movile': !mobile}" )
-    router-view(v-if="$route.params.postId" :postId="$route.params.postId" style="height: 100%" @loaded="dataLoaded")
+    router-view(v-if="$route.params.postId" :postId="$route.params.postId" style="height: 100%" @loaded="dataLoaded" @appendSection="appendSection")
     router-view(v-else)
 
   footer(style="padding: 0")
@@ -313,9 +323,10 @@ v-main.d-flex.fd-column.align-center
           margin-inline-start: 20px !important
           color: white
 
-          li
+          li.item
             border-left: 2px solid #E5E5E5
             font-size: 0.75rem
+            margin-left: 0.1rem
 
             &.font-weight-regular
               font-weight: 400 !important

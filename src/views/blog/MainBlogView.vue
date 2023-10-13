@@ -60,10 +60,10 @@
           </v-col>
         </v-row>
 
-        <v-row no-gutters>
+        <v-row no-gutters v-if="latestPosts.length" >
           <v-col>
             <div class="swiper-slide">
-              <SlideLastestPostsComponent v-if="latestPosts" :latestPosts="latestPosts"></SlideLastestPostsComponent>
+              <SlideLastestPostsComponent :latestPosts="latestPosts"></SlideLastestPostsComponent>
             </div>
           </v-col>
         </v-row>
@@ -107,14 +107,15 @@ export default {
       return (process.env.NODE_ENV === 'development'? '/img/webP/' : 'https://jaeverba-javana.github.io/img/webP/') +this.mainPost.id+'.webp'
     },
     latestPosts() {
-
       if (this.name === 'xs')
         return this.posts
       else {
         let posts = []
+        console.log("posts.length",this.posts.length)
         for (let i = 1; i < this.posts.length; i++) {
           posts.push(this.posts[i])
         }
+        console.log("posts",posts)
         return posts
       }
 
