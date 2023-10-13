@@ -102,7 +102,6 @@
 </template>
 
 <script>
-// import IconStore from "@/stores/IconStore";
 import {engine} from "@/engine";
 import {mapState} from "pinia";
 import {jvi_00__classic_light} from "@/fonts/paths/full/classicLight.mjs";
@@ -143,12 +142,6 @@ export default {
     },
     dialogo: false,
     icons
-    // text: {
-    //   es: {
-    //     "contactame": "contáctame",},
-    //   en: {
-    //     "contactame": "contact me",},
-    // }
   }),
 
   setup() {
@@ -245,9 +238,6 @@ export default {
   },
 
   computed: {
-    // ...mapState(IconStore, {
-    //     icons: store => store.icons
-    // }),
     submit_disabled_bool() {
       return !((!this.classes.input_nom.warning && this.classes.input_nom.activado) && ((!this.classes.input_dir.warning && !this.classes.input_dir.warning_email) && this.classes.input_dir.activado) && (!this.classes.input_men.warning && this.classes.input_men.activado))
     },

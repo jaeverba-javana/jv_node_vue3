@@ -1,13 +1,12 @@
 <template>
   <footer id="FooterTemplate">
-    <!--canvas.background-->
-    <Particles v-if="false"
+<!--    <Particles v-if="false"
         id="tsparticles"
         class="background"
         :particlesInit="particlesInit"
         :particlesLoaded="particlesLoaded"
         :options="particlesOptions"
-    />
+    />-->
 
     <div>
       <section class="template-contactame-contenedor">
@@ -50,7 +49,7 @@ let text = {
 
 
 
-let particlesOptions = {
+/*let particlesOptions = {
   color: ['#03dac6', '#ff0266', '#000000'],
   connectParticles: true,
   fullScreen: {enable: false, zIndex: 0},
@@ -92,7 +91,7 @@ let particlesOptions = {
     }
   },
   particles: {
-    color: ['#03dac6', '#ff0266', '#000000'/*'#ffffff', '#770000', '#007777', '#817203', '#300c74'*/],
+    color: ['#03dac6', '#ff0266', '#000000'/!*'#ffffff', '#770000', '#007777', '#817203', '#300c74'*!/],
     links: {
       color: engine.theme.get()==='light'? '#000000' : '#ffffff',
       distance: 150,
@@ -132,13 +131,14 @@ let particlesOptions = {
   },
   detectRetina: true
 
-}
-const particlesInit = async engine => {
+}*/
+
+/*const particlesInit = async engine => {
   await loadFull(engine);
-};
-const particlesLoaded = async container => {
+};*/
+/*const particlesLoaded = async container => {
   console.log("Particles container loaded", container);
-};
+};*/
 </script>
 
 <style lang="sass">

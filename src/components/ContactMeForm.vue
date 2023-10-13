@@ -111,7 +111,6 @@
 </template>
 
 <script>
-import IconStore from "@/stores/IconStore";
 import MainStore from "@/stores/MainStore";
 import {mapState} from "pinia";
 import axios from "axios";
@@ -246,9 +245,6 @@ export default {
     },
 
     computed: {
-        ...mapState(IconStore, {
-            icons: store => store.icons
-        })
     },
 
     mounted() {

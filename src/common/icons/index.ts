@@ -6,7 +6,7 @@ import {
 	jvi_angle_left__classic_solid,
 	jvi_angle_right__classic_solid,
 	jvi_angle_up__classic_solid,
-	jvi_chevron_up__classic_solid,
+	jvi_chevron_up__classic_solid, jvi_circle__classic_solid,
 	jvi_envelope__classic_solid,
 	jvi_link__classic_solid,
 	jvi_messages__classic_solid,
@@ -19,6 +19,7 @@ import {
 import {
 	jvi_angle_up__classic_light,
 	jvi_envelope__classic_light,
+	jvi_house__classic_light,
 	jvi_messages__classic_light,
 	jvi_paper_plane__classic_light,
 	jvi_person_running__classic_light,
@@ -27,7 +28,9 @@ import {
 } from './../../fonts/paths/full/classicLight.mjs'
 
 import {
-	jvi_envelope__classic_regular, jvi_link__classic_regular,
+	jvi_envelope__classic_regular,
+	jvi_house__classic_regular,
+	jvi_link__classic_regular,
 	jvi_messages__classic_regular,
 	jvi_paper_plane__classic_regular,
 	jvi_user__classic_regular,
@@ -62,6 +65,7 @@ export const classicSolid = {
 	angleLeft: jvi_angle_left__classic_solid,
 	angleRight: jvi_angle_right__classic_solid,
 	angleUp: jvi_angle_up__classic_solid,
+	circle: jvi_circle__classic_solid,
 	chevronUp: jvi_chevron_up__classic_solid,
 	envelope: jvi_envelope__classic_solid,
 	link: jvi_link__classic_solid,
@@ -83,6 +87,7 @@ export const classicRegular = {
 export const classicLight = {
 	angleUp: jvi_angle_up__classic_light,
 	envelope: jvi_envelope__classic_light,
+	house: jvi_house__classic_light,
 	messages: jvi_messages__classic_light,
 	paperPlane: jvi_paper_plane__classic_light,
 	personRunning: jvi_person_running__classic_light,

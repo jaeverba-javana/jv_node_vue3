@@ -5,10 +5,6 @@ import router from './router'
 import store from './stores'
 import vuetify from './plugins/vuetify'
 import jv from '@/plugins/jv/dist/jv'
-// import {VSkeletonLoader} from "vuetify/lib/labs/VSkeletonLoader";
-// import Particles from 'vue3-particles'
-
-import { loadFonts } from './plugins/webfontloader'
 
 import './assets/main.sass'
 import "swiper/scss"
@@ -16,7 +12,7 @@ import "swiper/scss/navigation"
 import 'swiper/scss/pagination';
 import 'swiper/scss/scrollbar';
 
-// loadFonts()
+
 
 const app = createApp(App)
     .use(createPinia())

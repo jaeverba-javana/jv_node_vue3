@@ -3,11 +3,11 @@
 import {useDisplay} from "vuetify";
 import {mapMutations, mapState} from "vuex";
 import {mapState as piniaMapState} from "pinia"
-import IconStore from "@/stores/IconStore";
 import {engine} from "@/engine"
 import ThemeToggler from "@/components/ThemeToggler.vue";
 import LanguageSelector from "@/components/LanguageSelector.vue";
 import HeaderNav from "@/components/HeaderNav.vue";
+import icons from "@/common/icons";
 import {defineComponent} from "vuetify/lib/util/index.mjs";
 import Panel from "@/views/Panel.vue";
 import MainStore from "@/stores/MainStore";
@@ -62,7 +62,8 @@ export default {
     },
     showRightSideBar: false,
     sections: {},
-    THEME
+    THEME,
+    icons
   }),
   setup() {
     let {mobile, sm, md, name} = useDisplay()
@@ -75,9 +76,6 @@ export default {
     },*/
     ...mapState({
       blogView: state => state.views.blogView
-    }),
-    ...piniaMapState(IconStore, {
-      icons: store => store.icons
     }),
     ...piniaMapState(MainStore, {
       lang: store => store.lang

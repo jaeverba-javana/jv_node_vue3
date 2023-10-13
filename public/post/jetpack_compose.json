@@ -13,19 +13,22 @@
         "es": "Jetpack Compose es un moderno kit de herramientas de IU (Interfaz de Usuario) para la creación de aplicaciones de Android de manera más rápida y sencilla. Diseñado por Google, Jetpack Compose utiliza un enfoque declarativo para la construcción de interfaces, lo que permite a los desarrolladores describir cómo debería lucir la IU en lugar de escribir código imperativo detallado.",
         "en": ""
       }
-    },{
+    },
+    {
       "type": "p",
       "content": {
         "es": "Con Jetpack Compose, puedes crear interfaces de usuario de alta calidad utilizando componentes reutilizables y personalizables. Su enfoque basado en funciones y la utilización del lenguaje de programación Kotlin te permiten crear rápidamente pantallas interactivas y visualmente atractivas. Además, Jetpack Compose se integra de manera fluida con el ecosistema de Jetpack de Android, lo que significa que puedes aprovechar las ventajas de las bibliotecas y componentes existentes.",
         "en": ""
       }
-    },{
+    },
+    {
       "type": "p",
       "content": {
         "es": "Si eres un desarrollador de Android que busca una forma más moderna y eficiente de construir interfaces de usuario, Jetpack Compose es una herramienta que debes considerar. Con su enfoque simplificado y su capacidad para acelerar el proceso de desarrollo de IU, Jetpack Compose ofrece una nueva forma emocionante de crear aplicaciones atractivas y funcionales para dispositivos Android.",
         "en": ""
       }
-    },{
+    },
+    {
       "type": "section",
       "title": {
         "es": "Ventajas",
@@ -35,23 +38,140 @@
         {
           "type": "p",
           "content": {
-            "es": "Y bueno, no se hablaría tan bien de android si no tubiera unas ventajas tan buenas como las que se van a mencionar a continuación",
+            "es": "Jetpack Compose trae consigo una serie de beneficios que sin duda nos van a fancilitar la vida a la hora de programar",
             "en": "Hello"
           }
-        },{
-          "type": "section",
-          "title": {
-            "es": "Rapido"
-          },
+        },
+        {
+          "type": "uList",
           "content": [
             {
-              "type": "p",
-              "content": {
-                "es": "esto es de lo rapido",
-                "en": "esto es de lo rapido en ingles"
-              }
+              "title": {
+                "es": "Menos código",
+                "en": "Faster"
+              },
+              "content": [
+                {
+                  "type": "p",
+                  "typography": "bodySmall",
+                  "content": {
+                    "es": "Escribir menos código nos da una gran ventaja en la parte del desarrollo, por eso ahora como desarrolladores, usando Compose podemos ahorrarnos tiempo escribiendo código y enfocarnos más en el problema en cuestión."
+                  }
+                },
+                {
+                  "type": "p",
+                  "typography": "bodySmall",
+                  "content": {
+                    "es": "Ahora no hay necesidad de dividir el código de la interfaz de isuario en dos partes diferentes (Código Java o Kotlin, y XML), facilitando el leer el código ya que se encuentra todo escrito en un mismo lenguaje."
+                  }
+                },
+                {
+                  "type": "p",
+                  "typography": "bodySmall",
+                  "content": {
+                    "es": "Al usar un paradigma declarativo, donde la vista está creada y solo hay necesidad de escribir qué es lo que queremos usar y no tener que crear cada componenete visual de forma imperativa, nos da una gran ventaja no solo ahorrando líneas de códio, sino también reduciendo al mínimo los errores."
+                  }
+                }
+              ]
+            },
+            {
+              "title": {
+                "es": "Intuitiva",
+                "en": "Faster"
+              },
+              "content": [
+                {
+                  "type": "p",
+                  "typography": "bodySmall",
+                  "content": {
+                    "es": "La modo declarativo de compose no solo nos ahorra escribir código, también nos facilita el entender lo que estamos escribiendo, ya que el resultado es un código más intuitivi y legible."
+                  }
+                },
+                {
+                  "type": "p",
+                  "typography": "bodySmall",
+                  "content": {
+                    "es": "Compose permite compilar componentes pequeños y que no estén vinculados a un estado no vinculados a una actividad. Haciendo así que estos sean más fáciles de probar, personalizar y reutilizar de manera intuitiva"
+                  }
+                },
+                {
+                  "type": "p",
+                  "typography": "bodySmall",
+                  "content": {
+                    "es": "En compose los estados son explícitos y se pasan al elemento componible. De esta forma solo hay una fuente de información del estado, lo cual lo mantiene encapsulado y evita confuciones sobre el estado en el que va a estar nuestro componente en momento de ejecución. A medida que cambia el estado los componenetes se actualizan automáticamente."
+                  }
+                }
+              ]
+            },
+            {
+              "title": {
+                "es": "Acelera el desarrollo",
+                "en": "Faster"
+              },
+              "content": [
+                {
+                  "type": "p",
+                  "typography": "bodySmall",
+                  "content": {
+                    "es": "Compose es compatible con el sistema de creación de UI clásico de android, lo cual quiere decir que puedes llamar código de componenetes desde view y viceversa. Las librerías de siempre, como Navigation, ViewModel y las corrutinas de Kotlin funcionan en compose, de modo que se puede implementar donde quieras."
+                  }
+                },
+                {
+                  "type": "p",
+                  "typography": "bodySmall",
+                  "content": {
+                    "es": "Compose tiene una amplia compatibilidad con android studio. Esto nos permite crear previsualizaciones de los componenetes en el IDE, por lo cuál no hay la necesidad de compilar una vez tras otra nuestra aplicación en un dispositivo físico o virtual. Esta característica nos ahorra tiempo de compilación en muchos de los componenetes que vamos a crear."
+                  }
+                }
+              ]
+            },
+            {
+              "title": {
+                "es": "Potente",
+                "en": "Faster"
+              },
+              "content": [
+                {
+                  "type": "p",
+                  "typography": "bodySmall",
+                  "content": {
+                    "es": "Compose te permite usar de forma directa las API de la plataforma de Android y tiene compatibilidad con Material Design, tema oscuro, animaciones, etc."
+                  }
+                },
+                {
+                  "type": "p",
+                  "typography": "bodySmall",
+                  "content": {
+                    "es": "Ahora es mucho más fácil crear o usar animaciones, compose nos proporciona una manera sencilla de animar nuestros componentes"
+                  }
+                },
+                {
+                  "type": "p",
+                  "typography": "bodySmall",
+                  "content": {
+                    "es": "Compose incluye por defecto los requisitos de diseño de Material Design 3, pero podemos crear los nuesros propios y usarlos de igual forma con el potente motor que nos brinda compose."
+                  }
+                }
+              ]
             }
           ]
+        }
+      ]
+    },
+    {
+      "type": "bibliography",
+      "content": [
+        {
+          "pre": "Google.",
+          "link": "https://developer.android.com/jetpack/compose/why-adopt?hl=es-419",
+          "linkText": {
+            "es": "Por qué implementar Compose",
+            "en": "Why adopt Compose"
+          },
+          "post": {
+            "es": "Sitio oficial de Android",
+            "en": "Android oficial website"
+          }
         }
       ]
     }

@@ -75,7 +75,7 @@
 <script>
 // import {mapState} from "vuex";
 import {mapState} from "pinia"
-import IconStore from "@/stores/IconStore";
+import {classicRegular} from "@/common/icons";
 import MainStore from "@/stores/MainStore";
 import SlideLastestPostsComponent from "@/components/blog/SlideLastestPostsComponent.vue";
 import {useDisplay} from "vuetify";
@@ -101,7 +101,6 @@ export default {
     // ...mapState({
     //     icons: state => state.icons
     // }),
-    ...mapState(IconStore, ["icons"]),
     ...mapState(MainStore, ["lang"]),
     mainPostImg() {
       return (process.env.NODE_ENV === 'development'? '/img/webP/' : 'https://jaeverba-javana.github.io/img/webP/') +this.mainPost.id+'.webp'
